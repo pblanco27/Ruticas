@@ -55,13 +55,12 @@
 			color:#fff;
 			z-index:9;
 			font-size: 0.75em;
-			height:30px;
+			height:110%;
 			line-height:18px;
 			-webkit-border-radius: 3px;
 			-moz-border-radius: 3px;
 			border-radius: 3px;
-			white-space:nowrap;
-			word-wrap:normal;
+			white-space:pre-wrap;
 		}
 		[data-tip]:hover:before,
 		[data-tip]:hover:after {
@@ -224,7 +223,7 @@
 							<div class="form-group" data-tip="La longitud cambia según el punto elegido en el mapa">
 								<input type="text" name="latitud" id="latitud" class="form-control" placeholder="Longitud" disabled>
 							</div>
-							<div class="form-group" data-tip="El número de teléfono solo debe contener números (a excepción del + del código de área), y debe ser de máximo 45 caracteres">
+							<div class="form-group" data-tip="El teléfono debe contener números (a excepción del + del código de área), y debe ser de máximo 45 caracteres">
 								<input type="text" name="telefono" id="telefono" class="form-control" placeholder="Número telefónico" maxlength="45" required>
 								<font style="color:Red"><?php echo $_SESSION["error_telefono"]; ?></font>
 							</div>							
@@ -232,7 +231,7 @@
 								<input type="text" name="correo" id="correo" class="form-control" placeholder="Correo electrónico" maxlength="45" required>
 								<font style="color:Red"><?php echo $_SESSION["error_correo"]; ?></font>
 							</div>
-							<div class="form-group" data-tip="El contacto de emergencia puede ser consultado ante una eventualidad. Sigue el mismo formato del número telefónico">
+							<div class="form-group" data-tip="Contacto ante eventualidad. Sigue el mismo formato del número telefónico">
 								<input type="text" name="contacto" id="contacto" class="form-control" placeholder="Contacto de emergencia" maxlength="45" required>
 								<font style="color:Red"><?php echo $_SESSION["error_contacto"]; ?></font>
 							</div>		

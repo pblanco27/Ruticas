@@ -50,13 +50,12 @@
 				color:#fff;
 				z-index:9;
 				font-size: 0.75em;
-				height:30px;
+				height:110%;
 				line-height:18px;
 				-webkit-border-radius: 3px;
 				-moz-border-radius: 3px;
 				border-radius: 3px;
-				white-space:nowrap;
-				word-wrap:normal;
+				white-space:pre-wrap;
 			}
 			[data-tip]:hover:before,
 			[data-tip]:hover:after {
@@ -128,11 +127,11 @@
 											<input type="text" name="num_celular" id="num_celular" class="form-control" placeholder="Número de celular" value="">
 											<font style="color:Red"><?php echo $_SESSION["error_num_celular"]; ?></font>
 										</div>
-										<div class="form-group" data-tip="El número de teléfono solo debe contener números (a excepción del + del código de área), y debe ser de máximo 45 caracteres">
+										<div class="form-group" data-tip="El teléfono debe contener números (a excepción del + del código de área), y debe ser de máximo 45 caracteres">
 											<input type="text" name="num_telefono" id="num_telefono" class="form-control" placeholder="Número telefónico" value="">
 											<font style="color:Red"><?php echo $_SESSION["error_num_telefono"]; ?></font>
 										</div>
-										<div class="form-group" data-tip="La contraseña solo debe ser una combinación de letras mayúsculas, minúsculas (sin tildes) y números, de mínimo 8 caracteres y máximo 45">
+										<div class="form-group" data-tip="La contraseña debe contener letras mayúsculas, minúsculas (sin tildes) y números, de mínimo 8 caracteres y máximo 45">
 											<input type="password" name="clave" id="clave" class="form-control" placeholder="Contraseña">
 											<font style="color:Red"><?php echo $_SESSION["error_clave"]; ?></font>
 										</div>
