@@ -18,6 +18,51 @@
 		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 		<link rel="stylesheet" type="text/css" href="css/style.css">
 		<script type="text/javascript" src="js/func.js"></script>
+		<style>
+			[data-tip] {
+				position:relative;
+			}
+			[data-tip]:before {
+				content:'';
+				/* hides the tooltip when not hovered */
+				display:none;
+				content:'';
+				border-left: 5px solid transparent;
+				border-right: 5px solid transparent;
+				border-bottom: 5px solid #1a1a1a;	
+				position:absolute;
+				top:30px;
+				left:50%;
+				z-index:8;
+				font-size:0;
+				line-height:0;
+				width:0;
+				height:0;
+			}
+			[data-tip]:after {
+				display:none;
+				content:attr(data-tip);
+				position:absolute;
+				top:35px;
+				left:40%;
+				padding:5px 8px;
+				background:#1a1a1a;
+				color:#fff;
+				z-index:9;
+				font-size: 0.75em;
+				height:30px;
+				line-height:18px;
+				-webkit-border-radius: 3px;
+				-moz-border-radius: 3px;
+				border-radius: 3px;
+				white-space:nowrap;
+				word-wrap:normal;
+			}
+			[data-tip]:hover:before,
+			[data-tip]:hover:after {
+				display:block;
+			}
+		</style>
 	</head>
 	<body>
 		<div class="container">
@@ -58,40 +103,40 @@
 										</div>
 									</form>
 									<form id="register-form" action="validarRegistro.php" method="post" role="form" style="display: <?php echo $_SESSION["registrarActivo"]?>;">
-									    <div class="form-group">
+									    <div class="form-group" data-tip="El nombre solo debe contener letras, y debe ser de máximo 45 caracteres">
 											<input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre" value="">
 											<font style="color:Red"><?php echo $_SESSION["error_nombre"]; ?></font>
 										</div>
-										<div class="form-group">
+										<div class="form-group" data-tip="El primer apellido solo debe contener letras, y debe ser de máximo 45 caracteres">
 											<input type="text" name="apellido1" id="apellido1" class="form-control" placeholder="Primer apellido" value="">
 											<font style="color:Red"><?php echo $_SESSION["error_apellido1"]; ?></font>
 										</div>
-										<div class="form-group">
+										<div class="form-group" data-tip="El segundo apellido solo debe contener letras, y debe ser de máximo 45 caracteres">
 											<input type="text" name="apellido2" id="apellido2" class="form-control" placeholder="Segundo apellido" value="">
 											<font style="color:Red"><?php echo $_SESSION["error_apellido2"]; ?></font>
 										</div>
-										<div class="form-group">
+										<div class="form-group" data-tip="El nombre de usuario solo debe contener letras (sin tildes) y números, y debe ser de máximo 45 caracteres">
 											<input type="text" name="nombre_usuario" id="nombre_usuario" class="form-control" placeholder="Nombre de usuario" value="">
 											<font style="color:Red"><?php echo $_SESSION["error_nombre_usuario"]; ?></font>											
 											<font style="color:Red"><?php echo $_SESSION["error_nombre_usuario_repetido"]; ?></font>
 										</div>
-										<div class="form-group">
+										<div class="form-group" data-tip="El correo debe contener letras (sin tildes) y números, un arroba y un dominio, de máximo 45 caracteres">
 											<input type="text" name="correo" id="correo" class="form-control" placeholder="Correo electrónico" value="">
 											<font style="color:Red"><?php echo $_SESSION["error_correo"]; ?></font>
 										</div>
-										<div class="form-group">
+										<div class="form-group" data-tip="El número de celular solo debe contener números (a excepción del + del código de área), y debe ser de máximo 45 caracteres">
 											<input type="text" name="num_celular" id="num_celular" class="form-control" placeholder="Número de celular" value="">
 											<font style="color:Red"><?php echo $_SESSION["error_num_celular"]; ?></font>
 										</div>
-										<div class="form-group">
+										<div class="form-group" data-tip="El número de teléfono solo debe contener números (a excepción del + del código de área), y debe ser de máximo 45 caracteres">
 											<input type="text" name="num_telefono" id="num_telefono" class="form-control" placeholder="Número telefónico" value="">
 											<font style="color:Red"><?php echo $_SESSION["error_num_telefono"]; ?></font>
 										</div>
-										<div class="form-group">
+										<div class="form-group" data-tip="La contraseña solo debe ser una combinación de letras mayúsculas, minúsculas (sin tildes) y números, de mínimo 8 caracteres y máximo 45">
 											<input type="password" name="clave" id="clave" class="form-control" placeholder="Contraseña">
 											<font style="color:Red"><?php echo $_SESSION["error_clave"]; ?></font>
 										</div>
-										<div class="form-group">
+										<div class="form-group" data-tip="Esta contraseña debe coincidir con la ingresada anteriormente">
 											<input type="password" name="confirmar_clave" id="confirmar_clave" class="form-control" placeholder="Confirmar contraseña">
 											<font style="color:Red"><?php echo $_SESSION["error_confirmacion"]; ?></font>
 										</div>

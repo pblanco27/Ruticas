@@ -1,12 +1,4 @@
 <?php	
-	if ($_POST["nombre_usuario"] == "paolo" &&
-		$_POST["clave"] == "123"){
-		header("Location:../page.html");
-	} else {
-		header("Location:index.php");
-	}
-
-	/*
 	session_start();	
 	
 	include "conexion.php";
@@ -29,10 +21,9 @@
 		!isset($errores["error_clave"]) &&
 		!isset($errores["error_clave_incorrecta"])){
 		$_SESSION["nombre_usuario"] = $_POST["nombre_usuario"];
-		header("Location:../page.html");
+		header("Location:../start.php");
 		//header("Location:paginaInicio.php");
 	} else {		
 		header("Location:index.php");
 	}	
-	*/
 ?>

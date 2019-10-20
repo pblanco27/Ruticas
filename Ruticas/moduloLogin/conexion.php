@@ -5,9 +5,9 @@
 		private $conexion = null;
 		
 		public function __construct(){
-			$dbServerName = "35.232.166.32";
-			$dbUsername = "cs";
-			$dbPassword = "compusociedad";
+			$dbServerName = "104.196.172.139";
+			$dbUsername = "root";
+			$dbPassword = "electiva2019";
 			$dbName = "labWeb"; 
 			$this->conexion = new mysqli($dbServerName, $dbUsername, $dbPassword, $dbName); 
 			mysqli_set_charset($this->conexion,"utf8");
@@ -56,7 +56,7 @@
 				$contrasena = $this->buscarUsuario($nombreUsuario);
 				if ($contrasena == ""){
 					$errores["error_nombre_usuario_inexistente"] = "El nombre de usuario ingresado no existe.";
-				} else if ($contrasena != $claveIngresada){
+				} else if ($contrasena != sha1($claveIngresada)){
 					$errores["error_clave_incorrecta"] = "La contraseña ingresada no corresponde a dicho usuario.";						
 				}	
 			} 			
@@ -97,6 +97,10 @@
 				} else {
 					$res->close();
 					$this->conexion->next_result();
+					
+					$num_celular = str_replace(' ', '', $num_celular);
+					$num_telefono = str_replace(' ', '', $num_telefono);
+					
 					$registrar = "CALL registrarUsuario('$nombre',
 														'$apellido1',
 														'$apellido2',
@@ -104,7 +108,7 @@
 														'$correo',
 														'$num_celular',
 														'$num_telefono',
-														'$clave')";				
+														'".sha1($clave)."')";				
 					$this->conexion->query($registrar);
 				}				
 			} 			

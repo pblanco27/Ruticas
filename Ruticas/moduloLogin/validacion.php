@@ -109,7 +109,7 @@
 			if ($clave == "") {	
 				$this->errores["error_clave"] = "La clave no puede ir vacía.";
 			} else if(!preg_match("/^(?=\w*\d)(?=\w*[A-Z])(?=\w*[a-z])\S{8,45}$/",$clave) || (strlen($clave))>45 || (strlen($clave))<8 ){
-				$this->errores["error_clave"] = "La clave solo debe ser una combinación de letras mayúsculas, minúsculas (sin tildes) y números, de mínimo 8 caracteres y máximo 45.";
+				$this->errores["error_clave"] = "La contraseña solo debe ser una combinación de letras mayúsculas, minúsculas (sin tildes) y números, de mínimo 8 caracteres y máximo 45.";
 			}
 		}
 		
@@ -117,7 +117,7 @@
 			if ($clave2 == ""){
 				$this->errores["error_confirmacion"] = "La confirmación de contraseña no puede ir vacía.";
 			} else if ($clave != $clave2){
-				$this->errores["error_confirmacion"] = "Las claves ingresadas no coinciden.";
+				$this->errores["error_confirmacion"] = "Las contraseñas ingresadas no coinciden.";
 			}
 		}
 	}

@@ -293,9 +293,9 @@ h2.pagetitle {
 }
 .navbar .brand a:hover {
 	text-decoration: none;
- transition: color .15s linear;
- -webkit-transition: color .15s linear;
- -moz-transition: color .15s linear;
+	transition: color .15s linear;
+	-webkit-transition: color .15s linear;
+	-moz-transition: color .15s linear;
 }
 .navbar .brand a:focus {
 	outline: none;
@@ -455,7 +455,7 @@ section.section h4 {
 	letter-spacing: -1px;
 }
 section.inner {
-	padding: 50px 0 50px;
+	padding: 20px;
 }
 
 
@@ -471,7 +471,7 @@ section.inner {
 /* === section spacer === */
 
 section.spacer {
-	padding:60px 0 10px;
+	padding:0px 0px;
 	color:#fcfcfc;
 }
 
