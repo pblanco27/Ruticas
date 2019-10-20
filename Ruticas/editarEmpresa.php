@@ -87,10 +87,10 @@
 									  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 										<ul>
 											<li>
-												<a class="dropdown-item" href="#">Crear empresa</a>
+												<a class="dropdown-item" href="crearEmpresa.php">Crear empresa</a>
 											</li>
 											<li>
-												<a class="dropdown-item" href="editarEmpresa.php">Editar empresa</a>
+												<a class="dropdown-item" href="#">Editar empresa</a>
 											</li>
 										</ul>
 									  </div>
@@ -130,7 +130,14 @@
 
 		<section class="spacer green">
 			<div align="center">
-				<h2 class="pagetitle" style="color:white;">Crear empresa<h2>			
+				<h2 class="pagetitle" style="color:white;">
+				Editar empresa:
+					<select name="empresa" id="empresa" class="form-control" required>
+						<option value="" style="display:none;">Seleccione una empresa</option>
+						<option value="1">Empresa 1</option>
+						<option value="2">Empresa 2</option>
+					</select> 
+				<h2> 	
 			</div>
 		</section>
 
@@ -274,9 +281,14 @@
 								</select> 
 							</div>	
 							
-							<div class="form-group">
-								<input type="submit" class="form-control btn btn-register" value="Crear">
-							</div>
+							<div class="row">
+								<div class="span2">
+									<button class="btn" style="width:100%;">Deshabilitar</button>
+								</div>
+								<div class="span2">
+									<input type="submit" class="btn" style= "font-size: 16px; padding: 11px 19px;" value="Guardar">
+								</div>
+							</div>	
 						</form>
 						
 						<!--

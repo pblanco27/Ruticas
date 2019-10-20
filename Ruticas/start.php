@@ -91,7 +91,7 @@
 												<a class="dropdown-item" href="crearEmpresa.php">Crear empresa</a>
 											</li>
 											<li>
-												<a class="dropdown-item" href="#">Editar empresa</a>
+												<a class="dropdown-item" href="editarEmpresa.php">Editar empresa</a>
 											</li>
 										</ul>
 									  </div>
