@@ -115,6 +115,9 @@
 											<li>
 												<a class="dropdown-item" href="#">Editar rutas</a>
 											</li>
+											<li>
+												<a class="dropdown-item" href="asignarRuta.php">Asignar rutas</a>
+											</li>
 										</ul>
 									  </div>
 									  &nbsp;&nbsp;
@@ -196,11 +199,9 @@
 								</div>
 							</div>
 					</center>
-					Costo Pasaje:
-					<input type="text">
+					<input type="text" placeholder="Costo Pasaje">
 					<br>
-					Duracion del viaje (min):
-					<input type="text">
+					<input type="text" placeholder="Duracion del viaje (min)">
 					<br>
 					Unidades de discapacitados:
 					<input type="checkbox" class="custom-control-input" id="defaultUnchecked">

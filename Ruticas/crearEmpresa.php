@@ -113,6 +113,9 @@ session_start(); ?>
 											<li>
 												<a class="dropdown-item" href="editarRuta.php">Editar rutas</a>
 											</li>
+											<li>
+												<a class="dropdown-item" href="asignarRuta.php">Asignar rutas</a>
+											</li>
 										</ul>
 									  </div>
 									  &nbsp;&nbsp;
