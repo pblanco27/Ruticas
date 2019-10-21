@@ -10,15 +10,15 @@
 		<link href="css/style.css" rel="stylesheet">
 		<link href="color/default.css" rel="stylesheet">
 		<link rel="shortcut icon" href="img/favicon.ico">
-		<script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>		
+		<script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
               integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
               crossorigin=""/>
         <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
                 integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
-                crossorigin=""></script>		
+                crossorigin=""></script>
 		<style>
-        #map { 
+        #map {
             width: 100%;
             height: 450px; }
 		nav ul {
@@ -34,7 +34,7 @@
 			content:'';
 			border-left: 5px solid transparent;
 			border-right: 5px solid transparent;
-			border-bottom: 5px solid #1a1a1a;	
+			border-bottom: 5px solid #1a1a1a;
 			position:absolute;
 			top:30px;
 			left:50%;
@@ -79,9 +79,9 @@
 					</a>
 						<img class="brand" src="img/ruticas.png">
 						<nav class="pull-right nav-collapse collapse">
-							<ul id="menu-main" class="nav">							
-								<li>								
-									<div class="dropdown">	
+							<ul id="menu-main" class="nav">
+								<li>
+									<div class="dropdown">
 									  <button class="btn btn-danger dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 										Empresas
 									  </button>
@@ -97,8 +97,8 @@
 									  </div>
 									  &nbsp;&nbsp;
 									</div>
-								</li> 	 
-								<li>								
+								</li>
+								<li>
 									<div class="dropdown">
 									  <button class="btn btn-danger dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 										Rutas
@@ -118,6 +118,12 @@
 									</div>
 								</li>
 								<li>
+									<button class="btn btn-danger dropdown-toggle" onclick="location.href='log.php';">
+										Log
+									</button>
+									&nbsp;&nbsp;
+								</li>
+								<li>
 									<button class="btn btn-danger dropdown-toggle" onclick="location.href='index.php';">
 										Salir
 									</button>
@@ -131,11 +137,11 @@
 
 		<section class="spacer green">
 			<div align="center">
-				<h2 class="pagetitle" style="color:white;">Consultar información<h2>			
+				<h2 class="pagetitle" style="color:white;">Consultar información<h2>
 			</div>
 		</section>
 
-		<section id="maincontent" class="inner">			
+		<section id="maincontent" class="inner">
 			<div class="container">
 				<div class="row">
 					<div class="span8">
@@ -149,7 +155,7 @@
                                     maxZoom: 18
                                 }).addTo(map);
 
-								
+
                                 L.control.scale().addTo(map);
                                 //L.marker([9.938118,-84.075391], {draggable: true}).addTo(map);
                                 L.Routing.control({
@@ -158,19 +164,19 @@
                                         L.latLng(9.935428,-84.071388),
                                         L.latLng(9.928192,-84.078832)
                                     ]
-                                }).addTo(map);								
+                                }).addTo(map);
                             </script>
                         </div>
-						
-						
+
+
 						<!--
-						<div class="tabbable">							
+						<div class="tabbable">
 							<ul class="nav nav-tabs">
 								<li class="active"><a href="#one" data-toggle="tab"><i class="icon-rocket"></i> One</a></li>
 								<li><a href="#two" data-toggle="tab">Two</a></li>
 								<li><a href="#three" data-toggle="tab">Three</a></li>
 							</ul>
-							
+
 							<div class="tab-content">
 								<div class="tab-pane active" id="one">
 									<p>
@@ -199,14 +205,14 @@
 										Tale dolor mea ex, te enim assum suscipit cum, vix aliquid omittantur in. Duo eu cibo dolorum menandri, nam sumo dicit admodum ei. Ne mazim commune honestatis cum, mentitum phaedrum sit et.
 									</p>
 								</div>
-							</div>							
+							</div>
 						</div>
 						-->
 					</div>
 
-					<div class="span4">	
+					<div class="span4">
 						<!-- Aquí van a ir las consultas -->
-					
+
 						<!--
 						<form id="register-form" action="validarEmpresa.php" method="post" role="form" >
 							<div class="form-group" data-tip="El nombre debe ser de máximo 45 caracteres">
@@ -230,7 +236,7 @@
 							<div class="form-group" data-tip="El número de teléfono solo debe contener números (a excepción del + del código de área), y debe ser de máximo 45 caracteres">
 								<input type="text" name="telefono" id="telefono" class="form-control" placeholder="Número telefónico" maxlength="45" required>
 								<font style="color:Red"><?php echo $_SESSION["error_telefono"]; ?></font>
-							</div>							
+							</div>
 							<div class="form-group" data-tip="El correo debe contener letras (sin tildes) y números, un arroba y un dominio, de máximo 45 caracteres">
 								<input type="text" name="correo" id="correo" class="form-control" placeholder="Correo electrónico" maxlength="45" required>
 								<font style="color:Red"><?php echo $_SESSION["error_correo"]; ?></font>
@@ -238,8 +244,8 @@
 							<div class="form-group" data-tip="El contacto de emergencia puede ser consultado ante una eventualidad. Sigue el mismo formato del número telefónico">
 								<input type="text" name="contacto" id="contacto" class="form-control" placeholder="Contacto de emergencia" maxlength="45" required>
 								<font style="color:Red"><?php echo $_SESSION["error_contacto"]; ?></font>
-							</div>		
-							
+							</div>
+
 							<div class="form-group" data-tip="Debe seleccionar a que hora empiezan a laborar">
 								Hora inicio: &nbsp;<select name="horaInicio" id="horaInicio" class="form-control" placeholder="Seleccione una hora" required>
 									<option value="0">0</option>
@@ -256,7 +262,7 @@
 									<option value="11">11</option>
 									<option value="12">12</option>
 								</select> am
-							</div>	
+							</div>
 							<div class="form-group" data-tip="Debe seleccionar a que hora terminan de laborar">
 								Hora cierre: <select name="horaFin" id="horaFin" class="form-control" placeholder="Seleccione una hora" required>
 									<option value="0">0</option>
@@ -273,14 +279,14 @@
 									<option value="11">11</option>
 									<option value="12">12</option>
 								</select> pm
-							</div>	
-							
+							</div>
+
 							<div class="form-group">
 								<input type="submit" class="form-control btn btn-register" value="Crear">
 							</div>
 						</form>
 						-->
-						
+
 						<!--
 						<div class="accordion" id="accordion2">
 							<div class="accordion-group">
@@ -326,7 +332,7 @@
 						-->
 					</div>
 				</div>
-				
+
 				<!--
 				<div class="row">
 					<div class="span6">
@@ -418,19 +424,19 @@
 						<a href="#" class="btn btn-warning btn-mini btn-rounded">rounded button</a>
 					</div>
 				</div>
-				
+
 				-->
 			</div>
 		</section>
 
 		<footer>
 			<div class="container">
-				<div class="row">				
+				<div class="row">
 					<h1>
 						<font style="color:white;">
-							Desarrolladores 
+							Desarrolladores
 						</font>
-					</h1>				
+					</h1>
 					<div class="span6 offset3">
 						<ul class="social-networks">
 							<li><a href="https://www.instagram.com/gabritico"><i class="icon-circled icon-bgdark icon-instagram icon-2x"></i></a></li>
@@ -447,7 +453,7 @@
 				</div>
 			</div>
 		</footer>
-		<a href="#" class="scrollup"><i class="icon-angle-up icon-square icon-bgdark icon-2x"></i></a>				
+		<a href="#" class="scrollup"><i class="icon-angle-up icon-square icon-bgdark icon-2x"></i></a>
 
 		<script src="js/jquery.js"></script>
 		<script src="js/jquery.scrollTo.js"></script>
@@ -461,7 +467,7 @@
 		<script src="js/animate.js"></script>
 		<script src="js/jquery.tweet.js"></script>
 		<script src="js/custom.js"></script>
-		
+
 	</body>
 
 </html>

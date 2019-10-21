@@ -124,6 +124,12 @@ unset($_SESSION["error_lats"]);
 									</div>
 								</li>
 								<li>
+									<button class="btn btn-danger dropdown-toggle" onclick="location.href='log.php';">
+										Log
+									</button>
+									&nbsp;&nbsp;
+								</li>
+								<li>
 									<button class="btn btn-danger dropdown-toggle" onclick="location.href='index.php';">
 										Salir
 									</button>
