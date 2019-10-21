@@ -1,5 +1,7 @@
 <?php
-session_start(); ?>
+	include "conexion.php";
+	session_start();
+?>
 <!DOCTYPE HTML>
 <html lang="es">
 	<head>
@@ -206,25 +208,45 @@ session_start(); ?>
 							<div class="row">
 								<div class="span2">
 									Lugar de partida:<br><br>
-									<select name="provincia" id="provincia" class="form-control" style="width:100%;" required>
+									<select name="provinciaPartida" id="provinciaPartida" class="form-control" style="width:100%;" required>
 										<option value="">Seleccione una provincia</option>
+										<?php
+											$sql = "call getProvincias()";
+											$res = $conn->query($sql);
+											$provincias = "";
+											while ($row = $res->fetch_array()) {
+												$provincias.= "<option value='".$row["idProvincia"]."'>".$row["nombre"]."</option>";
+											}
+											echo $provincias;
+											$res->close();
+											$conn->next_result();
+										?>
 									</select>
-									<select name="canton" id="canton" class="form-control" style="width:100%;" required>
+									<select name="cantonPartida" id="cantonPartida" class="form-control" style="width:100%;" required>
 										<option value="">Seleccione un cantón</option>
 									</select>
-									<select name="distrito" id="distrito" class="form-control" style="width:100%;" required>
+									<select name="distritoPartida" id="distritoPartida" class="form-control" style="width:100%;" required>
 										<option value="">Seleccione un distrito</option>
 									</select>
 								</div>
 								<div class="span2">
 									Lugar de destino:<br><br>
-									<select name="provincia" id="provincia" class="form-control" style="width:100%;" required>
+									<select name="provinciaDestino" id="provinciaDestino" class="form-control" style="width:100%;" required>
 										<option value="">Seleccione una provincia</option>
+										<?php
+											$sql = "call getProvincias()";
+											$res = $conn->query($sql);
+											$provincias = "";
+											while ($row = $res->fetch_array()) {
+												$provincias.= "<option value='".$row["idProvincia"]."'>".$row["nombre"]."</option>";
+											}
+											echo $provincias;
+										?>
 									</select>
-									<select name="canton" id="canton" class="form-control" style="width:100%;" required>
+									<select name="cantonDestino" id="cantonDestino" class="form-control" style="width:100%;" required>
 										<option value="">Seleccione un cantón</option>
 									</select>
-									<select name="distrito" id="distrito" class="form-control" style="width:100%;" required>
+									<select name="distritoDestino" id="distritoDestino" class="form-control" style="width:100%;" required>
 										<option value="">Seleccione un distrito</option>
 									</select>									
 								</div>
@@ -414,7 +436,8 @@ session_start(); ?>
 		<script src="js/animate.js"></script>
 		<script src="js/jquery.tweet.js"></script>
 		<script src="js/custom.js"></script>
-
+		<script type="text/javascript" src="js/armarDireccionPartida.js"></script>
+		<script type="text/javascript" src="js/armarDireccionDestino.js"></script>
 	</body>
 
 </html>
