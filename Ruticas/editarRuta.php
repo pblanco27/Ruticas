@@ -1,4 +1,5 @@
 <?php
+	include "conexion.php";
 	session_start();
 ?>
 <!DOCTYPE HTML>
@@ -142,7 +143,7 @@
 				<h2 class="pagetitle" style="color:white;">
 				Editar ruta:
 				<select name="ruta" id="ruta" class="form-control" required>
-					<option value="" style="display:none;">Seleccione una ruta</option>						
+					<option value="" style="display:none;">Seleccione una ruta</option>
 				</select>
 				<h2>
 			</div>
@@ -207,31 +208,51 @@
 								<textarea name="descripcion" id="descripcion" rows="7" placeholder="Descripción del ruta" style="resize: none;" maxlength="250" required></textarea>
 								<font style="color:Red"><?php echo $_SESSION["error_descripcion"]; ?></font>
 							</div>
-							
+
 							<div class="row">
 								<div class="span2">
 									Lugar de partida:<br><br>
-									<select name="provincia" id="provincia" class="form-control" style="width:100%;" required>
+									<select name="provinciaPartida" id="provinciaPartida" class="form-control" style="width:100%;" required>
 										<option value="">Seleccione una provincia</option>
+										<?php
+											$sql = "call getProvincias()";
+											$res = $conn->query($sql);
+											$provincias = "";
+											while ($row = $res->fetch_array()) {
+												$provincias.= "<option value='".$row["idProvincia"]."'>".$row["nombre"]."</option>";
+											}
+											echo $provincias;
+											$res->close();
+											$conn->next_result();
+										?>
 									</select>
-									<select name="canton" id="canton" class="form-control" style="width:100%;" required>
+									<select name="cantonPartida" id="cantonPartida" class="form-control" style="width:100%;" required>
 										<option value="">Seleccione un cantón</option>
 									</select>
-									<select name="distrito" id="distrito" class="form-control" style="width:100%;" required>
+									<select name="distritoPartida" id="distritoPartida" class="form-control" style="width:100%;" required>
 										<option value="">Seleccione un distrito</option>
 									</select>
 								</div>
 								<div class="span2">
 									Lugar de destino:<br><br>
-									<select name="provincia" id="provincia" class="form-control" style="width:100%;" required>
+									<select name="provinciaDestino" id="provinciaDestino" class="form-control" style="width:100%;" required>
 										<option value="">Seleccione una provincia</option>
+										<?php
+											$sql = "call getProvincias()";
+											$res = $conn->query($sql);
+											$provincias = "";
+											while ($row = $res->fetch_array()) {
+												$provincias.= "<option value='".$row["idProvincia"]."'>".$row["nombre"]."</option>";
+											}
+											echo $provincias;
+										?>
 									</select>
-									<select name="canton" id="canton" class="form-control" style="width:100%;" required>
+									<select name="cantonDestino" id="cantonDestino" class="form-control" style="width:100%;" required>
 										<option value="">Seleccione un cantón</option>
 									</select>
-									<select name="distrito" id="distrito" class="form-control" style="width:100%;" required>
+									<select name="distritoDestino" id="distritoDestino" class="form-control" style="width:100%;" required>
 										<option value="">Seleccione un distrito</option>
-									</select>									
+									</select>
 								</div>
 							</div>
 							<div class="row">
@@ -424,6 +445,8 @@
 		<script src="js/animate.js"></script>
 		<script src="js/jquery.tweet.js"></script>
 		<script src="js/custom.js"></script>
+		<script type="text/javascript" src="js/armarDireccionPartida.js"></script>
+		<script type="text/javascript" src="js/armarDireccionDestino.js"></script>
 
 	</body>
 
