@@ -151,6 +151,42 @@ unset($_SESSION["error_lats"]);
 		<section id="maincontent" class="inner">
 			<div class="container">
 				<?php
+				$sql = "call getUsers()";
+        $res = $conn->query($sql);
+				 ?>
+				<div class="row">
+					<div class="span4">
+						<p>Fecha:</p>
+						<input type="date">
+					</div>
+					<div class="span4">
+						<p>Usuario:</p>
+						<select class="form-control">
+							<?php while ($row = $res->fetch_array()) {
+              if (!empty($row['usuario'])) {?>
+              <option value="<?php echo $row['idUsuario']; ?>">
+                <?php echo $row['usuario']; ?>
+              </option>
+              <?php }
+              } ?>
+						</select>
+					</div>
+					<div class="span4">
+						<p>Área:</p>
+						<select>
+							<option>Empresas</option>
+							<option>Rutas</option>
+						</select>
+					</div>
+				</div>
+				&nbsp;
+				<center>
+					<button class="btn btn-primary">Filtrar</button>
+				</center>
+				&nbsp;
+				<?php
+				$res->close();
+        $conn->next_result();
         $sql = "call getLog()";
         $res = $conn->query($sql);
         ?>
