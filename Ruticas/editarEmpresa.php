@@ -1,8 +1,7 @@
 <?php
-include "conexion.php";
-session_start();
-echo $_SESSION['idUser'];
-unset($_SESSION["error_lats"]);
+	include "conexion.php";
+	session_start();
+	unset($_SESSION["error_lats"]);
 ?>
 
 <!DOCTYPE HTML>
@@ -112,11 +111,11 @@ unset($_SESSION["error_lats"]);
 									  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 										<ul>
 											<li>
-												<a class="dropdown-item" href="#">Crear ruta</a>
+												<a class="dropdown-item" href="crearRuta.php">Crear ruta</a>
 											</li>
 											<div class="dropdown-divider"></div>
 											<li>
-												<a class="dropdown-item" href="#">Editar rutas</a>
+												<a class="dropdown-item" href="editarRuta.php">Editar rutas</a>
 											</li>
 										</ul>
 									  </div>
@@ -305,7 +304,7 @@ unset($_SESSION["error_lats"]);
 
 							<div class="row">
 								<div class="span2">
-									<button type="button" class="btn" style="width:100%;" onclick="location.href='Scripts/deshabilitar.php';" id='botonHabilitar'>-----</button>
+									<button type="button" class="btn" style="width:100%;" onclick="location.href='Scripts/cambiarEstadoEmpresa.php';" id='botonCambiarEstadoEmpresa'>-----</button>
 								</div>
 								<div class="span2">
 									<input type="submit" class="btn" style= "font-size: 16px; padding: 11px 19px;" value="Guardar">
@@ -492,7 +491,6 @@ unset($_SESSION["error_lats"]);
 		<script src="js/animate.js"></script>
 		<script src="js/jquery.tweet.js"></script>
 		<script src="js/custom.js"></script>
-
 		<script type="text/javascript" src="js/comboBox.js"></script>
 	</body>
 
