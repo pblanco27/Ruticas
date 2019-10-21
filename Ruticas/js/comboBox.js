@@ -32,9 +32,9 @@ $(document).ready(function() {
           document.getElementById('horaInicio').getElementsByTagName('option')[hor1-1].selected  = 'selected';
           document.getElementById('horaFin').getElementsByTagName('option')[hor2-1].selected  = 'selected';
           if(activado == 1){
-            document.getElementById("botonHabilitar").firstChild.data = 'Deshabilitar';
+            document.getElementById("botonCambiarEstadoEmpresa").firstChild.data = 'Deshabilitar';
           }else {
-            document.getElementById("botonHabilitar").firstChild.data = 'Habilitar';
+            document.getElementById("botonCambiarEstadoEmpresa").firstChild.data = 'Habilitar';
           }
           //map = L.map('map');
           //map.setView(new L.LatLng(lat, long),11,{animation:true});
