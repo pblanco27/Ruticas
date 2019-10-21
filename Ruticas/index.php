@@ -1,3 +1,9 @@
+<?php
+session_start();
+unset($_SESSION["error_telefono"]);
+unset($_SESSION["error_contacto"]);
+unset($_SESSION["error_lats"]);
+ ?>
 <!DOCTYPE HTML>
 <html lang="es">
 	<head>
@@ -19,7 +25,7 @@
 					<div class="container">
 						<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
 						</a>
-						<img class="brand" src="img/ruticas.png">							
+						<img class="brand" src="img/ruticas.png">
 						<nav class="pull-right nav-collapse collapse">
 							<ul id="menu-main" class="nav">
 								<button class="btn btn-danger dropdown-toggle" onclick="location.href='guest.php';">
@@ -34,7 +40,7 @@
 				</div>
 			</div>
 		</div>
-		
+
 		<div id="header-wrapper" class="header-slider">
 			<header class="clearfix">
 				<div class="logo">
@@ -67,7 +73,7 @@
 				</div>
 			</header>
 		</div>
-		
+
 		<section class="spacer green">
 			<div class="container">
 				<div class="row">
@@ -84,8 +90,8 @@
 				</div>
 			</div>
 		</section>
-		
-		<!--	
+
+		<!--
 		<section id="about" class="section">
 			<div class="container">
 				<h4>Who We Are</h4>
@@ -153,13 +159,13 @@
 					</div>
 				</div>
 			</div>
-		
+
 		</section>
 
 		<section id="services" class="section orange">
 			<div class="container">
 				<h4>Services</h4>
-				
+
 				<div class="row">
 					<div class="span3 animated-fast flyIn">
 						<div class="service-box">
@@ -204,7 +210,7 @@
 		<section id="works" class="section">
 			<div class="container clearfix">
 				<h4>Our Works</h4>
-				
+
 				<div class="row">
 					<div id="filters" class="span12">
 						<ul class="clearfix">
@@ -235,12 +241,12 @@
 							</li>
 						</ul>
 					</div>
-				
+
 				</div>
 				<div class="row">
 					<div class="span12">
 						<div id="portfolio-wrap">
-							
+
 							<div class="portfolio-item grid print photography">
 								<div class="portfolio">
 									<a href="img/works/big.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
@@ -254,7 +260,7 @@
 							</a>
 								</div>
 							</div>
-							
+
 							<div class="portfolio-item grid print design web">
 								<div class="portfolio">
 									<a href="img/works/big.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
@@ -268,7 +274,7 @@
 							</a>
 								</div>
 							</div>
-							
+
 							<div class="portfolio-item grid print design">
 								<div class="portfolio">
 									<a href="img/works/big.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
@@ -282,7 +288,7 @@
 							</a>
 								</div>
 							</div>
-							
+
 							<div class="portfolio-item grid photography web">
 								<div class="portfolio">
 									<a href="img/works/big.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
@@ -296,7 +302,7 @@
 							</a>
 								</div>
 							</div>
-							
+
 							<div class="portfolio-item grid photography web">
 								<div class="portfolio">
 									<a href="img/works/big.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
@@ -310,7 +316,7 @@
 							</a>
 								</div>
 							</div>
-						
+
 							<div class="portfolio-item grid photography web">
 								<div class="portfolio">
 									<a href="img/works/big.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
@@ -324,7 +330,7 @@
 							</a>
 								</div>
 							</div>
-							
+
 							<div class="portfolio-item grid photography web">
 								<div class="portfolio">
 									<a href="img/works/big.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
@@ -338,7 +344,7 @@
 							</a>
 								</div>
 							</div>
-						
+
 							<div class="portfolio-item grid photography">
 								<div class="portfolio">
 									<a href="img/works/big.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
@@ -352,7 +358,7 @@
 							</a>
 								</div>
 							</div>
-							
+
 							<div class="portfolio-item grid photography web">
 								<div class="portfolio">
 									<a href="img/works/big.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
@@ -366,7 +372,7 @@
 							</a>
 								</div>
 							</div>
-							
+
 							<div class="portfolio-item grid design web">
 								<div class="portfolio">
 									<a href="img/works/big.jpg" data-pretty="prettyPhoto[gallery1]" class="portfolio-image">
@@ -380,7 +386,7 @@
 							</a>
 								</div>
 							</div>
-							
+
 						</div>
 					</div>
 				</div>
@@ -405,7 +411,7 @@
 		<section id="blog" class="section">
 			<div class="container">
 				<h4>Our Blog</h4>
-			
+
 				<div class="row">
 					<div class="span3">
 						<div class="home-post">
@@ -491,15 +497,15 @@
 			</div>
 		</section>
 		-->
-		
+
 		<footer>
 			<div class="container">
-				<div class="row">				
+				<div class="row">
 					<h1>
 						<font style="color:white;">
-							Desarrolladores 
+							Desarrolladores
 						</font>
-					</h1>				
+					</h1>
 					<div class="span6 offset3">
 						<ul class="social-networks">
 							<li><a href="https://www.instagram.com/gabritico"><i class="icon-circled icon-bgdark icon-instagram icon-2x"></i></a></li>
@@ -517,7 +523,7 @@
 			</div>
 		</footer>
 		<a href="#" class="scrollup"><i class="icon-angle-up icon-square icon-bgdark icon-2x"></i></a>
-		
+
 		<script src="js/jquery.js"></script>
 		<script src="js/jquery.scrollTo.js"></script>
 		<script src="js/jquery.nav.js"></script>
