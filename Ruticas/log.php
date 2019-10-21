@@ -1,7 +1,7 @@
 <?php
-include "conexion.php";
-session_start();
-unset($_SESSION["error_lats"]);
+	include "conexion.php";
+	session_start();
+	unset($_SESSION["error_lats"]);
 ?>
 
 <!DOCTYPE HTML>
@@ -73,6 +73,11 @@ unset($_SESSION["error_lats"]);
 		[data-tip]:hover:after {
 			display:block;
 		}
+		div.table-scroll {
+			width: 100%; 
+			height: 370px; 
+			overflow: scroll; 
+		}	
 		</style>
 	</head>
 
@@ -112,11 +117,11 @@ unset($_SESSION["error_lats"]);
 									  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 										<ul>
 											<li>
-												<a class="dropdown-item" href="#">Crear ruta</a>
+												<a class="dropdown-item" href="crearRuta.php">Crear ruta</a>
 											</li>
 											<div class="dropdown-divider"></div>
 											<li>
-												<a class="dropdown-item" href="#">Editar rutas</a>
+												<a class="dropdown-item" href="editarRuta.php">Editar rutas</a>
 											</li>
 										</ul>
 									  </div>
@@ -143,8 +148,7 @@ unset($_SESSION["error_lats"]);
 
 		<section class="spacer green">
 			<div align="center">
-				<h2 class="pagetitle" style="color:white;">Log de acciones<h2>
-				<br>
+				<h2 class="pagetitle" style="color:white;">Historial de acciones<h2>
 			</div>
 		</section>
 
@@ -152,66 +156,68 @@ unset($_SESSION["error_lats"]);
 			<div class="container">
 				<?php
 				$sql = "call getUsers()";
-        $res = $conn->query($sql);
+				$res = $conn->query($sql);
 				 ?>
 				<div class="row">
-					<div class="span4">
+					<div class="span3">
 						<p>Fecha:</p>
 						<input type="date">
 					</div>
-					<div class="span4">
+					<div class="span3">
 						<p>Usuario:</p>
 						<select class="form-control">
 							<?php while ($row = $res->fetch_array()) {
-              if (!empty($row['usuario'])) {?>
-              <option value="<?php echo $row['idUsuario']; ?>">
-                <?php echo $row['usuario']; ?>
-              </option>
-              <?php }
-              } ?>
+							  if (!empty($row['usuario'])) {?>
+							  <option value="<?php echo $row['idUsuario']; ?>">
+								<?php echo $row['usuario']; ?>
+							  </option>
+							  <?php }
+							  } ?>
 						</select>
 					</div>
-					<div class="span4">
+					<div class="span3">
 						<p>Área:</p>
 						<select>
 							<option>Empresas</option>
 							<option>Rutas</option>
 						</select>
 					</div>
+					<div class="span3">
+						<br>
+						<button class="btn btn-primary" style="float:right;">Filtrar</button>
+					</div>
 				</div>
-				&nbsp;
-				<center>
-					<button class="btn btn-primary">Filtrar</button>
-				</center>
-				&nbsp;
 				<?php
-				$res->close();
-        $conn->next_result();
-        $sql = "call getLog()";
-        $res = $conn->query($sql);
-        ?>
+					$res->close();
+					$conn->next_result();
+					$sql = "call getLog()";
+					$res = $conn->query($sql);
+				?>
+				<div class="table-scroll"> 
 					<table class="table table-bordered">
 						<thead>
 							<tr>
 								<th>Fecha</th>
-								<th>Entidad</th>
+								<th>Área</th>
 								<th>Acción</th>
 								<th>Usuario</th>
 							</tr>
 						</thead>
 						<tbody>
 							<?php while ($row = $res->fetch_array()) {
-	            if (!empty($row['nombreTabla'])) {?>
-							<tr>
-	            <td><?php echo $row['fecha']; ?></td>
-	            <td><?php echo $row['nombreTabla']; ?></td>
-							<td><?php echo $row['accion']; ?></td>
-							<td><?php echo $row['usuario']; ?></td>
-						</tr>
-	            <?php }
-	            } ?>
+								if (!empty($row['nombreTabla'])) {?>
+									<tr>
+										<td><?php echo $row['fecha']; ?></td>
+										<td><?php echo $row['nombreTabla']; ?></td>
+										<td><?php echo $row['accion']; ?></td>
+										<td><?php echo $row['usuario']; ?></td>
+									</tr>
+							<?php }
+							}
+							?>
 						</tbody>
 					</table>
+				</div>
 			</div>
 		</section>
 
