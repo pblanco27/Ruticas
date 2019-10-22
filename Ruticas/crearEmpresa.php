@@ -1,5 +1,6 @@
 <?php
-session_start(); ?>
+	session_start();
+?>
 <!DOCTYPE HTML>
 <html lang="es">
 	<head>
@@ -151,7 +152,7 @@ session_start(); ?>
 					<div class="span8">
 						<!-- Aquí va el mapa -->
 						<div id="map">
-	            <script type="text/javascript" src="js/fun.js"></script>
+						<script type="text/javascript" src="js/mapaCrearEmpresa.js"></script>
 		        </div>
 					</div>
 					<div class="span4">

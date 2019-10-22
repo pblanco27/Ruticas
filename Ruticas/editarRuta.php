@@ -223,7 +223,7 @@
 									<button type="button" class="btn" style="width:100%;" onclick="location.href='Scripts/cambiarEstadoRuta.php';" id='botonCambiarEstadoRuta'>-----</button>
 								</div>
 								<div class="span2">
-									<input type="submit" class="btn" style= "font-size: 16px; padding: 11px 19px;" value="Guardar">
+									<input type="submit" class="btn" style="font-size: 16px; padding: 11px 19px;" value="Guardar">
 								</div>
 							</div>
 						</form>
@@ -272,7 +272,5 @@
 		<script src="js/custom.js"></script>
 		<script type="text/javascript" src="js/armarDireccionPartida.js"></script>
 		<script type="text/javascript" src="js/armarDireccionDestino.js"></script>
-
 	</body>
-
 </html>
