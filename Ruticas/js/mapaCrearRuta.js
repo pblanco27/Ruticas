@@ -26,6 +26,7 @@ function onMapClick(e) {
 	marker.push(marker2);
 	cont = cont + 1;
 	dibujarRuta();
+	document.getElementById("puntos").value = JSON.stringify(marker);
 }
 
 function eliminarPuntos(){

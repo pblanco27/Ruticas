@@ -157,7 +157,7 @@
 					<div class="span8">
 						<!-- Aquí va el mapa -->
 						<div id="map">
-                <script type="text/javascript" src="js/fun.js"></script>
+                
             </div>
 					</div>
 
@@ -272,5 +272,6 @@
 		<script src="js/custom.js"></script>
 		<script type="text/javascript" src="js/armarDireccionPartida.js"></script>
 		<script type="text/javascript" src="js/armarDireccionDestino.js"></script>
+		<script type="text/javascript" src="js/fun.js"></script>
 	</body>
 </html>

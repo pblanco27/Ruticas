@@ -217,7 +217,7 @@
 						</div>
 					</div>
 					<div class="span4">
-						<h2>Empresa</h2>
+						<h4>Empresa</h4>
 							<div class="form-group" >
 								<input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre de la empresa" maxlength="45" required readonly>
 								<font style="color:Red"><?php echo $_SESSION["error_nombre"]; ?></font>
@@ -308,7 +308,7 @@
 							</div>
 					</div>
 					<div class="span4">
-						<h2>Ruta</h2>
+						<h4>Ruta</h4>
 						<form id="register-form" action="Scripts/modificarRuta.php" method="post" role="form" >
 							<div class="form-group" data-tip="El número de ruta debe ser de máximo 45 caracteres">
 								<input type="text" name="numero" id="numero" class="form-control" placeholder="Número de la ruta" maxlength="45" required readonly>

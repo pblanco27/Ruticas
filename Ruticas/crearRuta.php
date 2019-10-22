@@ -156,12 +156,14 @@
 							</div>
 							<div class="row">
 								<div class="span4"><br><br>
-									<button type="button" class="btn btn-register" style="width:100%;" onclick="eliminarPuntos();">
+									<button type="button" class="btn btn-register" style="width:100%;" onclick="window.location.reload();">
+									<!--<button type="button" class="btn btn-register" style="width:100%;" onclick="eliminarPuntos();">-->
 										Volver a trazar
 									</button>
 								</div>
 								<div class="span4"><br>
-									<h6 align="center"><input id="listo" type="checkbox" style="height:30px;"/>&nbsp; He trazado la ruta correctamente<h6>
+									<input name="puntos" id="puntos" type="text" style="display:none;">
+									<h6 align="center"><input id="listo" name="listo" type="checkbox" style="height:30px;">&nbsp; He trazado la ruta correctamente<h6>
 								</div>
 							</div>
 						</div>
