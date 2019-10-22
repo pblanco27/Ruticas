@@ -106,11 +106,15 @@
 									  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
 										<ul>
 											<li>
-												<a class="dropdown-item" href="#">Crear ruta</a>
+												<a class="dropdown-item" href="crearRuta.php">Crear ruta</a>
 											</li>
 											<div class="dropdown-divider"></div>
 											<li>
-												<a class="dropdown-item" href="#">Editar rutas</a>
+												<a class="dropdown-item" href="editarRuta.php">Editar rutas</a>
+											</li>
+											<div class="dropdown-divider"></div>
+											<li>
+												<a class="dropdown-item" href="asignarRuta.php">Asignar rutas</a>
 											</li>
 										</ul>
 									  </div>

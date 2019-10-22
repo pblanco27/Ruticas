@@ -117,6 +117,7 @@
 											<li>
 												<a class="dropdown-item" href="editarRuta.php">Editar rutas</a>
 											</li>
+											<div class="dropdown-divider"></div>
 											<li>
 												<a class="dropdown-item" href="asignarRuta.php">Asignar rutas</a>
 											</li>
