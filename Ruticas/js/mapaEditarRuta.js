@@ -11,6 +11,8 @@ accessToken: 'pk.eyJ1IjoiYmJyb29rMTU0IiwiYSI6ImNpcXN3dnJrdDAwMGNmd250bjhvZXpnbWs
 var marker = L.marker([9.938038, -84.075376]).addTo(map);
 L.control.scale().addTo(map);
 
+mapsPlaceholder[0] = map;
+
 var marker = new Array();
 var cont =  0; 
 var routingControl;

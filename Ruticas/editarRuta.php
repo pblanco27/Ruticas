@@ -205,7 +205,7 @@
 							<div class="row">								
 								<div class="span2">
 									Lugar de partida:<br><br>
-									<select name="provinciaPartida" id="provinciaPartida" class="form-control" style="width:100%;" required>
+									<select name="provinciaPartida" id="provinciaPartida" class="form-control" style="width:100%;" >
 										<option value="">Seleccione una provincia</option>
 										<?php
 											$sql = "call getProvincias()";
@@ -219,16 +219,16 @@
 											$conn->next_result();
 										?>
 									</select>
-									<select name="cantonPartida" id="cantonPartida" class="form-control" style="width:100%;" required>
+									<select name="cantonPartida" id="cantonPartida" class="form-control" style="width:100%;" >
 										<option value="">Seleccione un cantón</option>
 									</select>
-									<select name="distritoPartida" id="distritoPartida" class="form-control" style="width:100%;" required>
+									<select name="distritoPartida" id="distritoPartida" class="form-control" style="width:100%;" >
 										<option value="0">Seleccione un distrito</option>
 									</select>
 								</div>
 								<div class="span2">
 									Lugar de destino:<br><br>
-									<select name="provinciaDestino" id="provinciaDestino" class="form-control" style="width:100%;" required>
+									<select name="provinciaDestino" id="provinciaDestino" class="form-control" style="width:100%;" >
 										<option value="">Seleccione una provincia</option>
 										<?php
 											$sql = "call getProvincias()";
@@ -240,10 +240,10 @@
 											echo $provincias;
 										?>
 									</select>
-									<select name="cantonDestino" id="cantonDestino" class="form-control" style="width:100%;" required>
+									<select name="cantonDestino" id="cantonDestino" class="form-control" style="width:100%;" >
 										<option value="">Seleccione un cantón</option>
 									</select>
-									<select name="distritoDestino" id="distritoDestino" class="form-control" style="width:100%;" required>
+									<select name="distritoDestino" id="distritoDestino" class="form-control" style="width:100%;" >
 										<option value="0">Seleccione un distrito</option>
 									</select>
 								</div>

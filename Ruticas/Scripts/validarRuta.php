@@ -26,7 +26,7 @@
 			$sql = "call getMaxRuta()";
 			$res = $conn->query($sql) or die ('Unable to execute query. '. mysqli_error($conn));
 			$row = mysqli_fetch_assoc($res);
-			$idRuta = $row['max(idRuta)'];
+			$idRuta = $row['MAX(idRuta)'];
 			$res->close();
 			$conn->next_result();
 			for ($i = 0; $i < sizeof($puntosDecodificados); $i++) {
