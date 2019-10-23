@@ -23,6 +23,29 @@ $(document).ready(function() {
 													  "a " + nombreDestino;
 		  document.getElementById("idDistritoPartida").value = idDistritoPartida;
 		  document.getElementById("idDistritoDestino").value = idDistritoDestino;
+		  $.ajax({
+			url: 'Scripts/cargarPuntos.php',
+			type: 'post',
+			data: {
+			  ruta: rutaid
+			},
+			dataType: 'json',
+			success: function(response) {			  
+			  var puntos = response[0]['puntos'];
+			  
+			  
+			  document.getElementById("numero").value = numeroRuta;
+			  document.getElementById("descripcion").value = descripcion;
+			  document.getElementById("trayecto").value = "Trayecto de ruta: " +
+														  "de " + nombrePartida + " " +
+														  "a " + nombreDestino;
+			  document.getElementById("idDistritoPartida").value = idDistritoPartida;
+			  document.getElementById("idDistritoDestino").value = idDistritoDestino;
+			  
+			  
+			}
+		  });
+		  
         }
       });
   });

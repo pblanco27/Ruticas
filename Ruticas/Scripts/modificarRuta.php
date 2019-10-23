@@ -33,7 +33,6 @@
 		if ($listo){
 			//$sql = "call editarRuta('$numero','$descripcion',$latitudInicial,$longitudInicial,$latitudFinal,$longitudFinal,$idUser,$distritoPartida, $distritoDestino)";
 			
-			
 			$sql = "call crearRuta('$numero','$descripcion',$latitudInicial,$longitudInicial,$latitudFinal,$longitudFinal,$idUser,$distritoPartida, $distritoDestino)";
 			
 			$conn->query($sql) or die ('Unable to execute query. '. mysqli_error($conn));
