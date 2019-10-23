@@ -174,7 +174,7 @@
 								<input type="text" name="numero" id="numero" class="form-control" placeholder="Número de la ruta" maxlength="45" required>
 								<font style="color:Red"><?php echo $_SESSION["error_numero"]; unset($_SESSION["error_numero"]); ?></font>
 							</div>
-							<div class="form-group" data-tip="La descripción debe ser de máximo 250 caracteres" >
+							<div class="form-group">
 								<textarea name="descripcion" id="descripcion" rows="7" placeholder="Descripción del ruta" style="resize: none;" maxlength="250" required></textarea>
 								<font style="color:Red"><?php echo $_SESSION["error_descripcion"]; unset($_SESSION["error_descripcion"]); ?></font>
 							</div>

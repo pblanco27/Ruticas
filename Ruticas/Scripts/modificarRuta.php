@@ -9,6 +9,8 @@
 		$descripcion= $_POST['descripcion'];
 		$distritoPartida= $_POST['distritoPartida'];
 		$distritoDestino= $_POST['distritoDestino'];
+		$idDistritoPartida= $_POST['idDistritoPartida'];
+		$idDistritoDestino= $_POST['idDistritoDestino'];
 		$listo= $_POST['listo'];
 
 		$puntos = $_POST['puntos'];
@@ -19,8 +21,21 @@
 		$latitudFinal = end($puntosDecodificados)["_latlng"]["lat"];
 		$longitudFinal = end($puntosDecodificados)["_latlng"]["lng"];
 
+		if ($distritoPartida == 0 && $distritoDestino == 0){
+			$distritoPartida = $idDistritoPartida;
+			$distritoDestino = $idDistritoDestino;
+		} else if ($distritoPartida == 0 && $distritoDestino != 0){
+			$distritoDestino = $idDistritoDestino;
+		} else {
+			$distritoPartida = $idDistritoPartida;
+		}
+		
 		if ($listo){
+			//$sql = "call editarRuta('$numero','$descripcion',$latitudInicial,$longitudInicial,$latitudFinal,$longitudFinal,$idUser,$distritoPartida, $distritoDestino)";
+			
+			
 			$sql = "call crearRuta('$numero','$descripcion',$latitudInicial,$longitudInicial,$latitudFinal,$longitudFinal,$idUser,$distritoPartida, $distritoDestino)";
+			
 			$conn->query($sql) or die ('Unable to execute query. '. mysqli_error($conn));
 			$conn->next_result();
 			$sql = "call getMaxRuta()";

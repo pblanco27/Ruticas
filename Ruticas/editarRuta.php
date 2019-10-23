@@ -143,8 +143,22 @@
 			<div align="center">
 				<h2 class="pagetitle" style="color:white;">
 				Editar ruta:
-				<select name="ruta" id="ruta" class="form-control" required>
-					<option value="" style="display:none;">Seleccione una ruta</option>
+				<?php
+					$sql = "call getRutasSimple()";
+					$res = $conn->query($sql);
+				?>
+				<select name="ruta" id="ruta">
+					<option value="0" style="display:none;">Seleccione una ruta</option>
+					<?php while ($row = $res->fetch_array()) {
+						if (!empty($row['numeroRuta'])) {?>
+						<option value="<?php echo $row['idRuta']; ?>">
+						  <?php echo $row['numeroRuta']; ?>
+						</option>
+					<?php }
+					}
+					$res->close();
+					$conn->next_result();
+					?>
 				</select>
 				<h2>
 			</div>
@@ -153,7 +167,7 @@
 		<section id="maincontent" class="inner">
 			<div class="container">
 				<div class="row">
-					<form id="register-form" action="Scripts/validarRuta.php" method="post" role="form" >
+					<form id="register-form" action="Scripts/modificarRuta.php" method="post" role="form" >
 						<div class="span8">
 							<!-- Aquí va el mapa -->
 							<div id="map">
@@ -179,12 +193,16 @@
 								<input type="text" name="numero" id="numero" class="form-control" placeholder="Número de la ruta" maxlength="45" required>
 								<font style="color:Red"><?php echo $_SESSION["error_numero"]; unset($_SESSION["error_numero"]); ?></font>
 							</div>
-							<div class="form-group" data-tip="La descripción debe ser de máximo 250 caracteres" >
-								<textarea name="descripcion" id="descripcion" rows="7" placeholder="Descripción del ruta" style="resize: none;" maxlength="250" required></textarea>
+							<div class="form-group">
+								<textarea name="descripcion" id="descripcion" rows="5" placeholder="Descripción del ruta" style="resize: none;" maxlength="250" required></textarea>
 								<font style="color:Red"><?php echo $_SESSION["error_descripcion"]; unset($_SESSION["error_descripcion"]); ?></font>
 							</div>
-
-							<div class="row">
+							<div class="form-group" data-tip="El trayecto actual de la ruta. Seleccione otro en las opciones de abajo si desea cambiarlo.">
+								<input type="text" name="trayecto" id="trayecto" readonly>
+								<input type="text" name="idDistritoPartida" id="idDistritoPartida" style="display:none;" readonly>
+								<input type="text" name="idDistritoDestino" id="idDistritoDestino" style="display:none;" readonly>
+							</div>
+							<div class="row">								
 								<div class="span2">
 									Lugar de partida:<br><br>
 									<select name="provinciaPartida" id="provinciaPartida" class="form-control" style="width:100%;" required>
@@ -205,7 +223,7 @@
 										<option value="">Seleccione un cantón</option>
 									</select>
 									<select name="distritoPartida" id="distritoPartida" class="form-control" style="width:100%;" required>
-										<option value="">Seleccione un distrito</option>
+										<option value="0">Seleccione un distrito</option>
 									</select>
 								</div>
 								<div class="span2">
@@ -226,7 +244,7 @@
 										<option value="">Seleccione un cantón</option>
 									</select>
 									<select name="distritoDestino" id="distritoDestino" class="form-control" style="width:100%;" required>
-										<option value="">Seleccione un distrito</option>
+										<option value="0">Seleccione un distrito</option>
 									</select>
 								</div>
 							</div>
@@ -282,7 +300,8 @@
 		<script src="js/animate.js"></script>
 		<script src="js/jquery.tweet.js"></script>
 		<script src="js/custom.js"></script>
+		<script type="text/javascript" src="js/comboBoxRuta.js"></script>
 		<script type="text/javascript" src="js/armarDireccionPartida.js"></script>
-		<script type="text/javascript" src="js/armarDireccionDestino.js"></script>
+		<script type="text/javascript" src="js/armarDireccionDestino.js"></script>		
 	</body>
 </html>

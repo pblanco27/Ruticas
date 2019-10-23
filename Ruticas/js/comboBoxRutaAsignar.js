@@ -5,7 +5,7 @@ $(document).ready(function() {
 	document.getElementById("discapacitado").checked = false;
     var rutaid = $(this).val();
       $.ajax({
-        url: 'Scripts/infoRutaAsignar.php',
+        url: 'Scripts/infoRuta.php',
         type: 'post',
         data: {
           ruta: rutaid
