@@ -5,11 +5,12 @@
 	$dbName = "labWeb";
 	$conn = new mysqli($dbServerName, $dbUsername, $dbPassword, $dbName);
 
+	/*
 	if ($conn->connect_errno) {
 	    echo "Falló la conexión a MySQL: (" . $conn->connect_errno . ") " . $conn->connect_error;
+	} else {
+	 	echo "Conexión establecida exitosamente";
 	}
-	// else {
-	// 	echo "Conexión establecida exitosamente";
-	// }
+	*/
 	mysqli_set_charset($conn,"utf8");
 ?>

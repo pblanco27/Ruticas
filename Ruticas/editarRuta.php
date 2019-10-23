@@ -15,16 +15,14 @@
 		<link href="color/default.css" rel="stylesheet">
 		<link rel="shortcut icon" href="img/favicon.ico">
 		<script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
-        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
-              integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
-              crossorigin=""/>
-        <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
-                integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
-                crossorigin=""></script>
+        		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" />
+		<link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+		<script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"></script>
+		<script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
 		<style>
         #map {
             width: 100%;
-            height: 450px; }
+            height: 380px; }
 		nav ul {
 			list-style-type: none;
 		}
@@ -151,25 +149,39 @@
 				<h2>
 			</div>
 		</section>
+
 		<section id="maincontent" class="inner">
 			<div class="container">
 				<div class="row">
-					<div class="span8">
-						<!-- Aquí va el mapa -->
-						<div id="map">
-                
-            </div>
-					</div>
+					<form id="register-form" action="Scripts/validarRuta.php" method="post" role="form" >
+						<div class="span8">
+							<!-- Aquí va el mapa -->
+							<div id="map">
+								<script type="text/javascript" src="js/mapaEditarRuta.js"></script>
+							</div>
+							<div class="row">
+								<div class="span4"><br><br>
+									<button type="button" class="btn btn-register" style="width:100%;" onclick="window.location.reload();">
+									<!--<button type="button" class="btn btn-register" style="width:100%;" onclick="eliminarPuntos();">-->
+										Volver a trazar
+									</button>
+								</div>
+								<div class="span4"><br>
+									<input name="puntos" id="puntos" type="text" style="display:none;">
+									<h6 align="center"><input id="listo" name="listo" type="checkbox" style="height:30px;">&nbsp; He trazado la ruta correctamente<h6>
+									<font style="color:Red"><?php echo $_SESSION["error_listo"]; unset($_SESSION["error_listo"]); ?></font>									
+								</div>
+							</div>
+						</div>
 
-					<div class="span4">
-						<form id="register-form" action="Scripts/modificarRuta.php" method="post" role="form" >
+						<div class="span4">							
 							<div class="form-group" data-tip="El número de ruta debe ser de máximo 45 caracteres">
 								<input type="text" name="numero" id="numero" class="form-control" placeholder="Número de la ruta" maxlength="45" required>
-								<font style="color:Red"><?php echo $_SESSION["error_nombre"]; ?></font>
+								<font style="color:Red"><?php echo $_SESSION["error_numero"]; unset($_SESSION["error_numero"]); ?></font>
 							</div>
 							<div class="form-group" data-tip="La descripción debe ser de máximo 250 caracteres" >
 								<textarea name="descripcion" id="descripcion" rows="7" placeholder="Descripción del ruta" style="resize: none;" maxlength="250" required></textarea>
-								<font style="color:Red"><?php echo $_SESSION["error_descripcion"]; ?></font>
+								<font style="color:Red"><?php echo $_SESSION["error_descripcion"]; unset($_SESSION["error_descripcion"]); ?></font>
 							</div>
 
 							<div class="row">
@@ -226,8 +238,8 @@
 									<input type="submit" class="btn" style="font-size: 16px; padding: 11px 19px;" value="Guardar">
 								</div>
 							</div>
-						</form>
-					</div>
+						</div>
+					</form>
 				</div>
 			</div>
 		</section>
@@ -272,6 +284,5 @@
 		<script src="js/custom.js"></script>
 		<script type="text/javascript" src="js/armarDireccionPartida.js"></script>
 		<script type="text/javascript" src="js/armarDireccionDestino.js"></script>
-		<script type="text/javascript" src="js/fun.js"></script>
 	</body>
 </html>

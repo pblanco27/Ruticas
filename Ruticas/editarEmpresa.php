@@ -16,7 +16,6 @@
 		<link href="css/style.css" rel="stylesheet">
 		<link href="color/default.css" rel="stylesheet">
 		<link rel="shortcut icon" href="img/favicon.ico">
-		<script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
               integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
               crossorigin=""/>
@@ -172,41 +171,42 @@
 					<div class="span8">
 						<!-- Aquí va el mapa -->
 						<div id="map">
-              <script type="text/javascript" src="js/fun.js"></script>
-            </div>
+						  <script type="text/javascript" src="js/mapaEditarEmpresa.js"></script>
+						</div>
 					</div>
 
 					<div class="span4">
 						<form id="register-form" action="Scripts/modificarEmpresa.php" method="post" role="form" >
 							<div class="form-group" data-tip="El nombre debe ser de máximo 45 caracteres">
 								<input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre de la empresa" maxlength="45" required>
-								<font style="color:Red"><?php echo $_SESSION["error_nombre"]; ?></font>
+								<font style="color:Red"><?php echo $_SESSION["error_nombre"]; unset($_SESSION["error_nombre"]); ?></font>
 							</div>
 							<div class="form-group" data-tip="La zona donde opera debe ser de máximo 45 caracteres">
 								<input type="text" name="zona" id="zona" class="form-control" placeholder="Zona donde opera"  maxlength="45" required>
-								<font style="color:Red"><?php echo $_SESSION["error_zona"]; ?></font>
+								<font style="color:Red"><?php echo $_SESSION["error_zona"]; unset($_SESSION["error_zona"]); ?></font>
 							</div>
 							<div class="form-group" data-tip="La direccion debe ser de máximo 45 caracteres">
 								<input type="text" name="direccion" id="direccion" class="form-control" placeholder="Direccion física" maxlength="45" required>
-								<font style="color:Red"><?php echo $_SESSION["error_direccion"]; ?></font>
+								<font style="color:Red"><?php echo $_SESSION["error_direccion"]; unset($_SESSION["error_direccion"]); ?></font>
 							</div>
 							<div class="form-group" data-tip="La latitud cambia según el punto elegido en el mapa">
-								<input type="text" name="latitud" id="latitud" class="form-control" placeholder="Latitud" readonly>
+								<input type="text" name="latitud" id="latitud" class="form-control" placeholder="Latitud" readonly required>
 							</div>
 							<div class="form-group" data-tip="La longitud cambia según el punto elegido en el mapa">
-								<input type="text" name="longitud" id="longitud" class="form-control" placeholder="Longitud" readonly>
+								<input type="text" name="longitud" id="longitud" class="form-control" placeholder="Longitud" readonly required>
+								<font style="color:Red"><?php echo $_SESSION["error_lats"]; unset($_SESSION["error_lats"]); ?></font>
 							</div>
 							<div class="form-group" data-tip="El teléfono debe contener números (a excepción del + del código de área), y debe ser de máximo 45 caracteres">
 								<input type="text" name="telefono" id="telefono" class="form-control" placeholder="Número telefónico" maxlength="45" required>
-								<font style="color:Red"><?php echo $_SESSION["error_telefono"]; ?></font>
+								<font style="color:Red"><?php echo $_SESSION["error_telefono"]; unset($_SESSION["error_telefono"]); ?></font>
 							</div>
 							<div class="form-group" data-tip="El correo debe contener letras (sin tildes) y números, un arroba y un dominio, de máximo 45 caracteres">
 								<input type="email" name="correo" id="correo" class="form-control" placeholder="Correo electrónico" maxlength="45" required>
-								<font style="color:Red"><?php echo $_SESSION["error_correo"]; ?></font>
+								<font style="color:Red"><?php echo $_SESSION["error_correo"]; unset($_SESSION["error_correo"]); ?></font>
 							</div>
 							<div class="form-group" data-tip="Contacto ante eventualidad. Sigue el mismo formato del número telefónico">
 								<input type="text" name="contacto" id="contacto" class="form-control" placeholder="Contacto de emergencia" maxlength="45" required>
-								<font style="color:Red"><?php echo $_SESSION["error_contacto"]; ?></font>
+								<font style="color:Red"><?php echo $_SESSION["error_contacto"]; unset($_SESSION["error_contacto"]); ?></font>
 							</div>
 
 							<div class="form-group" data-tip="Debe seleccionar a que hora empiezan a laborar">
@@ -315,9 +315,7 @@
 		<script src="js/jquery.flexslider.js"></script>
 		<script src="js/inview.js"></script>
 		<script src="js/animate.js"></script>
-		<script src="js/jquery.tweet.js"></script>
 		<script src="js/custom.js"></script>
 		<script type="text/javascript" src="js/comboBoxEmpresa.js"></script>
 	</body>
-
 </html>

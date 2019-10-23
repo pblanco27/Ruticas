@@ -14,7 +14,6 @@
 		<link href="css/style.css" rel="stylesheet">
 		<link href="color/default.css" rel="stylesheet">
 		<link rel="shortcut icon" href="img/favicon.ico">
-		<script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
               integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
               crossorigin=""/>
@@ -152,106 +151,102 @@
 			<div class="container">
 				<div class="row">
 					<div class="span4">
-						<center>
-							<div class="row">
-								<?php
-				        $sql = "call getEmpresasSimple()";
-				        $res = $conn->query($sql);
-				        ?>
-								<div class="span1">
-									Empresa:
+						<form id="register-form" action="Scripts/modificarVinculacion.php" method="post" role="form" >
+							<center>
+								<div class="row">
+									<?php
+										$sql = "call getEmpresasSimple()";
+										$res = $conn->query($sql);
+									?>
+									<div class="span1">
+										Empresa:
+									</div>
+									<div class="span2">
+										<select name="empresa" id="empresa">
+											<option value="0" style="display:none;">Seleccione una empresa</option>
+											<?php while ($row = $res->fetch_array()) {
+												if (!empty($row['nombre'])) {?>
+												<option value="<?php echo $row['idEmpresa']; ?>">
+												  <?php echo $row['nombre']; ?>
+												</option>
+											<?php }
+											} ?>
+										</select>
+									</div>
 								</div>
-								<div class="span2">
-									<select name="empresa" id="empresa">
-										<option value="" style="display:none;">Seleccione una empresa</option>
-										<?php while ($row = $res->fetch_array()) {
-				            if (!empty($row['nombre'])) {?>
-				            <option value="<?php echo $row['idEmpresa']; ?>">
-				              <?php echo $row['nombre']; ?>
-				            </option>
-				            <?php }
-				            } ?>
-									</select>
-								</div>
-							</div>
 
+								<div class="row">
+									<?php
+										$res->close();
+										$conn->next_result();
+										$sql = "call getRutasSimple()";
+										$res = $conn->query($sql);
+									?>
+									<div class="span1">
+										Ruta:
+									</div>
+									<div class="span2">
+										<select name="ruta" id="ruta">
+											<option value="0" style="display:none;">Seleccione una empresa</option>
+											<?php while ($row = $res->fetch_array()) {
+												if (!empty($row['numeroRuta'])) {?>
+												<option value="<?php echo $row['idRuta']; ?>">
+												  <?php echo $row['numeroRuta']; ?>
+												</option>
+											<?php }
+											} ?>
+										</select>
+									</div>
+								</div>
+							</center>
+							<input type="text" id="costo" name="costo" placeholder="Costo Pasaje">
+							<br>
+							<input type="text" id="duracion" name="duracion" placeholder="Duracion del viaje (min)">
+							<br>
+							Unidades de discapacitados:
+							<input type="checkbox" id="discapacitado" name="discapacitado" class="custom-control-input">
+							<br>
+							<br>
 							<div class="row">
-								<?php
-								$res->close();
-								$conn->next_result();
-				        $sql = "call getRutasSimple()";
-				        $res = $conn->query($sql);
-				        ?>
-								<div class="span1">
-									Ruta:
+								<div class="span2">
+									<button id="botonCambiarEstadoVinculacion" type="button" class="btn" style="width:100%; display:none;" onclick="location.href='Scripts/cambiarEstadoVinculacion.php';" >Desvincular</button>
 								</div>
 								<div class="span2">
-									<select>
-										<option value="" style="display:none;">Seleccione una empresa</option>
-										<?php while ($row = $res->fetch_array()) {
-				            if (!empty($row['numeroRuta'])) {?>
-				            <option value="<?php echo $row['idRuta']; ?>">
-				              <?php echo $row['numeroRuta']; ?>
-				            </option>
-				            <?php }
-				            } ?>
-									</select>
+									<input id="botonSubmit" type="submit" class="btn" style= "font-size: 16px; padding: 11px 19px;" value="Vincular">
+									<input id="tipoVinculacion" name="tipoVinculacion" type="text" style="display:none;">
 								</div>
 							</div>
-					</center>
-					<input type="text" placeholder="Costo Pasaje">
-					<br>
-					<input type="text" placeholder="Duracion del viaje (min)">
-					<br>
-					Unidades de discapacitados:
-					<input type="checkbox" class="custom-control-input" id="defaultUnchecked">
-					<br>
-					<br>
-						<div class="row">
-							<div class="span2">
-								<button type="button" class="btn" style="width:100%;" onclick="location.href='Scripts/cambiarEstadoRuta.php';" id='botonCambiarEstadoRuta'>-----</button>
-							</div>
-							<div class="span2">
-								<input type="submit" class="btn" style= "font-size: 16px; padding: 11px 19px;" value="Guardar">
-							</div>
-						</div>
+						</form>
 					</div>
 					<div class="span4">
 						<h4>Empresa</h4>
 							<div class="form-group" >
-								<input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre de la empresa" maxlength="45" required readonly>
-								<font style="color:Red"><?php echo $_SESSION["error_nombre"]; ?></font>
+								<input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre de la empresa" maxlength="45" readonly>
 							</div>
 							<div class="form-group">
-								<input type="text" name="zona" id="zona" class="form-control" placeholder="Zona donde opera"  maxlength="45" required readonly>
-								<font style="color:Red"><?php echo $_SESSION["error_zona"]; ?></font>
+								<input type="text" name="zona" id="zona" class="form-control" placeholder="Zona donde opera"  maxlength="45" readonly>
 							</div>
 							<div class="form-group">
-								<input type="text" name="direccion" id="direccion" class="form-control" placeholder="Direccion física" maxlength="45" required readonly>
-								<font style="color:Red"><?php echo $_SESSION["error_direccion"]; ?></font>
+								<input type="text" name="direccion" id="direccion" class="form-control" placeholder="Direccion física" maxlength="45" readonly>
 							</div>
 							<div class="form-group">
-								<input type="text" name="latitud" id="latitud" class="form-control" placeholder="Latitud" style="display:none;" readonly required>
+								<input type="text" name="latitud" id="latitud" class="form-control" placeholder="Latitud" style="display:none;" readonly>
 							</div>
 							<div class="form-group" style="display:none;">
-								<input type="text" name="longitud" id="longitud" class="form-control" placeholder="Longitud" readonly required>
-								<font style="color:Red"><?php echo $_SESSION["error_lats"]; ?></font>
+								<input type="text" name="longitud" id="longitud" class="form-control" placeholder="Longitud" readonly>
 							</div>
 							<div class="form-group">
-								<input type="text" name="telefono" id="telefono" class="form-control" placeholder="Número telefónico" maxlength="45" required readonly>
-								<font style="color:Red"><?php echo $_SESSION["error_telefono"]; ?></font>
+								<input type="text" name="telefono" id="telefono" class="form-control" placeholder="Número telefónico" maxlength="45" readonly>
 							</div>
 							<div class="form-group">
-								<input type="email" name="correo" id="correo" class="form-control" placeholder="Correo electrónico" maxlength="45" required readonly>
-								<font style="color:Red"><?php echo $_SESSION["error_correo"]; ?></font>
+								<input type="email" name="correo" id="correo" class="form-control" placeholder="Correo electrónico" maxlength="45" readonly>
 							</div>
 							<div class="form-group" data-tip="Contacto ante eventualidad.">
-								<input type="text" name="contacto" id="contacto" class="form-control" placeholder="Contacto de emergencia" maxlength="45" required readonly>
-								<font style="color:Red"><?php echo $_SESSION["error_contacto"]; ?></font>
+								<input type="text" name="contacto" id="contacto" class="form-control" placeholder="Contacto de emergencia" maxlength="45" readonly>
 							</div>
 
 							<div class="form-group">
-								Hora inicio: &nbsp;&nbsp;<select name="horaInicio" id="horaInicio" class="form-control" placeholder="Seleccione una hora" required readonly>
+								Hora inicio: &nbsp;&nbsp;<select name="horaInicio" id="horaInicio" class="form-control" placeholder="Seleccione una hora" readonly>
 									<option value="1">1</option>
 									<option value="2">2</option>
 									<option value="3">3</option>
@@ -279,7 +274,7 @@
 								</select>
 							</div>
 							<div class="form-group">
-								Hora cierre: &nbsp;<select name="horaFin" id="horaFin" class="form-control" placeholder="Seleccione una hora" required readonly>
+								Hora cierre: &nbsp;<select name="horaFin" id="horaFin" class="form-control" placeholder="Seleccione una hora" readonly>
 									<option value="1">1</option>
 									<option value="2">2</option>
 									<option value="3">3</option>
@@ -309,18 +304,15 @@
 					</div>
 					<div class="span4">
 						<h4>Ruta</h4>
-						<form id="register-form" action="Scripts/modificarRuta.php" method="post" role="form" >
-							<div class="form-group" data-tip="El número de ruta debe ser de máximo 45 caracteres">
-								<input type="text" name="numero" id="numero" class="form-control" placeholder="Número de la ruta" maxlength="45" required readonly>
-								<font style="color:Red"><?php echo $_SESSION["error_nombre"]; ?></font>
-							</div>
-							<div class="form-group" data-tip="La descripción debe ser de máximo 250 caracteres" >
-								<textarea name="descripcion" id="descripcion" rows="7" placeholder="Descripción del ruta" style="resize: none;" maxlength="250" required readonly></textarea>
-								<font style="color:Red"><?php echo $_SESSION["error_descripcion"]; ?></font>
-							</div>
-								</div>
-							</div>
-						</form>
+						<div class="form-group">
+							<input type="text" name="numero" id="numero" class="form-control" placeholder="Número de la ruta" maxlength="45" readonly>
+						</div>
+						<div class="form-group">
+							<textarea name="descripcion" id="descripcion" rows="7" placeholder="Descripción del ruta" style="resize: none;" maxlength="250" readonly></textarea>
+						</div>
+						<div class="form-group">
+							<input type="text" name="trayecto" id="trayecto" readonly>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -362,10 +354,8 @@
 		<script src="js/jquery.flexslider.js"></script>
 		<script src="js/inview.js"></script>
 		<script src="js/animate.js"></script>
-		<script src="js/jquery.tweet.js"></script>
 		<script src="js/custom.js"></script>
 		<script type="text/javascript" src="js/comboBoxEmpresa.js"></script>
-
+		<script type="text/javascript" src="js/comboBoxRutaAsignar.js"></script>
 	</body>
-
 </html>

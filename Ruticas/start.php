@@ -10,7 +10,6 @@
 		<link href="css/style.css" rel="stylesheet">
 		<link href="color/default.css" rel="stylesheet">
 		<link rel="shortcut icon" href="img/favicon.ico">
-		<script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
               integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
               crossorigin=""/>
@@ -215,7 +214,6 @@
 		<script src="js/jquery.flexslider.js"></script>
 		<script src="js/inview.js"></script>
 		<script src="js/animate.js"></script>
-		<script src="js/jquery.tweet.js"></script>
 		<script src="js/custom.js"></script>
 
 	</body>

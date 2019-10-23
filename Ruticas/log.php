@@ -1,7 +1,6 @@
 <?php
 	include "conexion.php";
 	session_start();
-	unset($_SESSION["error_lats"]);
 ?>
 
 <!DOCTYPE HTML>
@@ -123,6 +122,9 @@
 											<li>
 												<a class="dropdown-item" href="editarRuta.php">Editar rutas</a>
 											</li>
+											<li>
+												<a class="dropdown-item" href="asignarRuta.php">Asignar rutas</a>
+											</li>
 										</ul>
 									  </div>
 									  &nbsp;&nbsp;
@@ -190,7 +192,7 @@
 				<?php
 					$res->close();
 					$conn->next_result();
-					$sql = "call getLog()";
+					$sql = "call getLogSimple()";
 					$res = $conn->query($sql);
 				?>
 				<div class="table-scroll"> 
@@ -259,7 +261,5 @@
 		<script src="js/animate.js"></script>
 		<script src="js/jquery.tweet.js"></script>
 		<script src="js/custom.js"></script>
-
 	</body>
-
 </html>

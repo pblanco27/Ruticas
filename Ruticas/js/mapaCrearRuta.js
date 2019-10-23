@@ -22,7 +22,7 @@ function dibujarRuta(){
 }
 
 function onMapClick(e) {
-	var marker2 = L.marker([ e.latlng.lat , e.latlng.lng ],{title:"Posición"+cont});
+	var marker2 = L.marker([ e.latlng.lat , e.latlng.lng ],{title:"Posición "+cont});
 	marker.push(marker2);
 	cont = cont + 1;
 	dibujarRuta();

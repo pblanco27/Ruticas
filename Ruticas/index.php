@@ -1,9 +1,6 @@
 <?php
-session_start();
-unset($_SESSION["error_telefono"]);
-unset($_SESSION["error_contacto"]);
-unset($_SESSION["error_lats"]);
- ?>
+	session_start();
+?>
 <!DOCTYPE HTML>
 <html lang="es">
 	<head>

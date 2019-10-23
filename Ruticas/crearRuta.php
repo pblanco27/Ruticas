@@ -164,6 +164,7 @@
 								<div class="span4"><br>
 									<input name="puntos" id="puntos" type="text" style="display:none;">
 									<h6 align="center"><input id="listo" name="listo" type="checkbox" style="height:30px;">&nbsp; He trazado la ruta correctamente<h6>
+									<font style="color:Red"><?php echo $_SESSION["error_listo"]; unset($_SESSION["error_listo"]); ?></font>									
 								</div>
 							</div>
 						</div>
@@ -171,11 +172,11 @@
 						<div class="span4">							
 							<div class="form-group" data-tip="El número de ruta debe ser de máximo 45 caracteres">
 								<input type="text" name="numero" id="numero" class="form-control" placeholder="Número de la ruta" maxlength="45" required>
-								<font style="color:Red"><?php echo $_SESSION["error_nombre"]; ?></font>
+								<font style="color:Red"><?php echo $_SESSION["error_numero"]; unset($_SESSION["error_numero"]); ?></font>
 							</div>
 							<div class="form-group" data-tip="La descripción debe ser de máximo 250 caracteres" >
 								<textarea name="descripcion" id="descripcion" rows="7" placeholder="Descripción del ruta" style="resize: none;" maxlength="250" required></textarea>
-								<font style="color:Red"><?php echo $_SESSION["error_descripcion"]; ?></font>
+								<font style="color:Red"><?php echo $_SESSION["error_descripcion"]; unset($_SESSION["error_descripcion"]); ?></font>
 							</div>
 
 							<div class="row">
