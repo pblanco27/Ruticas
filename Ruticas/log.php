@@ -73,10 +73,10 @@
 			display:block;
 		}
 		div.table-scroll {
-			width: 100%; 
-			height: 370px; 
-			overflow: scroll; 
-		}	
+			width: 100%;
+			height: 370px;
+			overflow: scroll;
+		}
 		</style>
 	</head>
 
@@ -155,22 +155,24 @@
 		</section>
 
 		<section id="maincontent" class="inner">
+			<?php
+			$sql = "call getUsers()";
+			$res = $conn->query($sql);
+			 ?>
 			<div class="container">
-				<?php
-				$sql = "call getUsers()";
-				$res = $conn->query($sql);
-				 ?>
+				<form id="filtros" action="Scripts/logFiltros.php" method="post">
 				<div class="row">
 					<div class="span3">
 						<p>Fecha:</p>
-						<input type="date">
+						<input type="date" id="inputFecha" name="inputFecha">
 					</div>
 					<div class="span3">
 						<p>Usuario:</p>
-						<select class="form-control">
+						<select class="form-control" id="selectUsuarios" name="selectUsuarios">
+							<option value="0">Todos</option>
 							<?php while ($row = $res->fetch_array()) {
 							  if (!empty($row['usuario'])) {?>
-							  <option value="<?php echo $row['idUsuario']; ?>">
+								<option value="<?php echo $row['idusuario']; ?>">
 								<?php echo $row['usuario']; ?>
 							  </option>
 							  <?php }
@@ -179,23 +181,27 @@
 					</div>
 					<div class="span3">
 						<p>Área:</p>
-						<select>
-							<option>Empresas</option>
-							<option>Rutas</option>
+						<select class="form-control" id="selectArea" name="selectArea">
+							<option value="0">Todos</option>
+							<option value="1">Empresa</option>
+							<option value="2">Ruta</option>
 						</select>
 					</div>
 					<div class="span3">
 						<br>
-						<button class="btn btn-primary" style="float:right;">Filtrar</button>
+						<button type="submit" class="btn btn-primary" style="float:right;">Filtrar</button>
+					</form>
 					</div>
 				</div>
 				<?php
+				if(!isset($_SESSION['tablaLog'])){
 					$res->close();
 					$conn->next_result();
 					$sql = "call getLogSimple()";
 					$res = $conn->query($sql);
+				}
 				?>
-				<div class="table-scroll"> 
+				<div class="table-scroll">
 					<table class="table table-bordered">
 						<thead>
 							<tr>
@@ -206,15 +212,24 @@
 							</tr>
 						</thead>
 						<tbody>
-							<?php while ($row = $res->fetch_array()) {
-								if (!empty($row['nombreTabla'])) {?>
-									<tr>
-										<td><?php echo $row['fecha']; ?></td>
-										<td><?php echo $row['nombreTabla']; ?></td>
-										<td><?php echo $row['accion']; ?></td>
-										<td><?php echo $row['usuario']; ?></td>
-									</tr>
-							<?php }
+							<?php
+							if(!isset($_SESSION['tablaLog'])){
+								while ($row = $res->fetch_array()) {
+									if (!empty($row['nombreTabla'])) {
+										$table .="
+										<tr>
+											<td>".$row['fecha']."</td>
+											<td>".$row['nombreTabla']."</td>
+											<td>".$row['accion']."
+											<td>".$row['usuario']."</td>
+										</tr>";
+									}
+								}
+								echo $table;
+							}
+							else{
+								echo $_SESSION['tablaLog'];
+								unset($_SESSION['tablaLog']);
 							}
 							?>
 						</tbody>
