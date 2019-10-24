@@ -1,32 +1,62 @@
 $(document).ready(function() {
-  $("#ruta").change(function() {
+  $("#empresa").change(function() {
 	document.getElementById("costo").value = "";
 	document.getElementById("duracion").value = "";
 	document.getElementById("discapacitado").checked = false;
   document.getElementById("horaStart").value = "";
   document.getElementById("horaEnd").value = "";
-    var rutaid = $(this).val();
+    var empid = $(this).val();
       $.ajax({
-        url: 'Scripts/infoRuta.php',
+        url: 'Scripts/infoEmpresa.php',
         type: 'post',
         data: {
-          ruta: rutaid
+          emp: empid
         },
         dataType: 'json',
         success: function(response) {
-          var numeroRuta = response[0]['numeroRuta'];
-          var descripcion = response[0]['descripcion'];
-          var nombrePartida = response[0]['nombrePartida'];
-          var nombreDestino = response[0]['nombreDestino'];
-          document.getElementById("numero").value = numeroRuta;
-          document.getElementById("descripcion").value = descripcion;
-		  document.getElementById("trayecto").value = "Trayecto de ruta: " +
-													  "de " + nombrePartida + " " +
-													  "a " + nombreDestino;
+          var nom = response[0]['nombre'];
+          var contacto = response[0]['contacto'];
+          var dirF = response[0]['fisica'];
+          var correo = response[0]['correo'];
+          var hor1 = response[0]['horario1'];
+          var hor2 = response[0]['horario2'];
+          var lat = response[0]['lat'];
+          var long = response[0]['long'];
+          var tel = response[0]['telefono'];
+          var zona = response[0]['zona'];
+          var activado = response[0]['activado'];
+          document.getElementById("nombre").value = nom;
+          document.getElementById("zona").value = zona;
+          document.getElementById("direccion").value = dirF;
+          document.getElementById("latitud").value = lat;
+          document.getElementById("longitud").value = long;
+          document.getElementById("telefono").value = tel;
+          document.getElementById("correo").value = correo;
+          document.getElementById("contacto").value = contacto;
+          document.getElementById('horaInicio').getElementsByTagName('option')[hor1-1].selected  = 'selected';
+          document.getElementById('horaFin').getElementsByTagName('option')[hor2-1].selected  = 'selected';
+
+		  if (typeof mapsPlaceholder != 'undefined'){
+			  // Nos movemos a la posición de la empresa
+			  mapsPlaceholder[0].panTo([lat,long]);
+
+			  // Añadimos un marcador si no está creado
+			  if (marcadores[empid] != 1){
+				L.marker([lat,long], {title:nom}).addTo(mapsPlaceholder[0]);
+				marcadores[empid] = 1;
+			  }
+
+			  // Se cambia el mensaje del boton de cambiar estado
+			  if(activado == 1){
+				document.getElementById("botonCambiarEstadoEmpresa").firstChild.data = 'Deshabilitar';
+			  } else {
+				document.getElementById("botonCambiarEstadoEmpresa").firstChild.data = 'Habilitar';
+			  }
+		  }
         }
       });
-	  empresaid = document.getElementById("empresa").value;
 	  rutaid = document.getElementById("ruta").value;
+	  empresaid = document.getElementById("empresa").value;
 	  if (empresaid != 0){
 		  $.ajax({
 			url: 'Scripts/revisarVinculacion.php',
