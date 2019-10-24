@@ -23,6 +23,7 @@ $(document).ready(function() {
 													  "a " + nombreDestino;
 		  document.getElementById("idDistritoPartida").value = idDistritoPartida;
 		  document.getElementById("idDistritoDestino").value = idDistritoDestino;
+		  document.getElementById("idRuta").value = rutaid;
 		  $.ajax({
 			url: 'Scripts/cargarPuntos.php',
 			type: 'post',
@@ -33,20 +34,20 @@ $(document).ready(function() {
 			success: function(response) {			  
 			var puntos = response[0]['puntos'];
 			var waypoints = new Array();
-			for(i=1;i<puntos.length;i++) {
+			for(i=1;i<puntos.length;i++){
 				lat = puntos[i][0];
 				lng = puntos[i][1];
-				//console.log("Lat: " + lat + " long: " + lng);
 				waypoints.push(L.latLng(lat, lng));
-				marker.push(L.marker([lat, lng]));
+				var marker2 = L.marker([lat, lng],{title:"Posición "+cont});
+				marker.push(marker2);
 				document.getElementById("puntos").value = JSON.stringify(marker);
 			} 
 			//if (routingControl != null) map.removeControl(routingControl);
-			L.Routing.control({waypoints}).addTo(mapsPlaceholder[0]);
+			routingControl = L.Routing.control({waypoints:waypoints, draggableWaypoints:false}).addTo(mapsPlaceholder[0]);
 			lat = puntos[1][0];
 			lng = puntos[1][1];
-			//console.log("Lat: " + lat + " long: " + lng);
 			mapsPlaceholder[0].panTo([lat,lng]);
+			dibujar = true;
 			}
 		  });
         }

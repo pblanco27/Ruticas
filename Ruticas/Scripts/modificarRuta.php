@@ -12,6 +12,7 @@
 		$idDistritoPartida= $_POST['idDistritoPartida'];
 		$idDistritoDestino= $_POST['idDistritoDestino'];
 		$listo= $_POST['listo'];
+		$idRuta = $_POST["idRuta"];
 
 		$puntos = $_POST['puntos'];
 		$puntosDecodificados = json_decode($puntos,true);
@@ -31,25 +32,19 @@
 		}
 		
 		if ($listo){
-			//$sql = "call editarRuta('$numero','$descripcion',$latitudInicial,$longitudInicial,$latitudFinal,$longitudFinal,$idUser,$distritoPartida, $distritoDestino)";
-			
-			$sql = "call crearRuta('$numero','$descripcion',$latitudInicial,$longitudInicial,$latitudFinal,$longitudFinal,$idUser,$distritoPartida, $distritoDestino)";
-			
+			$sql = "call editarRuta('$numero','$descripcion',$latitudInicial,$longitudInicial,$latitudFinal,$longitudFinal,$idUser,$distritoPartida, $distritoDestino, $idRuta)";			
 			$conn->query($sql) or die ('Unable to execute query. '. mysqli_error($conn));
 			$conn->next_result();
-			$sql = "call getMaxRuta()";
-			$res = $conn->query($sql) or die ('Unable to execute query. '. mysqli_error($conn));
-			$row = mysqli_fetch_assoc($res);
-			$idRuta = $row['MAX(idRuta)'];
-			$res->close();
+			
+			$sql = "call eliminarParadas($idRuta)";
+			$conn->query($sql) or die ('Unable to execute query. '. mysqli_error($conn));
 			$conn->next_result();
+			
 			for ($i = 0; $i < sizeof($puntosDecodificados); $i++) {
 				$latitud = $puntosDecodificados[$i]["_latlng"]["lat"];
 				$longitud = $puntosDecodificados[$i]["_latlng"]["lng"];
-				echo $idRuta;
 				$sql = "call crearParada($idRuta,$longitud,$latitud,$idUser)";
 				$conn->query($sql) or die ('Unable to execute query. '. mysqli_error($conn));
-
 			}
 			header("Location: ../editarRuta.php");
 		} else {

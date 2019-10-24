@@ -253,6 +253,7 @@
 									<button type="button" class="btn" style="width:100%;" onclick="location.href='Scripts/cambiarEstadoRuta.php';" id='botonCambiarEstadoRuta'>-----</button>
 								</div>
 								<div class="span2">
+									<input type="text" style="display:none;" id="idRuta" name="idRuta">
 									<input type="submit" class="btn" style="font-size: 16px; padding: 11px 19px;" value="Guardar">
 								</div>
 							</div>
