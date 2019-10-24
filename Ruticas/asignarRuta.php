@@ -199,8 +199,13 @@
 									</div>
 								</div>
 							</center>
+							<p>Costo (colones):</p>
 							<input type="text" id="costo" name="costo" placeholder="Costo Pasaje">
-							<br>
+							<p>Hora de inicio del servicio:</p>
+							<input type="time" id="horaStart" name="horaStart" required>
+							<p>Hora de fin del servicio:</p>
+							<input type="time" id="horaEnd" name="horaEnd" required>
+							<p>Duración (min):</p>
 							<input type="text" id="duracion" name="duracion" placeholder="Duracion del viaje (min)">
 							<br>
 							Unidades de discapacitados:
@@ -355,7 +360,7 @@
 		<script src="js/inview.js"></script>
 		<script src="js/animate.js"></script>
 		<script src="js/custom.js"></script>
-		<script type="text/javascript" src="js/comboBoxEmpresa.js"></script>
+		<script type="text/javascript" src="js/comboBoxEmpresaAsignar.js"></script>
 		<script type="text/javascript" src="js/comboBoxRutaAsignar.js"></script>
 	</body>
 </html>
