@@ -128,12 +128,12 @@
 				$res = $this->conexion->query($chequeo);
 				$row = mysqli_fetch_assoc($res);
 
-				if ($row['contrasena'] != $clave_actual){
+				if ($row['contrasena'] != sha1($clave_actual)){
 					$errores["error_clave_incorrecta"] = "La contraseña ingresada no corresponde a dicho usuario.";
 				} else {
 					$res->close();
 					$this->conexion->next_result();
-					$cambio = "CALL cambiarContrasena('$nombre_usuario', '$nueva_clave')";
+					$cambio = "CALL cambiarContrasena('$nombre_usuario', '".sha1($nueva_clave)."')";
 					$this->conexion->query($cambio);
 				}
 			}

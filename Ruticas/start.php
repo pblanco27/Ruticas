@@ -1,3 +1,7 @@
+<?php
+session_start();
+unset($_SESSION["mensajeRegistro"]);
+?>
 <!DOCTYPE HTML>
 <html lang="es">
 
@@ -136,6 +140,12 @@
 								&nbsp;&nbsp;
 							</li>
 							<li>
+								<button class="btn btn-danger dropdown-toggle" id="botonAjuste" name="botonAjuste" data-toggle="modal" data-target="#cambiarPass" onclick="document.getElementById('cambiarPass').style.visibility = 'visible' ;">
+									<img src="img/gear.png" height="19" width="20">
+								</button>
+								&nbsp;&nbsp;
+							</li>
+							<li>
 								<button class="btn btn-danger dropdown-toggle" onclick="location.href='index.php';">
 									Salir
 								</button>
@@ -170,13 +180,13 @@
 
 							L.control.scale().addTo(map);
 							//L.marker([9.938118,-84.075391], {draggable: true}).addTo(map);
-							L.Routing.control({
-								waypoints: [
-									L.latLng(9.938118, -84.075391),
-									L.latLng(9.935428, -84.071388),
-									L.latLng(9.928192, -84.078832)
-								]
-							}).addTo(map);
+							// L.Routing.control({
+							// 	waypoints: [
+							// 		L.latLng(9.938118, -84.075391),
+							// 		L.latLng(9.935428, -84.071388),
+							// 		L.latLng(9.928192, -84.078832)
+							// 	]
+							// }).addTo(map);
 						</script>
 					</div>
 				</div>
@@ -186,6 +196,60 @@
 			</div>
 		</div>
 	</section>
+
+	<div id="cambiarPass" class="modal" style="visibility:hidden;">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<div class="row">
+						<div class="span4">
+							<h4 class="modal-title">Cambiar Contraseña</h4>
+						</div>
+						<div class="span1">
+							<button type="button" class="close" data-dismiss="modal" data-toggle="modal" data-target="#editar" aria-hidden="true">×</button>
+						</div>
+					</div>
+					<!-- <h4 class="modal-title">Cambiar Contraseña</h4>
+					<button type="button" class="close" data-dismiss="modal" data-toggle="modal" data-target="#editar" aria-hidden="true">×</button> -->
+				</div>
+				<div class="modal-body text-center">
+					<div class="col-md-12 col-sm-12 no-">
+						<form action="moduloLogin/validarCambioClave.php" method="post" id="cambiarpassword" class="log-frm" name="userRegisterFrm">
+							<label>Contraseña actual</label>
+							<input type="password" placeholder="Contraseña actual" name="clave_actual" id="clave_actual" class="form-control">
+							<br>
+							<font style="color:Red"><?php echo $_SESSION["error_clave_actual"]; ?></font><br><br>
+							<label>Nueva contraseña</label>
+							<input type="password" placeholder="Nueva contraseña" name="nueva_clave" id="nueva_clave" class="form-control">
+							<br>
+							<font style="color:Red"><?php echo $_SESSION["error_nueva_clave"]; ?></font><br><br>
+							<label>Confirmar Nueva Contraseña</label>
+							<input type="password" placeholder="Confirmar nueva contraseña" name="confirmar_clave" id="confirmar_clave" class="form-control">
+							<br>
+							<font style="color:Red"><?php echo $_SESSION["error_confirmacion"]; ?></font><br><br>
+							<input type="submit" name="userRegBtn" class="form-control btn btn-register" value="Cambiar">
+						</form>
+					</div>
+					<div class="clearfix"></div>
+					<?php
+					if (isset($_SESSION["mensaje"])) {
+						echo "<script language='javascript'>alert('Se ha cambiado la clave exitosamente.');</script>";
+						unset($_SESSION["mensaje"]);
+					}
+					?>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<?php
+	if ($_SESSION['nuevo'] == 1) {
+		//echo "<script language='javascript'>alert('Deberia estar el modal.');</script>";
+		echo "<script>
+		document.getElementById('botonAjuste').click();
+			</script>";
+	}
+	?>
 
 	<footer>
 		<div class="container">

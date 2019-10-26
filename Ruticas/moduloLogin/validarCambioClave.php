@@ -18,9 +18,9 @@
 		!isset($errores["error_confirmacion"])){
 		$_SESSION["nuevo"] = 0;
 		$_SESSION["mensaje"] = true;
-		header("Location:paginaInicio.php");
+		header("Location:../start.php");
 	} else {
 		$_SESSION["nuevo"] = 1;
-		header("Location:paginaInicio.php");
+		header("Location:../start.php");
 	}
 ?>
