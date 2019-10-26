@@ -18,13 +18,24 @@ function dibujarRuta(){
 		waypoints.push(L.latLng(marker[i].getLatLng().lat ,marker[i].getLatLng().lng ));
 	} 
 	if (routingControl != null) map.removeControl(routingControl);
-	routingControl = L.Routing.control({waypoints}).addTo(map);
+	var customOptions =
+	{
+		'maxWidth': '500',
+		'className': 'custom'
+	}
+	console.log('Hola');
+	
+	routingControl = L.Routing.control({
+		waypoints: waypoints,
+		createMarker: function (i, wp, nWps) {
+			return L.marker(wp.latLng).bindPopup("Nombre del punto: <input type'text' id='input" + i + "'> <button value='" + i + "' onclick='clickBoton(this.value,"+wp.latLng.lat+","+wp.latLng.lng+")'>Enviar</button>", customOptions);
+		}, draggableWaypoints: false
+	}).addTo(map);
 }
 
 function onMapClick(e) {
-	var marker2 = L.marker([ e.latlng.lat , e.latlng.lng ],{title:"Posición "+cont});
+	var marker2 = L.marker([ e.latlng.lat , e.latlng.lng ]);
 	marker.push(marker2);
-	cont = cont + 1;
 	dibujarRuta();
 	document.getElementById("puntos").value = JSON.stringify(marker);
 }
