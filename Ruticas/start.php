@@ -1,10 +1,9 @@
 <?php
-session_start();
-unset($_SESSION["mensajeRegistro"]);
+	session_start();
+	unset($_SESSION["mensajeRegistro"]);
 ?>
 <!DOCTYPE HTML>
 <html lang="es">
-
 <head>
 	<meta charset="utf-8">
 	<title>Proyecto Ruticas</title>
@@ -73,6 +72,41 @@ unset($_SESSION["mensajeRegistro"]);
 		[data-tip]:hover:after {
 			display: block;
 		}
+		
+		.alert {
+			background-color: #f44336;
+			color: white;
+			opacity: 1;
+			transition: opacity 0.6s;
+			margin-bottom: 15px;
+		}
+
+		.alert.success {
+			background-color: #4CAF50;
+		}
+
+		.alert.info {
+			background-color: #2196F3;
+		}
+
+		.alert.warning {
+			background-color: #ff9800;
+		}
+
+		.closebtn {
+			margin-left: 15px;
+			color: white;
+			font-weight: bold;
+			float: right;
+			font-size: 22px;
+			line-height: 20px;
+			cursor: pointer;
+			transition: 0.3s;
+		}
+
+		.closebtn:hover {
+			color: black;
+		}
 	</style>
 </head>
 
@@ -87,7 +121,7 @@ unset($_SESSION["mensajeRegistro"]);
 					<nav class="pull-right nav-collapse collapse">
 						<ul id="menu-main" class="nav">
 							<li>
-								<button class="btn btn-danger dropdown-toggle" onclick="location.href='#';">
+								<button class="btn btn-danger" onclick="location.href='#';">
 									Consultas
 								</button>
 								&nbsp;&nbsp;
@@ -134,19 +168,19 @@ unset($_SESSION["mensajeRegistro"]);
 								</div>
 							</li>
 							<li>
-								<button class="btn btn-danger dropdown-toggle" onclick="location.href='log.php';">
-									Log
+								<button class="btn btn-danger" onclick="location.href='log.php';">
+									Historial
 								</button>
 								&nbsp;&nbsp;
 							</li>
 							<li>
-								<button class="btn btn-danger dropdown-toggle" id="botonAjuste" name="botonAjuste" data-toggle="modal" data-target="#cambiarPass" onclick="document.getElementById('cambiarPass').style.visibility = 'visible' ;">
-									<img src="img/gear.png" height="19" width="20">
+								<button class="btn btn-danger" id="botonAjuste" name="botonAjuste" data-toggle="modal" data-target="#cambiarPass" onclick="document.getElementById('cambiarPass').style.visibility = 'visible';">
+									<img src="img/gear.png" width="20">
 								</button>
 								&nbsp;&nbsp;
 							</li>
 							<li>
-								<button class="btn btn-danger dropdown-toggle" onclick="location.href='index.php';">
+								<button class="btn btn-danger" onclick="location.href='index.php';">
 									Salir
 								</button>
 							</li>
@@ -166,6 +200,10 @@ unset($_SESSION["mensajeRegistro"]);
 	<section id="maincontent" class="inner">
 		<div class="container">
 			<div class="row">
+				<div class='alert success' id="exitoCambioClave" style="display:none;">
+					<span class='closebtn' onclick="this.parentElement.style.display='none'">&times;</span>
+					<strong>¡Se cambió la contraseña exitosamente!</strong>
+				</div>
 				<div class="span8">
 					<!-- Aquí va el mapa -->
 					<div id="map">
@@ -203,37 +241,65 @@ unset($_SESSION["mensajeRegistro"]);
 				<div class="modal-header">
 					<div class="row">
 						<div class="span4">
-							<h4 class="modal-title">Cambiar Contraseña</h4>
+							<h3 class="modal-title">Ajustes</h3>
 						</div>
-						<div class="span1">
-							<button type="button" class="close" data-dismiss="modal" data-toggle="modal" data-target="#editar" aria-hidden="true">×</button>
-						</div>
+						<div class="span1" style="float:right;">
+							<button type="button" class="close" data-dismiss="modal" data-toggle="modal" data-target="#editar" aria-hidden="true" style="float:right;">×</button>
+						</div>						
 					</div>
-					<!-- <h4 class="modal-title">Cambiar Contraseña</h4>
-					<button type="button" class="close" data-dismiss="modal" data-toggle="modal" data-target="#editar" aria-hidden="true">×</button> -->
+					<div class="row">
+						<div class="span2">
+							<button class="btn btn-danger" onclick="document.getElementById('cambio').style.display = 'block';
+																	document.getElementById('desactivacion').style.display = 'none';">
+								Cambiar clave
+							</button>						
+						</div>
+						<div class="span2.5" style="float:right;">
+							<button class="btn btn-danger" onclick="document.getElementById('desactivacion').style.display = 'block';
+																	document.getElementById('cambio').style.display = 'none';">
+								Desactivar cuenta
+							</button>
+						</div>								
+					</div>						
 				</div>
-				<div class="modal-body text-center">
-					<div class="col-md-12 col-sm-12 no-">
-						<form action="moduloLogin/validarCambioClave.php" method="post" id="cambiarpassword" class="log-frm" name="userRegisterFrm">
+				
+				<div class="modal-body text-center">				
+					<div class="col-md-12 col-sm-12 no-"  id="cambio" style="display:none;">
+						<form action="moduloLogin/validarCambioClave.php" method="post" id="cambiarpassword" class="log-frm" name="userRegisterFrm" >
 							<label>Contraseña actual</label>
 							<input type="password" placeholder="Contraseña actual" name="clave_actual" id="clave_actual" class="form-control">
 							<br>
-							<font style="color:Red"><?php echo $_SESSION["error_clave_actual"]; ?></font><br><br>
+							<font style="color:Red; font-size:15px"><?php echo $_SESSION["error_clave_actual"]; unset($_SESSION["error_clave_actual"]); ?></font><br><br>
 							<label>Nueva contraseña</label>
 							<input type="password" placeholder="Nueva contraseña" name="nueva_clave" id="nueva_clave" class="form-control">
 							<br>
-							<font style="color:Red"><?php echo $_SESSION["error_nueva_clave"]; ?></font><br><br>
+							<font style="color:Red; font-size:15px"><?php echo $_SESSION["error_nueva_clave"]; unset($_SESSION["error_nueva_clave"]); ?></font><br><br>
 							<label>Confirmar Nueva Contraseña</label>
 							<input type="password" placeholder="Confirmar nueva contraseña" name="confirmar_clave" id="confirmar_clave" class="form-control">
 							<br>
-							<font style="color:Red"><?php echo $_SESSION["error_confirmacion"]; ?></font><br><br>
+							<font style="color:Red; font-size:15px"><?php echo $_SESSION["error_confirmacion"]; unset($_SESSION["error_confirmacion"]); ?></font><br><br>
 							<input type="submit" name="userRegBtn" class="form-control btn btn-register" value="Cambiar">
+						</form>
+					</div>
+					<div class="col-md-12 col-sm-12 no-"  id="desactivacion" style="display:none;">
+						<form action="moduloLogin/validarDesactivacion.php" method="post" id="cambiarpassword" class="log-frm" name="userRegisterFrm" >
+							<label>Contraseña actual</label>
+							<input type="password" placeholder="Contraseña actual" name="clave_actual" id="clave_actual" class="form-control"><br>
+							<font style="color:Red; font-size:15px"><?php echo $_SESSION["error_clave_incorrecta"]; unset($_SESSION["error_clave_incorrecta"]); ?></font><br><br>
+							<p>
+								Si desactiva su cuenta, no podrá volver a utilizarla nuevamente.<br>
+								Si desea volver a utilizar el sistema, debe volver a registrarse con otro nombre de usuario.<br>
+								Estos nombres son únicos y no se pueden recuperar.<br>
+							</p><br>
+							<h6 align="center"><input id="seguro" name="seguro" type="checkbox" style="height:30px;">&nbsp; Estoy seguro que deseo desactivar mi cuenta<h6>
+							<font style="color:Red; font-size:15px"><?php echo $_SESSION["error_seguro"]; unset($_SESSION["error_seguro"]); ?></font><br><br>
+							<input type="submit" name="userRegBtn" class="form-control btn btn-register" value="Desactivar">
 						</form>
 					</div>
 					<div class="clearfix"></div>
 					<?php
 					if (isset($_SESSION["mensaje"])) {
-						echo "<script language='javascript'>alert('Se ha cambiado la clave exitosamente.');</script>";
+						echo "<script>document.getElementById('exitoCambioClave').style = 'block';</script>";
 						unset($_SESSION["mensaje"]);
 					}
 					?>
@@ -241,15 +307,6 @@ unset($_SESSION["mensajeRegistro"]);
 			</div>
 		</div>
 	</div>
-
-	<?php
-	if ($_SESSION['nuevo'] == 1) {
-		//echo "<script language='javascript'>alert('Deberia estar el modal.');</script>";
-		echo "<script>
-		document.getElementById('botonAjuste').click();
-			</script>";
-	}
-	?>
 
 	<footer>
 		<div class="container">
@@ -288,7 +345,19 @@ unset($_SESSION["mensajeRegistro"]);
 	<script src="js/inview.js"></script>
 	<script src="js/animate.js"></script>
 	<script src="js/custom.js"></script>
-
+	<?php
+		if ($_SESSION['nuevo'] == 1) {
+			echo "<script>
+				    $(window).on('load',function(){
+					   $('#cambiarPass').modal('show');
+					   document.getElementById('cambiarPass').style.visibility = 'visible';
+					   document.getElementById('cambio').style.display = 'block';
+					   document.getElementById('desactivacion').style.display = 'none';
+				    });
+				  </script>";
+			unset($_SESSION['nuevo']);
+		}
+	?>
 </body>
 
 </html>

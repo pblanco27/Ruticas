@@ -34,7 +34,7 @@
 			if ($row['existe'] == 1){
 				$res->close();
 				$this->conexion->next_result();
-				$chequeo = "CALL getClave('$nombreUsuario')";
+				$chequeo = "CALL getClaveActivo('$nombreUsuario')";
 
 				$res = $this->conexion->query($chequeo);
 				$row = mysqli_fetch_assoc($res);
@@ -55,7 +55,7 @@
 			if ($errores == []){
 				$contrasena = $this->buscarUsuario($nombreUsuario);
 				if ($contrasena == ""){
-					$errores["error_nombre_usuario_inexistente"] = "El nombre de usuario ingresado no existe.";
+					$errores["error_nombre_usuario_inexistente"] = "El nombre de usuario ingresado no existe / está desactivado.";
 				} else if ($contrasena != sha1($claveIngresada)){
 					$errores["error_clave_incorrecta"] = "La contraseña ingresada no corresponde a dicho usuario.";
 				}
