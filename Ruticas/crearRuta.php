@@ -203,8 +203,10 @@ session_start();
 			<div class="row">
 				<div class="span8">
 					<!-- Aquí va el mapa -->
-					<div id="map">
+					<div id="map">						
 						<script type="text/javascript" src="js/mapaCrearRuta.js"></script>
+						<script type="text/javascript" src="js/agregarDescripcion.js"></script>
+						<script type="text/javascript" src="js/agregarNotificacion.js"></script>
 					</div>
 					<div class='alert success' id="alertaBien" style="display:none;">
 						<span class='closebtn' onclick="this.parentElement.style.display='none'">&times;</span>
@@ -212,9 +214,9 @@ session_start();
 					</div>
 					<div class='alert' id="alertaMal" style="display:none;">
 						<span class='closebtn' onclick="this.parentElement.style.display='none'">&times;</span>
-						<strong>Debe de ingresar un nombre.</strong>
+						<strong>El campo no puede ir vacío.</strong>
 					</div>
-					<script type="text/javascript" src="js/agregarNotificacion.js"></script>
+					
 					<form id="register-form" action="Scripts/validarRuta.php" method="post" role="form">
 
 						<div class="row">
@@ -226,6 +228,7 @@ session_start();
 							</div>
 							<div class="span4"><br>
 								<input name="puntos" id="puntos" type="text" style="display:none;">
+								<input name="nombres" id="nombres" type="text" style="display:none;">
 								<h6 align="center"><input id="listo" name="listo" type="checkbox" style="height:30px;">&nbsp; He trazado la ruta correctamente<h6>
 										<font style="color:Red"><?php echo $_SESSION["error_listo"];
 																unset($_SESSION["error_listo"]); ?></font>
@@ -330,9 +333,9 @@ session_start();
 				
 				<div class="modal-body text-center">				
 					<div class="col-md-12 col-sm-12 no-"  id="cambio" style="display:none;">
-						<form action="moduloLogin/validarCambioClave.php" method="post" id="cambiarpassword" class="log-frm" name="userRegisterFrm" >
+						<form action="moduloLogin/validarCambioClave.php" method="post"  class="log-frm" name="userRegisterFrm" >
 							<label>Contraseña actual</label>
-							<input type="password" placeholder="Contraseña actual" name="clave_actual" id="clave_actual" class="form-control">
+							<input type="password" placeholder="Contraseña actual" name="clave_actual"  class="form-control">
 							<br>
 							<font style="color:Red; font-size:15px"><?php echo $_SESSION["error_clave_actual"]; unset($_SESSION["error_clave_actual"]); ?></font><br><br>
 							<label>Nueva contraseña</label>
@@ -347,9 +350,9 @@ session_start();
 						</form>
 					</div>
 					<div class="col-md-12 col-sm-12 no-"  id="desactivacion" style="display:none;">
-						<form action="moduloLogin/validarDesactivacion.php" method="post" id="cambiarpassword" class="log-frm" name="userRegisterFrm" >
+						<form action="moduloLogin/validarDesactivacion.php" method="post"  class="log-frm" name="userRegisterFrm" >
 							<label>Contraseña actual</label>
-							<input type="password" placeholder="Contraseña actual" name="clave_actual" id="clave_actual" class="form-control"><br>
+							<input type="password" placeholder="Contraseña actual" name="clave_actual"  class="form-control"><br>
 							<font style="color:Red; font-size:15px"><?php echo $_SESSION["error_clave_incorrecta"]; unset($_SESSION["error_clave_incorrecta"]); ?></font><br><br>
 							<p>
 								Si desactiva su cuenta, no podrá volver a utilizarla nuevamente.<br>

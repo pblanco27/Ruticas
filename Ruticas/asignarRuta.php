@@ -368,9 +368,9 @@ session_start();
 				
 				<div class="modal-body text-center">				
 					<div class="col-md-12 col-sm-12 no-"  id="cambio" style="display:none;">
-						<form action="moduloLogin/validarCambioClave.php" method="post" id="cambiarpassword" class="log-frm" name="userRegisterFrm" >
+						<form action="moduloLogin/validarCambioClave.php" method="post"  class="log-frm" name="userRegisterFrm" >
 							<label>Contraseña actual</label>
-							<input type="password" placeholder="Contraseña actual" name="clave_actual" id="clave_actual" class="form-control">
+							<input type="password" placeholder="Contraseña actual" name="clave_actual"  class="form-control">
 							<br>
 							<font style="color:Red; font-size:15px"><?php echo $_SESSION["error_clave_actual"]; unset($_SESSION["error_clave_actual"]); ?></font><br><br>
 							<label>Nueva contraseña</label>
@@ -385,9 +385,9 @@ session_start();
 						</form>
 					</div>
 					<div class="col-md-12 col-sm-12 no-"  id="desactivacion" style="display:none;">
-						<form action="moduloLogin/validarDesactivacion.php" method="post" id="cambiarpassword" class="log-frm" name="userRegisterFrm" >
+						<form action="moduloLogin/validarDesactivacion.php" method="post"  class="log-frm" name="userRegisterFrm" >
 							<label>Contraseña actual</label>
-							<input type="password" placeholder="Contraseña actual" name="clave_actual" id="clave_actual" class="form-control"><br>
+							<input type="password" placeholder="Contraseña actual" name="clave_actual"  class="form-control"><br>
 							<font style="color:Red; font-size:15px"><?php echo $_SESSION["error_clave_incorrecta"]; unset($_SESSION["error_clave_incorrecta"]); ?></font><br><br>
 							<p>
 								Si desactiva su cuenta, no podrá volver a utilizarla nuevamente.<br>

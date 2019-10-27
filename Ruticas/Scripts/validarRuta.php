@@ -12,13 +12,17 @@
 		$listo= $_POST['listo'];
 
 		$puntos = $_POST['puntos'];
+		
 		$puntosDecodificados = json_decode($puntos,true);
 		$cantidadPuntos = sizeof($puntosDecodificados);
 		$latitudInicial = $puntosDecodificados[0]["_latlng"]["lat"];
 		$longitudInicial = $puntosDecodificados[0]["_latlng"]["lng"];
 		$latitudFinal = end($puntosDecodificados)["_latlng"]["lat"];
 		$longitudFinal = end($puntosDecodificados)["_latlng"]["lng"];
-
+		
+		$nombres = $_POST['nombres'];
+		$nombresPuntos = json_decode($nombres,true);
+		
 		if ($listo){
 			$sql = "call crearRuta('$numero','$descripcion',$latitudInicial,$longitudInicial,$latitudFinal,$longitudFinal,$idUser,$distritoPartida, $distritoDestino)";
 			$conn->query($sql) or die ('Unable to execute query. '. mysqli_error($conn));
@@ -32,10 +36,9 @@
 			for ($i = 0; $i < sizeof($puntosDecodificados); $i++) {
 				$latitud = $puntosDecodificados[$i]["_latlng"]["lat"];
 				$longitud = $puntosDecodificados[$i]["_latlng"]["lng"];
-				echo $idRuta;
-				$sql = "call crearParada($idRuta,$longitud,$latitud,$idUser)";
+				$descripcion = $nombresPuntos[$i+1];			
+				$sql = "call crearParada($idRuta,$longitud,$latitud,$idUser,'$descripcion')";
 				$conn->query($sql) or die ('Unable to execute query. '. mysqli_error($conn));
-
 			}
 			header("Location: ../crearRuta.php");
 		} else {

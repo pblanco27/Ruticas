@@ -1,7 +1,7 @@
 function clickBoton(n, lat, lng) {
-    var name = document.getElementById("input" + n).value;
+    var name = document.getElementById("waypoint" + n).value;
     if(name == ""){
-        document.getElementById("alertaMal").style = "block";
+        document.getElementById("alertaMal").style = "visibility:show;";
     }
     else{
         $.ajax({
@@ -14,7 +14,7 @@ function clickBoton(n, lat, lng) {
             },
             dataType: 'json',
             success: function (response) {
-                document.getElementById("input" + n).value = "";
+                document.getElementById("waypoint" + n).value = "";
                 document.getElementById("alertaBien").style = "block";
             },
             error: function () {
