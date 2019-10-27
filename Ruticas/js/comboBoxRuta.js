@@ -1,5 +1,8 @@
 $(document).ready(function () {
 	$("#ruta").change(function () {
+		nombres = new Array();
+		marker = new Array();
+		dibujarRuta();
 		var rutaid = $(this).val();
 		$.ajax({
 			url: 'Scripts/infoRuta.php',
@@ -59,7 +62,7 @@ $(document).ready(function () {
 											createMarker: function (i, wp, nWps) {
 												return L.marker(wp.latLng, {title:nombres[i+1]})
 												 .bindPopup("Notificar punto a OSM: <br><center><textarea id='input" + i + "' rows='3' style='resize:none;'></textarea><button value='" + i + "' onclick='clickBoton(this.value,"+wp.latLng.lat+","+wp.latLng.lng+")'>Enviar</button><center>", customOptions);
-											}, draggableWaypoints: false
+											}, draggableWaypoints: false, show:false
 										}).addTo(mapsPlaceholder[0]);
 						lat = puntos[1][0];
 						lng = puntos[1][1];

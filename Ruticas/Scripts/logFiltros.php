@@ -20,6 +20,7 @@ if($_POST){
   echo $sql;
   $res = $conn->query($sql) or die ('Unable to execute query. '. mysqli_error($conn));
   $str = "";
+  $table = "";
   while ($row = $res->fetch_array()) {
     $table .="
     <tr>

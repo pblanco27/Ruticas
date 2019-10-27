@@ -21,6 +21,8 @@
 		$longitudInicial = $puntosDecodificados[0]["_latlng"]["lng"];
 		$latitudFinal = end($puntosDecodificados)["_latlng"]["lat"];
 		$longitudFinal = end($puntosDecodificados)["_latlng"]["lng"];
+		$nombres = $_POST['nombres'];
+		$nombresPuntos = json_decode($nombres,true);
 
 		if ($distritoPartida == 0 && $distritoDestino == 0){
 			$distritoPartida = $idDistritoPartida;
@@ -43,7 +45,8 @@
 			for ($i = 0; $i < sizeof($puntosDecodificados); $i++) {
 				$latitud = $puntosDecodificados[$i]["_latlng"]["lat"];
 				$longitud = $puntosDecodificados[$i]["_latlng"]["lng"];
-				$sql = "call crearParada($idRuta,$longitud,$latitud,$idUser)";
+				$descripcion = $nombresPuntos[$i+1];			
+				$sql = "call crearParada($idRuta,$longitud,$latitud,$idUser,'$descripcion')";
 				$conn->query($sql) or die ('Unable to execute query. '. mysqli_error($conn));
 			}
 			header("Location: ../editarRuta.php");

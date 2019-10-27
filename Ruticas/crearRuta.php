@@ -207,6 +207,7 @@ session_start();
 						<script type="text/javascript" src="js/mapaCrearRuta.js"></script>
 						<script type="text/javascript" src="js/agregarDescripcion.js"></script>
 						<script type="text/javascript" src="js/agregarNotificacion.js"></script>
+						<script type="text/javascript" src="js/mapaRecargar.js"></script>
 					</div>
 					<div class='alert success' id="alertaBien" style="display:none;">
 						<span class='closebtn' onclick="this.parentElement.style.display='none'">&times;</span>
@@ -221,8 +222,7 @@ session_start();
 
 						<div class="row">
 							<div class="span4"><br><br>
-								<button type="button" class="btn btn-register" style="width:100%;" onclick="window.location.reload();">
-									<!--<button type="button" class="btn btn-register" style="width:100%;" onclick="eliminarPuntos();">-->
+								<button type="button" class="btn btn-register" style="width:100%;" onclick="recargar();">
 									Volver a trazar
 								</button>
 							</div>
@@ -412,7 +412,6 @@ session_start();
 	<script src="js/jquery.flexslider.js"></script>
 	<script src="js/inview.js"></script>
 	<script src="js/animate.js"></script>
-	<script src="js/jquery.tweet.js"></script>
 	<script src="js/custom.js"></script>
 	<script type="text/javascript" src="js/armarDireccionPartida.js"></script>
 	<script type="text/javascript" src="js/armarDireccionDestino.js"></script>
