@@ -1,8 +1,11 @@
 $(document).ready(function () {
 	$("#ruta").change(function () {
+		
 		nombres = new Array();
 		marker = new Array();
 		dibujarRuta();
+		//var top = document.getElementsByClassName("leaflet-top leaflet-right");
+		//top[0].style.display = "block";
 		var rutaid = $(this).val();
 		$.ajax({
 			url: 'Scripts/infoRuta.php',
@@ -55,14 +58,17 @@ $(document).ready(function () {
 							document.getElementById("puntos").value = JSON.stringify(marker);
 						}
 						//if (routingControl != null) map.removeControl(routingControl);
-						
+						var top = document.getElementsByClassName("leaflet-top leaflet-right");
+						while (top[0].firstChild) {
+						  top[0].removeChild(top[0].firstChild);
+						}
 						var customOptions = {'maxWidth': '2000', 'className': 'custom'};	
 						routingControl = L.Routing.control({
 											waypoints: waypoints,
 											createMarker: function (i, wp, nWps) {
 												return L.marker(wp.latLng, {title:nombres[i+1]})
 												 .bindPopup("Notificar punto a OSM: <br><center><textarea id='input" + i + "' rows='3' style='resize:none;'></textarea><button value='" + i + "' onclick='clickBoton(this.value,"+wp.latLng.lat+","+wp.latLng.lng+")'>Enviar</button><center>", customOptions);
-											}, draggableWaypoints: false, show:false
+											}, draggableWaypoints: false
 										}).addTo(mapsPlaceholder[0]);
 						lat = puntos[1][0];
 						lng = puntos[1][1];
