@@ -1,3 +1,7 @@
+<?php
+include "conexion.php";
+?>
+
 <!DOCTYPE HTML>
 <html lang="es">
 
@@ -14,6 +18,11 @@
 	<script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
 	<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
+	<link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+	<script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
+  	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css" rel="stylesheet" />
 	<style>
 		#map {
 			width: 100%;
@@ -103,33 +112,102 @@
 
 	<section id="maincontent" class="inner">
 		<div class="container">
+		<div class="row">
+						<div class="span1">
+							Empresa:
+						</div>
+						<div class="span2">
+							<?php
+							$sql = "call getEmpresasSimple()";
+							$res = $conn->query($sql);
+							?>
+							<select name="empresa" id="empresa" class="form-control" required>
+								<option value="0" style="display:none;">Seleccione una empresa</option>
+								<?php while ($row = $res->fetch_array()) {
+									if (!empty($row['nombre'])) { ?>
+										<option value="<?php echo $row['idEmpresa']; ?>">
+											<?php echo $row['nombre']; ?>
+										</option>
+								<?php }
+								} ?>
+							</select>
+						</div>
+					</div>
+					<div class="row">
+						<div class="span1">
+							Ruta:
+						</div>
+						<div class="span2">
+							<?php
+							$res->close();
+							$conn->next_result();
+							$sql = "call getRutasSimple()";
+							$res = $conn->query($sql);
+							?>
+							<select name="ruta" id="ruta">
+								<option value="0" style="display:none;">Seleccione una ruta</option>
+								<?php while ($row = $res->fetch_array()) {
+									if (!empty($row['numeroRuta'])) { ?>
+										<option value="<?php echo $row['idRuta']; ?>">
+											<?php echo $row['numeroRuta']; ?>
+										</option>
+								<?php }
+								}
+								?>
+							</select>
+						</div>
+						<select class="form-control selectpicker" name="select-comunidad" id="select-comunidad" data-live-search="true">
+							<option>Hola</option>
+						</select>
+					</div>
 			<div class="row">
 				<div class="span8">
 					<!-- Aquí va el mapa -->
 					<div id="map">
-						<script>
-							var map = L.map('map').setView([9.938118, -84.075391], 14);
-
-							L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-								attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
-								maxZoom: 18
-							}).addTo(map);
-
-
-							L.control.scale().addTo(map);
-							//L.marker([9.938118,-84.075391], {draggable: true}).addTo(map);
-							L.Routing.control({
-								waypoints: [
-									L.latLng(9.938118, -84.075391),
-									L.latLng(9.935428, -84.071388),
-									L.latLng(9.928192, -84.078832)
-								]
-							}).addTo(map);
-						</script>
+						<script type="text/javascript" src="js/mapaConsultas.js"></script>
 					</div>
 				</div>
-
 				<div class="span4">
+					<div id="infoRuta" style="display: none;">
+						<h2>Información de la Ruta</h2>
+						Número:
+						<input type="text" name="numero" id="numero" class="form-control" placeholder="Número de la ruta" maxlength="45" readonly>
+						Descripción:
+						<textarea name="descripcion" id="descripcion" rows="5" placeholder="Descripción del ruta" style="resize: none;" maxlength="250" readonly></textarea>
+						Trayecto:
+						<input type="text" name="trayecto" placeholder="Trayecto" id="trayecto" readonly>
+						Empresas que la operan:
+						<select name="nombreEmpresas" id="nombreEmpresas">
+						</select>
+					</div>
+					<div id="infoEmpresa" style="display:none">
+						<h2>Información de la Empresa</h2>
+						Nombre:
+						<input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre de la empresa" maxlength="45" readonly>
+						Zona:
+						<input type="text" name="zona" id="zona" class="form-control" placeholder="Zona donde opera" maxlength="45" readonly>
+						Dirección:
+						<input type="text" name="direccion" id="direccion" class="form-control" placeholder="Direccion física" maxlength="45" readonly>
+						Teléfono:
+						<input type="text" name="telefono" id="telefono" class="form-control" placeholder="Número telefónico" maxlength="45" readonly>
+						Correo:
+						<br>
+						<input type="email" name="correo" id="correo" class="form-control" placeholder="Correo electrónico" maxlength="45" readonly>
+						<br>
+						Información de Contacto:
+						<input type="text" name="contacto" id="contacto" class="form-control" placeholder="Contacto de emergencia" maxlength="45" readonly>
+						Hora de Inicio:
+						<input type="text" name="horaInicio" id="horaInicio" class="form-control" placeholder="hora de inicio" maxlength="45" readonly>
+						Hora de Cierre:
+						<input type="text" name="horaFin" id="horaFin" class="form-control" placeholder="hora de cierre" maxlength="45" readonly>
+						Rutas que opera:
+						<br>
+						<select name="nombreRutas" id="nombreRutas">
+						</select>
+					</div>
+					<div>
+						<h2>Información Destino</h2>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -173,7 +251,9 @@
 	<script src="js/animate.js"></script>
 	<script src="js/jquery.tweet.js"></script>
 	<script src="js/custom.js"></script>
-
+	<script type="text/javascript" src="js/comboBoxRutaConsulta.js"></script>
+	<script type="text/javascript" src="js/comboBoxEmpresaConsulta.js"></script>
+	<script type="text/javascript" src="js/comboBoxRutaEmpresaConsulta.js"></script>
 </body>
 
 </html>

@@ -1,5 +1,15 @@
 var mapsPlaceholder = [];
 var dibujar = false;
+var latlng;
+var marcadores = [];
+
+// navigator.geolocation.getCurrentPosition(
+// 	function(location) {
+//         latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
+//     }
+// );
+
+//var map = L.map('map').setView(latlng, 13)
 
 var map = L.map('map').setView([9.938038, -84.075376], 13)
 L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
@@ -26,22 +36,18 @@ function dibujarRuta(){
 	
 	var customOptions = {'maxWidth': '2000', 'className': 'custom'};	
 	routingControl = L.Routing.control({
-		waypoints: waypoints,
-		createMarker: function (i, wp, nWps) {
-			return L.marker(wp.latLng, {title:nombres[i+1]})
-			 .bindPopup("Notificar punto a OSM: <br><center><textarea id='waypoint" + i + "' rows='3' style='resize:none;'></textarea><button value='" + i + "' onclick='clickBoton(this.value,"+wp.latLng.lat+","+wp.latLng.lng+")'>Enviar</button><center>", customOptions);
-		}, draggableWaypoints: false
+		waypoints: waypoints, draggableWaypoints: false
 	}).addTo(mapsPlaceholder[0]);
 }
 
 function onMapClick(e) {
-	if (dibujar) {
-		var popup = L.popup();
-		popup
-			.setLatLng(e.latlng)			
-			.setContent("Nombre del punto: <br><center><textarea id='marker" + numeroPopups + "' rows='3' style='resize:none;'></textarea><button value='" + numeroPopups + "' onclick='agregarDescripcion(this.value, "+e.latlng.lat+","+e.latlng.lng+")'>Guardar</button>")
-			.openOn(mapsPlaceholder[0]);
-	}
+	// if (dibujar) {
+	// 	var popup = L.popup();
+	// 	popup
+	// 		.setLatLng(e.latlng)			
+	// 		.setContent("Nombre del punto: <br><center><textarea id='marker" + numeroPopups + "' rows='3' style='resize:none;'></textarea><button value='" + numeroPopups + "' onclick='agregarDescripcion(this.value, "+e.latlng.lat+","+e.latlng.lng+")'>Guardar</button>")
+	// 		.openOn(mapsPlaceholder[0]);
+	// }
 }
 
 function eliminarPuntos() {
