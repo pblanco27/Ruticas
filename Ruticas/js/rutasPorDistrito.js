@@ -1,3 +1,5 @@
+var panes = [];
+
 $(document).ready(function () {
 	$("#distrito").change(function () {
 		//mapsPlaceholder[0]._panes.markerPane.remove();
@@ -19,10 +21,10 @@ $(document).ready(function () {
 			dataType: 'json',
 			success: function (response) {
 				var colors = ["red", "blue", "orange", "green", "yellow", "brown", "black", "purple"];
-				var panes = [];
 				var ids = response[0]['ids'];
 				for (j = 1; j < ids.length; j++){
 					mapsPlaceholder[0].createPane("pane" + j);
+					panes.push("pane"+j);
 					$.ajax({
 						async: false,
 						url: 'Scripts/cargarPuntos.php',

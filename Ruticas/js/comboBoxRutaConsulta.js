@@ -1,5 +1,13 @@
 $(document).ready(function () {
 	$("#ruta").change(function () {
+		for(i = panes.length;i<0;i++){
+			console.log(panes[i]);
+			//mapsPlaceholder[0].getPane(panes[i]).style.display = 'none';
+			panes[i].pop();
+		}
+		//mapsPlaceholder[0]._panes.markerPane.remove();
+		//mapsPlaceholder[0]._panes.overlayPane.remove();
+		//mapsPlaceholder[0]._panes.shadowPane.remove();
 		nombres = new Array();
 		marker = new Array();
 		dibujarRuta();
