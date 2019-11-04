@@ -15,14 +15,11 @@ include "conexion.php";
 	<link href="css/style.css" rel="stylesheet">
 	<link href="color/default.css" rel="stylesheet">
 	<link rel="shortcut icon" href="img/favicon.ico">
-	<script src="js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
 	<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
 	<link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
 	<script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/js/bootstrap-select.min.js"></script>
-  	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.10.0/css/bootstrap-select.min.css" rel="stylesheet" />
 	<style>
 		#map {
 			width: 100%;
@@ -106,60 +103,21 @@ include "conexion.php";
 
 	<section class="spacer green">
 		<div align="center">
-			<h2 class="pagetitle" style="color:white;">Consultar información<h2>
+			<h2 class="pagetitle" style="color:white;">
+				Consultar información
+				<select name="consulta" id="consulta">
+					<option value="0" style="display:none;">Seleccione una consulta</option>
+					<option value="1" >Todas las rutas de una empresa</option>
+					<option value="2" >Una ruta en particular</option>
+					<option value="3" >Rutas con un mismo destino</option>
+					<option value="4" >Rutas con una misma parada intermedia</option>
+				</select>
+			</h2>
 		</div>
 	</section>
 
 	<section id="maincontent" class="inner">
 		<div class="container">
-		<div class="row">
-						<div class="span1">
-							Empresa:
-						</div>
-						<div class="span2">
-							<?php
-							$sql = "call getEmpresasSimple()";
-							$res = $conn->query($sql);
-							?>
-							<select name="empresa" id="empresa" class="form-control" required>
-								<option value="0" style="display:none;">Seleccione una empresa</option>
-								<?php while ($row = $res->fetch_array()) {
-									if (!empty($row['nombre'])) { ?>
-										<option value="<?php echo $row['idEmpresa']; ?>">
-											<?php echo $row['nombre']; ?>
-										</option>
-								<?php }
-								} ?>
-							</select>
-						</div>
-					</div>
-					<div class="row">
-						<div class="span1">
-							Ruta:
-						</div>
-						<div class="span2">
-							<?php
-							$res->close();
-							$conn->next_result();
-							$sql = "call getRutasSimple()";
-							$res = $conn->query($sql);
-							?>
-							<select name="ruta" id="ruta">
-								<option value="0" style="display:none;">Seleccione una ruta</option>
-								<?php while ($row = $res->fetch_array()) {
-									if (!empty($row['numeroRuta'])) { ?>
-										<option value="<?php echo $row['idRuta']; ?>">
-											<?php echo $row['numeroRuta']; ?>
-										</option>
-								<?php }
-								}
-								?>
-							</select>
-						</div>
-						<select class="form-control selectpicker" name="select-comunidad" id="select-comunidad" data-live-search="true">
-							<option>Hola</option>
-						</select>
-					</div>
 			<div class="row">
 				<div class="span8">
 					<!-- Aquí va el mapa -->
@@ -168,20 +126,22 @@ include "conexion.php";
 					</div>
 				</div>
 				<div class="span4">
-					<div id="infoRuta" style="display: none;">
-						<h2>Información de la Ruta</h2>
-						Número:
-						<input type="text" name="numero" id="numero" class="form-control" placeholder="Número de la ruta" maxlength="45" readonly>
-						Descripción:
-						<textarea name="descripcion" id="descripcion" rows="5" placeholder="Descripción del ruta" style="resize: none;" maxlength="250" readonly></textarea>
-						Trayecto:
-						<input type="text" name="trayecto" placeholder="Trayecto" id="trayecto" readonly>
-						Empresas que la operan:
-						<select name="nombreEmpresas" id="nombreEmpresas">
-						</select>
-					</div>
-					<div id="infoEmpresa" style="display:none">
-						<h2>Información de la Empresa</h2>
+					<div id="infoEmpresa" style="display:none;">
+						<h3>Información de la Empresa</h3>
+						<?php
+						$sql = "call getEmpresasSimple()";
+						$res = $conn->query($sql);
+						?>
+						<select name="empresa" id="empresa" class="form-control" required>
+							<option value="0" style="display:none;">Seleccione una empresa</option>
+							<?php while ($row = $res->fetch_array()) {
+								if (!empty($row['nombre'])) { ?>
+									<option value="<?php echo $row['idEmpresa']; ?>">
+										<?php echo $row['nombre']; ?>
+									</option>
+							<?php }
+							} ?>
+						</select><br>
 						Nombre:
 						<input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre de la empresa" maxlength="45" readonly>
 						Zona:
@@ -196,17 +156,74 @@ include "conexion.php";
 						<br>
 						Información de Contacto:
 						<input type="text" name="contacto" id="contacto" class="form-control" placeholder="Contacto de emergencia" maxlength="45" readonly>
-						Hora de Inicio:
-						<input type="text" name="horaInicio" id="horaInicio" class="form-control" placeholder="hora de inicio" maxlength="45" readonly>
-						Hora de Cierre:
-						<input type="text" name="horaFin" id="horaFin" class="form-control" placeholder="hora de cierre" maxlength="45" readonly>
+						<div class="row">
+							<div class="span2">
+								Hora de Inicio:
+								<input type="text" name="horaInicio" id="horaInicio" class="form-control" placeholder="Hora de inicio" maxlength="45" readonly>
+							</div>
+							<div class="span2">
+								Hora de Cierre:
+								<input type="text" name="horaFin" id="horaFin" class="form-control" placeholder="Hora de cierre" maxlength="45" readonly>
+							</div>
+						</div>
 						Rutas que opera:
 						<br>
 						<select name="nombreRutas" id="nombreRutas">
 						</select>
 					</div>
-					<div>
-						<h2>Información Destino</h2>
+					<div id="infoRuta" style="display: none;">
+						<h3>Información de la Ruta</h3>						
+						<?php
+						$res->close();
+						$conn->next_result();
+						$sql = "call getRutasSimple()";
+						$res = $conn->query($sql);
+						?>
+						<select name="ruta" id="ruta">
+							<option value="0" style="display:none;">Seleccione una ruta</option>
+							<?php while ($row = $res->fetch_array()) {
+								if (!empty($row['numeroRuta'])) { ?>
+									<option value="<?php echo $row['idRuta']; ?>">
+										<?php echo $row['numeroRuta']; ?>
+									</option>
+							<?php }
+							}
+							?>
+						</select><br>
+						Número:
+						<input type="text" name="numero" id="numero" class="form-control" placeholder="Número de la ruta" maxlength="45" readonly>
+						Descripción:
+						<textarea name="descripcion" id="descripcion" rows="5" placeholder="Descripción del ruta" style="resize: none;" maxlength="250" readonly></textarea>
+						Trayecto:
+						<input type="text" name="trayecto" placeholder="Trayecto" id="trayecto" readonly>
+						Empresas que la operan:
+						<select name="nombreEmpresas" id="nombreEmpresas">
+						</select>
+					</div>
+					<div id="infoDestino" style="display:none;">
+						<h3>Información Destino</h3>
+						<select name="provincia" id="provincia" class="form-control" style="width:100%;">
+							<option value="">Seleccione una provincia</option>
+							<?php
+							$res->close();
+							$conn->next_result();
+							$sql = "call getProvincias()";
+							$res = $conn->query($sql);
+							$provincias = "";
+							while ($row = $res->fetch_array()) {
+								$provincias .= "<option value='" . $row["idProvincia"] . "'>" . $row["nombre"] . "</option>";
+							}
+							echo $provincias;
+							$res->close();
+							$conn->next_result();
+							?>
+						</select>
+						<select name="canton" id="canton" class="form-control" style="width:100%;">
+							<option value="">Seleccione un cantón</option>
+						</select>
+						<select name="distrito" id="distrito" class="form-control" style="width:100%;">
+							<option value="">Seleccione un distrito</option>
+						</select>
 					</div>
 				</div>
 			</div>
@@ -238,7 +255,6 @@ include "conexion.php";
 		</div>
 	</footer>
 	<a href="#" class="scrollup"><i class="icon-angle-up icon-square icon-bgdark icon-2x"></i></a>
-
 	<script src="js/jquery.js"></script>
 	<script src="js/jquery.scrollTo.js"></script>
 	<script src="js/jquery.nav.js"></script>
@@ -249,11 +265,14 @@ include "conexion.php";
 	<script src="js/jquery.flexslider.js"></script>
 	<script src="js/inview.js"></script>
 	<script src="js/animate.js"></script>
-	<script src="js/jquery.tweet.js"></script>
 	<script src="js/custom.js"></script>
 	<script type="text/javascript" src="js/comboBoxRutaConsulta.js"></script>
 	<script type="text/javascript" src="js/comboBoxEmpresaConsulta.js"></script>
-	<script type="text/javascript" src="js/comboBoxRutaEmpresaConsulta.js"></script>
+	<script type="text/javascript" src="js/comboBoxRutaEmpresaConsulta.js"></script> 
+	<script type="text/javascript" src="js/armarDireccion.js"></script>
+	<script type="text/javascript" src="js/rutasPorDistrito.js"></script>
+	<script type="text/javascript" src="js/comboBoxConsulta.js"></script>
+	
 </body>
 
 </html>

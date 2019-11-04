@@ -1,6 +1,5 @@
 $(document).ready(function () {
 	$("#ruta").change(function () {
-		
 		nombres = new Array();
 		marker = new Array();
 		dibujarRuta();
@@ -28,8 +27,6 @@ $(document).ready(function () {
 				document.getElementById("trayecto").value = "Trayecto de ruta: " +
 					"de " + nombrePartida + " " +
                     "a " + nombreDestino;
-                document.getElementById("infoEmpresa").style.display = "none";   
-                document.getElementById("infoRuta").style.display = "block";
 				$.ajax({
 					url: 'Scripts/cargarPuntos.php',
 					type: 'post',

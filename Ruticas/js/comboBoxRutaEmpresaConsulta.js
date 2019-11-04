@@ -67,27 +67,6 @@ $(document).ready(function () {
 						dibujar = true;
 					}
                 });
-                // $.ajax({
-				// 	url: 'Scripts/infoRutaEmpresa.php',
-				// 	type: 'post',
-				// 	data: {
-				// 		ruta: rutaid
-				// 	},
-				// 	dataType: 'json',
-				// 	success: function (response) {
-                //         var nombres = response[0]['nombres'];
-                //         select = document.getElementById('nombreEmpresas');
-                //         var length = select.options.length;
-                //         for (i = 0; i < length; i++) {
-                //             select.options[i] = null;
-                //         }
-				// 		for (i = 1; i < nombres.length; i++) {
-                //             option = document.createElement( 'option' );
-                //             option.value = option.text = nombres[i];
-                //             select.add( option );
-				// 		}
-				// 	}
-				// });
 			}
 		});
 	});
