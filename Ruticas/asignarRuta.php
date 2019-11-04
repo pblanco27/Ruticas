@@ -202,7 +202,7 @@ session_start();
 								</div>
 								<div class="span2">
 									<select name="ruta" id="ruta">
-										<option value="0" style="display:none;">Seleccione una empresa</option>
+										<option value="0" style="display:none;">Seleccione una ruta</option>
 										<?php while ($row = $res->fetch_array()) {
 											if (!empty($row['numeroRuta'])) { ?>
 												<option value="<?php echo $row['idRuta']; ?>">

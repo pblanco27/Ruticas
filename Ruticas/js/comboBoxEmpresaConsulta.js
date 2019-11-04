@@ -1,8 +1,11 @@
 $(document).ready(function () {
     $("#empresa").change(function () {
+		if (markerEmpresa != null) mapsPlaceholder[0].removeLayer(markerEmpresa);
+		for(i = 0; i < routingControls.length; i++){
+			if (routingControls[i] != null) mapsPlaceholder[0].removeControl(routingControls[i]);
+		}
         nombres = new Array();
         marker = new Array();
-        dibujarRuta();
         var empid = $(this).val();
         document.getElementById("ruta").selectedIndex = "0"; 
         $.ajax({
@@ -37,12 +40,8 @@ $(document).ready(function () {
                 if (typeof mapsPlaceholder != 'undefined') {
                     // Nos movemos a la posición de la empresa
                     mapsPlaceholder[0].panTo([lat, long]);
-
-                    // Añadimos un marcador si no está creado
-                    if (marcadores[empid] != 1) {
-                        L.marker([lat, long], { title: nom }).addTo(mapsPlaceholder[0]);
-                        marcadores[empid] = 1;
-                    }
+                    // Añadimos un marcador
+					markerEmpresa = L.marker([lat, long], { title: nom }).addTo(mapsPlaceholder[0]);
                 }
             }
         });
@@ -58,7 +57,6 @@ $(document).ready(function () {
                 var ids = response[0]['ids'];
                 select = document.getElementById('nombreRutas');
                 var length = select.options.length;
-                console.log(length);
                 $("#nombreRutas").empty();
                 option = document.createElement( 'option' );
                 option.value = 0;

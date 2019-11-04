@@ -3,7 +3,7 @@
 	session_start();
 	if($_POST){
         $idEmpresa = $_POST['emp'];
-	  $sql = "call getNombreRutaEmpresa($idEmpresa)";
+	  $sql = "call getNombreRutaEmpresaActivado($idEmpresa)";
 	  $res = $conn->query($sql) or die ('Unable to execute query. '. mysqli_error($conn));	  
       $_SESSION['idRuta'] = $idRuta;
       $nombres[] = array();

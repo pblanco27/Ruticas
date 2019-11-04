@@ -1,5 +1,5 @@
 $(document).ready(function () {
-	$("#nombreRutas").change(function () {
+	$("#nombreEmpresas").change(function () {
 		if (markerEmpresa != null) mapsPlaceholder[0].removeLayer(markerEmpresa);
 		for(i = 0; i < routingControls.length; i++){
 			if (routingControls[i] != null) mapsPlaceholder[0].removeControl(routingControls[i]);
@@ -10,8 +10,8 @@ $(document).ready(function () {
 		var duracion;
 		var discapacitado;	
 		var numeroRuta;		
-		var rutaid = $(this).val();
-		var empid = document.getElementById('empresa').value;
+		var empid = $(this).val();
+		var rutaid = document.getElementById('ruta').value;
 		$.ajax({
 			async: false,
 			url: 'Scripts/infoRuta.php',

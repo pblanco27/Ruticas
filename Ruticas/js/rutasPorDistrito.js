@@ -1,16 +1,12 @@
-var panes = [];
-
 $(document).ready(function () {
 	$("#distrito").change(function () {
-		//mapsPlaceholder[0]._panes.markerPane.remove();
-		//mapsPlaceholder[0]._panes.overlayPane.remove();
-		//mapsPlaceholder[0]._panes.shadowPane.remove();
+		if (markerEmpresa != null) mapsPlaceholder[0].removeLayer(markerEmpresa);
+		for(i = 0; i < routingControls.length; i++){
+			if (routingControls[i] != null) mapsPlaceholder[0].removeControl(routingControls[i]);
+		}
 		nombres = new Array();
 		marker = new Array();
-		dibujarRuta();
-		
-		//var top = document.getElementsByClassName("leaflet-top leaflet-right");
-		//top[0].style.display = "block";
+		var numeroRuta;
 		var idDistrito = $(this).val();
 		$.ajax({
 			url: 'Scripts/rutasPorDistrito.php',
@@ -24,7 +20,18 @@ $(document).ready(function () {
 				var ids = response[0]['ids'];
 				for (j = 1; j < ids.length; j++){
 					mapsPlaceholder[0].createPane("pane" + j);
-					panes.push("pane"+j);
+					$.ajax({
+						async: false,
+						url: 'Scripts/infoRuta.php',
+						type: 'post',
+						data: {
+							ruta: ids[j]
+						},
+						dataType: 'json',
+						success: function (response) {
+							numeroRuta = response[0]['numeroRuta'];
+						}
+					});
 					$.ajax({
 						async: false,
 						url: 'Scripts/cargarPuntos.php',
@@ -46,21 +53,19 @@ $(document).ready(function () {
 								var marker2 = L.marker([lat, lng]);
 								marker.push(marker2);
 							}
-							//if (routingControl != null) map.removeControl(routingControl);
-							var top = document.getElementsByClassName("leaflet-top leaflet-right");
-							while (top[0].firstChild) {
-							  top[0].removeChild(top[0].firstChild);
-							}
 							var customOptions = {'maxWidth': '2000', 'className': 'custom'};							
 							routingControl = L.Routing.control({
 												waypoints: waypoints,
 												createMarker: function (i, wp, nWps) {
-													return L.marker(wp.latLng, {title:nombres[i+1]});
+													return L.marker(wp.latLng, {title:nombres[i+1]})
+													.bindPopup("Ruta: " + numeroRuta + "<br>" +
+															   "Nombre de la parada: " + nombres[i+1], customOptions);
 												}, draggableWaypoints: false,	
 												lineOptions: {
 													styles: [{pane:"pane"+j, color: colors[j-1]}]
 												}
 											}).addTo(mapsPlaceholder[0]);
+							routingControls.push(routingControl);
 							var top = document.getElementsByClassName("leaflet-top leaflet-right");
 							while (top[0].firstChild) {
 							  top[0].removeChild(top[0].firstChild);
@@ -68,7 +73,6 @@ $(document).ready(function () {
 							lat = puntos[1][0];
 							lng = puntos[1][1];
 							mapsPlaceholder[0].panTo([lat, lng]);
-							dibujar = true;
 						}
 					});
 				}

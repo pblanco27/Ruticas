@@ -31,7 +31,7 @@
 		$_SESSION["error_contacto"] = "El número de teléfono solo debe contener números (a excepción del + del código de área), y debe ser de máximo 45 caracteres.";
 		header("Location: ../crearEmpresa.php");
 	  }
-	  if(!isset($errores["error_telefono"]) && !isset($errores["error_contacto"])){
+	  if(!isset($_SESSION["error_telefono"]) && !isset($_SESSION["error_contacto"])){
 		$sql = "call crearEmpresa('$nombre','$zona','$direccion',$latitud,$longitud,'$num_telefono','$correo','$num_telefonoC',$idUser,$horaInicio,$horaFin)";
 		$conn->query($sql) or die ('Unable to execute query. '. mysqli_error($conn));
 		header("Location: ../crearEmpresa.php");

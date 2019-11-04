@@ -1,20 +1,42 @@
 var mapsPlaceholder = [];
-
-var map = L.map('map').setView([9.938038, -84.075376], 13)
-L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
-attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://mapbox.com">Mapbox</a>',
-maxZoom: 18,
-id: 'mapbox.streets',
-accessToken: 'pk.eyJ1IjoiYmJyb29rMTU0IiwiYSI6ImNpcXN3dnJrdDAwMGNmd250bjhvZXpnbWsifQ.Nf9Zkfchos577IanoKMoYQ'
-}).addTo(map);
-var marker = L.marker([9.938038, -84.075376]).addTo(map);
-L.control.scale().addTo(map);
-
-mapsPlaceholder[0] = map;
 var marker = new Array();
 var nombres = new Array();
 var numeroPopups = 0; 
 var routingControl;
+		
+navigator.geolocation.getCurrentPosition(
+	function(location) {
+		var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
+		var actualPos = L.icon({
+			iconUrl: 'img/actualPos.png',
+			iconSize: [25, 45]
+		});
+		
+		var map = L.map('map').setView(latlng, 13)
+		L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
+		attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://mapbox.com">Mapbox</a>',
+		maxZoom: 18,
+		id: 'mapbox.streets',
+		accessToken: 'pk.eyJ1IjoiYmJyb29rMTU0IiwiYSI6ImNpcXN3dnJrdDAwMGNmd250bjhvZXpnbWsifQ.Nf9Zkfchos577IanoKMoYQ'
+		}).addTo(map);
+		var customOptions = {'maxWidth': '2000', 'className': 'custom'};		
+		var marker = L.marker(latlng, {icon: actualPos, title:"Usted está aquí"}).bindPopup("Usted está aquí", customOptions).addTo(map);
+		L.control.scale().addTo(map);
+
+		mapsPlaceholder[0] = map;
+		marker = new Array();
+
+		function onMapClick(e) {
+			var popup = L.popup();
+			popup
+				.setLatLng(e.latlng)		
+				.setContent("Nombre del punto: <br><center><textarea id='marker" + numeroPopups + "' rows='3' style='resize:none;'></textarea><button value='" + numeroPopups + "' onclick='agregarDescripcion(this.value, "+e.latlng.lat+","+e.latlng.lng+")'>Guardar</button>")
+				.openOn(mapsPlaceholder[0]);
+		}
+
+		mapsPlaceholder[0].on('click', onMapClick);
+	}
+);
 
 function dibujarRuta(){
 	var waypoints = new Array();
@@ -32,21 +54,3 @@ function dibujarRuta(){
 		}, draggableWaypoints: false
 	}).addTo(mapsPlaceholder[0]);
 }
-
-function onMapClick(e) {
-	var popup = L.popup();
-	popup
-		.setLatLng(e.latlng)		
-		.setContent("Nombre del punto: <br><center><textarea id='marker" + numeroPopups + "' rows='3' style='resize:none;'></textarea><button value='" + numeroPopups + "' onclick='agregarDescripcion(this.value, "+e.latlng.lat+","+e.latlng.lng+")'>Guardar</button>")
-		.openOn(mapsPlaceholder[0]);
-}
-
-function eliminarPuntos(){
-	for(i=0;i<marker.length;i++) {
-		mapsPlaceholder[0].removeLayer(marker[i]);
-	} 	
-}
-
-mapsPlaceholder[0].on('click', onMapClick);
-//map.on('dblclick', eliminarPuntos);	
-		

@@ -1,18 +1,11 @@
 $(document).ready(function () {
 	$("#ruta").change(function () {
-		for(i = panes.length;i<0;i++){
-			console.log(panes[i]);
-			//mapsPlaceholder[0].getPane(panes[i]).style.display = 'none';
-			panes[i].pop();
+		if (markerEmpresa != null) mapsPlaceholder[0].removeLayer(markerEmpresa);
+		for(i = 0; i < routingControls.length; i++){
+			if (routingControls[i] != null) mapsPlaceholder[0].removeControl(routingControls[i]);
 		}
-		//mapsPlaceholder[0]._panes.markerPane.remove();
-		//mapsPlaceholder[0]._panes.overlayPane.remove();
-		//mapsPlaceholder[0]._panes.shadowPane.remove();
 		nombres = new Array();
 		marker = new Array();
-		dibujarRuta();
-		//var top = document.getElementsByClassName("leaflet-top leaflet-right");
-        //top[0].style.display = "block";
         document.getElementById("empresa").selectedIndex = "0"; 
 		var rutaid = $(this).val();
 		$.ajax({
@@ -55,23 +48,19 @@ $(document).ready(function () {
 							var marker2 = L.marker([lat, lng]);
 							marker.push(marker2);
 						}
-						//if (routingControl != null) map.removeControl(routingControl);
-						var top = document.getElementsByClassName("leaflet-top leaflet-right");
-						while (top[0].firstChild) {
-						  top[0].removeChild(top[0].firstChild);
-						}
 						var customOptions = {'maxWidth': '2000', 'className': 'custom'};	
 						routingControl = L.Routing.control({
 											waypoints: waypoints,
 											createMarker: function (i, wp, nWps) {
-												return L.marker(wp.latLng, {title:nombres[i+1]});
-												 //.bindPopup("Notificar punto a OSM: <br><center><textarea id='input" + i + "' rows='3' style='resize:none;'></textarea><button value='" + i + "' onclick='clickBoton(this.value,"+wp.latLng.lat+","+wp.latLng.lng+")'>Enviar</button><center>", customOptions);
+												return L.marker(wp.latLng, {title:nombres[i+1]})
+													.bindPopup("Ruta: " + numeroRuta + "<br>" +
+															   "Nombre de la parada: " + nombres[i+1], customOptions);
 											}, draggableWaypoints: false
 										}).addTo(mapsPlaceholder[0]);
+						routingControls.push(routingControl);
 						lat = puntos[1][0];
 						lng = puntos[1][1];
 						mapsPlaceholder[0].panTo([lat, lng]);
-						dibujar = true;
 					}
                 });
                 $.ajax({
@@ -82,20 +71,28 @@ $(document).ready(function () {
 					},
 					dataType: 'json',
 					success: function (response) {
-                        var nombres = response[0]['nombres'];
+                        var info = response[0]['info'];
                         select = document.getElementById('nombreEmpresas');
                         var length = select.options.length;
                         for (i = 0; i < length; i++) {
                             select.options[i] = null;
                         }
-						for (i = 1; i < nombres.length; i++) {
+						$("#nombreEmpresas").empty();
+						option = document.createElement( 'option' );
+						option.value = 0;
+						option.text = "Empresas que la recorren";
+						option.style.display = "none";
+						select.add(option);
+						for (i = 1; i < info.length; i++) {
                             option = document.createElement( 'option' );
-                            option.value = option.text = nombres[i];
-                            select.add( option );
+                            option.value = info[i][0];
+							option.text = info[i][1];
+                            select.add(option);
 						}
 					}
 				});
 			}
 		});
 	});
+	
 });

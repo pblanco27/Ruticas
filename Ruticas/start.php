@@ -1,9 +1,11 @@
 <?php
-	session_start();
-	unset($_SESSION["mensajeRegistro"]);
+include "conexion.php";
+session_start();
 ?>
+
 <!DOCTYPE HTML>
 <html lang="es">
+
 <head>
 	<meta charset="utf-8">
 	<title>Proyecto Ruticas</title>
@@ -16,6 +18,9 @@
 	<link rel="shortcut icon" href="img/favicon.ico">
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin="" />
 	<script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js" integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og==" crossorigin=""></script>
+	<link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css" />
+	<script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<style>
 		#map {
 			width: 100%;
@@ -71,41 +76,6 @@
 		[data-tip]:hover:before,
 		[data-tip]:hover:after {
 			display: block;
-		}
-		
-		.alert {
-			background-color: #f44336;
-			color: white;
-			opacity: 1;
-			transition: opacity 0.6s;
-			margin-bottom: 15px;
-		}
-
-		.alert.success {
-			background-color: #4CAF50;
-		}
-
-		.alert.info {
-			background-color: #2196F3;
-		}
-
-		.alert.warning {
-			background-color: #ff9800;
-		}
-
-		.closebtn {
-			margin-left: 15px;
-			color: white;
-			font-weight: bold;
-			float: right;
-			font-size: 22px;
-			line-height: 20px;
-			cursor: pointer;
-			transition: 0.3s;
-		}
-
-		.closebtn:hover {
-			color: black;
 		}
 	</style>
 </head>
@@ -193,43 +163,128 @@
 
 	<section class="spacer green">
 		<div align="center">
-			<h2 class="pagetitle" style="color:white;">Consultar información<h2>
+			<h2 class="pagetitle" style="color:white;">
+				Consultar información
+				<select name="consulta" id="consulta">
+					<option value="0" style="display:none;">Seleccione una consulta</option>
+					<option value="1" >Todas las rutas de una empresa</option>
+					<option value="2" >Una ruta en particular</option>
+					<option value="3" >Rutas con un mismo destino</option>
+					<option value="4" >Rutas con una misma parada intermedia</option>
+				</select>
+			</h2>
 		</div>
 	</section>
 
 	<section id="maincontent" class="inner">
 		<div class="container">
 			<div class="row">
-				<div class='alert success' id="exitoCambioClave" style="display:none;">
-					<span class='closebtn' onclick="this.parentElement.style.display='none'">&times;</span>
-					<strong>¡Se cambió la contraseña exitosamente!</strong>
-				</div>
 				<div class="span8">
 					<!-- Aquí va el mapa -->
 					<div id="map">
-						<script>
-							var map = L.map('map').setView([9.938118, -84.075391], 14);
-
-							L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-								attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://cloudmade.com">CloudMade</a>',
-								maxZoom: 18
-							}).addTo(map);
-
-
-							L.control.scale().addTo(map);
-							//L.marker([9.938118,-84.075391], {draggable: true}).addTo(map);
-							// L.Routing.control({
-							// 	waypoints: [
-							// 		L.latLng(9.938118, -84.075391),
-							// 		L.latLng(9.935428, -84.071388),
-							// 		L.latLng(9.928192, -84.078832)
-							// 	]
-							// }).addTo(map);
-						</script>
+						<script type="text/javascript" src="js/mapaConsultas.js"></script>
 					</div>
 				</div>
-
 				<div class="span4">
+					<div id="infoEmpresa" style="display:none;">
+						<h3>Información de la Empresa</h3>
+						<?php
+						$sql = "call getEmpresasSimpleActivado()";
+						$res = $conn->query($sql);
+						?>
+						<select name="empresa" id="empresa" class="form-control" required>
+							<option value="0" style="display:none;">Seleccione una empresa</option>
+							<?php while ($row = $res->fetch_array()) {
+								if (!empty($row['nombre'])) { ?>
+									<option value="<?php echo $row['idEmpresa']; ?>">
+										<?php echo $row['nombre']; ?>
+									</option>
+							<?php }
+							} ?>
+						</select><br>
+						Nombre:
+						<input type="text" name="nombre" id="nombre" class="form-control" placeholder="Nombre de la empresa" maxlength="45" readonly>
+						Zona:
+						<input type="text" name="zona" id="zona" class="form-control" placeholder="Zona donde opera" maxlength="45" readonly>
+						Dirección:
+						<input type="text" name="direccion" id="direccion" class="form-control" placeholder="Direccion física" maxlength="45" readonly>
+						Teléfono:
+						<input type="text" name="telefono" id="telefono" class="form-control" placeholder="Número telefónico" maxlength="45" readonly>
+						Correo:
+						<br>
+						<input type="email" name="correo" id="correo" class="form-control" placeholder="Correo electrónico" maxlength="45" readonly>
+						<br>
+						Información de Contacto:
+						<input type="text" name="contacto" id="contacto" class="form-control" placeholder="Contacto de emergencia" maxlength="45" readonly>
+						<div class="row">
+							<div class="span2">
+								Hora de Inicio:
+								<input type="text" name="horaInicio" id="horaInicio" class="form-control" placeholder="Hora de inicio" maxlength="45" readonly>
+							</div>
+							<div class="span2">
+								Hora de Cierre:
+								<input type="text" name="horaFin" id="horaFin" class="form-control" placeholder="Hora de cierre" maxlength="45" readonly>
+							</div>
+						</div>
+						Rutas que opera:
+						<br>
+						<select name="nombreRutas" id="nombreRutas">
+						</select>
+					</div>
+					<div id="infoRuta" style="display: none;">
+						<h3>Información de la Ruta</h3>						
+						<?php
+						$res->close();
+						$conn->next_result();
+						$sql = "call getRutasSimpleActivado()";
+						$res = $conn->query($sql);
+						?>
+						<select name="ruta" id="ruta">
+							<option value="0" style="display:none;">Seleccione una ruta</option>
+							<?php while ($row = $res->fetch_array()) {
+								if (!empty($row['numeroRuta'])) { ?>
+									<option value="<?php echo $row['idRuta']; ?>">
+										<?php echo $row['numeroRuta']; ?>
+									</option>
+							<?php }
+							}
+							?>
+						</select><br>
+						Número:
+						<input type="text" name="numero" id="numero" class="form-control" placeholder="Número de la ruta" maxlength="45" readonly>
+						Descripción:
+						<textarea name="descripcion" id="descripcion" rows="5" placeholder="Descripción del ruta" style="resize: none;" maxlength="250" readonly></textarea>
+						Trayecto:
+						<input type="text" name="trayecto" placeholder="Trayecto" id="trayecto" readonly>
+						Empresas que la recorren:
+						<select name="nombreEmpresas" id="nombreEmpresas">
+						</select>
+					</div>
+					<div id="infoDestino" style="display:none;">
+						<h3>Información Destino</h3>
+						<select name="provincia" id="provincia" class="form-control" style="width:100%;">
+							<option value="">Seleccione una provincia</option>
+							<?php
+							$res->close();
+							$conn->next_result();
+							$sql = "call getProvincias()";
+							$res = $conn->query($sql);
+							$provincias = "";
+							while ($row = $res->fetch_array()) {
+								$provincias .= "<option value='" . $row["idProvincia"] . "'>" . $row["nombre"] . "</option>";
+							}
+							echo $provincias;
+							$res->close();
+							$conn->next_result();
+							?>
+						</select>
+						<select name="canton" id="canton" class="form-control" style="width:100%;">
+							<option value="">Seleccione un cantón</option>
+						</select>
+						<select name="distrito" id="distrito" class="form-control" style="width:100%;">
+							<option value="">Seleccione un distrito</option>
+						</select>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -307,7 +362,7 @@
 			</div>
 		</div>
 	</div>
-
+	
 	<footer>
 		<div class="container">
 			<div class="row">
@@ -333,7 +388,6 @@
 		</div>
 	</footer>
 	<a href="#" class="scrollup"><i class="icon-angle-up icon-square icon-bgdark icon-2x"></i></a>
-
 	<script src="js/jquery.js"></script>
 	<script src="js/jquery.scrollTo.js"></script>
 	<script src="js/jquery.nav.js"></script>
@@ -345,6 +399,13 @@
 	<script src="js/inview.js"></script>
 	<script src="js/animate.js"></script>
 	<script src="js/custom.js"></script>
+	<script type="text/javascript" src="js/comboBoxEmpresaConsulta.js"></script>
+	<script type="text/javascript" src="js/comboBoxRutaEmpresaConsulta.js"></script> 
+	<script type="text/javascript" src="js/comboBoxRutaConsulta.js"></script>
+	<script type="text/javascript" src="js/comboBoxEmpresaRutaConsulta.js"></script> 
+	<script type="text/javascript" src="js/armarDireccion.js"></script>
+	<script type="text/javascript" src="js/rutasPorDistrito.js"></script>
+	<script type="text/javascript" src="js/comboBoxConsulta.js"></script>
 	<?php
 		if ($_SESSION['nuevo'] == 1) {
 			echo "<script>
@@ -355,7 +416,6 @@
 					   document.getElementById('desactivacion').style.display = 'none';
 				    });
 				  </script>";
-			unset($_SESSION['nuevo']);
 		}
 	?>
 </body>
