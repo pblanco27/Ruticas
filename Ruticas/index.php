@@ -13,7 +13,7 @@ session_start();
 	<link href="css/bootstrap-responsive.css" rel="stylesheet">
 	<link href="css/style.css" rel="stylesheet">
 	<link href="color/default.css" rel="stylesheet">
-	<link rel="shortcut icon" href="img/favicon.ico">
+	<link rel="shortcut icon" href="img/bus-icon.png">
 </head>
 
 <body>
@@ -83,7 +83,7 @@ session_start();
 					</blockquote>
 				</div>
 				<div class="span4 aligncenter flyRight">
-					<br><img src="img/bus3.png">
+					<br><img src="img/bus.png">
 				</div>
 			</div>
 		</div>

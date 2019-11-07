@@ -5,16 +5,26 @@ $(document).ready(function() {
 			document.getElementById("infoEmpresa").style.display = "block";   
 			document.getElementById("infoRuta").style.display = "none";
 			document.getElementById("infoDestino").style.display = "none";
+			consulta4 = false;
+			limpiarParadas();
 		} else if (idConsulta == 2){
 			document.getElementById("infoRuta").style.display = "block";
 			document.getElementById("infoEmpresa").style.display = "none";
 			document.getElementById("infoDestino").style.display = "none";
+			consulta4 = false;
+			limpiarParadas();
 		} else if (idConsulta == 3){
 			document.getElementById("infoDestino").style.display = "block";
 			document.getElementById("infoRuta").style.display = "none";
 			document.getElementById("infoEmpresa").style.display = "none";
+			consulta4 = false;
+			limpiarParadas();
 		} else if (idConsulta == 4){
-			// esto nunca se va a hacer
+			document.getElementById("infoRuta").style.display = "none";
+			document.getElementById("infoEmpresa").style.display = "none";
+			document.getElementById("infoDestino").style.display = "none";
+			consulta4 = true;
+			reiniciarParadas();
 		}
 	});
 });

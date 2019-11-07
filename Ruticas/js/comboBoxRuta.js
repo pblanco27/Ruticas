@@ -1,6 +1,5 @@
 $(document).ready(function () {
 	$("#ruta").change(function () {
-		
 		nombres = new Array();
 		marker = new Array();
 		dibujarRuta();
