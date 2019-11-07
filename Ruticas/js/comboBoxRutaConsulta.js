@@ -56,7 +56,7 @@ $(document).ready(function () {
 												return L.marker(wp.latLng, {title:nombres[i+1]})
 													.bindPopup("Ruta: " + numeroRuta + "<br>" +
 															   "Nombre de la parada: " + nombres[i+1], customOptions);
-											}, draggableWaypoints: false
+											}, draggableWaypoints: false,addWaypoints: false,
 										}).addTo(mapsPlaceholder[0]);
 						routingControls.push(routingControl);
 						lat = puntos[1][0];

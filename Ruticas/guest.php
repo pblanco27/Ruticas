@@ -225,6 +225,23 @@ include "conexion.php";
 							<option value="">Seleccione un distrito</option>
 						</select>
 					</div>
+					<div id="infoRutaParada" style="display: none;">
+						<h3>Información de la Ruta</h3>						
+						<select name="rutaParada" id="rutaParada">
+							<option value="0" style="display:none;">Seleccione una ruta</option>
+						</select><br>
+						Número:
+						<input type="text" name="numeroRutaParada" id="numeroRutaParada" class="form-control" placeholder="Número de la ruta" maxlength="45" readonly>
+						Descripción:
+						<textarea name="descripcionRutaParada" id="descripcionRutaParada" rows="5" placeholder="Descripción del ruta" style="resize: none;" maxlength="250" readonly></textarea>
+						Trayecto:
+						<input type="text" name="trayectoRutaParada" placeholder="Trayecto" id="trayectoRutaParada" readonly>
+						Empresas que la recorren:
+						<select name="nombreEmpresasParada" id="nombreEmpresasParada">
+						</select>
+						<br>
+						<button onclick="reiniciarParadas()">Limpiar Consulta</button>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -273,6 +290,9 @@ include "conexion.php";
 	<script type="text/javascript" src="js/armarDireccion.js"></script>
 	<script type="text/javascript" src="js/rutasPorDistrito.js"></script>
 	<script type="text/javascript" src="js/comboBoxConsulta.js"></script>
+	<script type="text/javascript" src="js/comboBoxRutaConsultaParada.js"></script>
+	<script type="text/javascript" src="js/limpiarConsulta.js"></script>
+	<script type="text/javascript" src="js/comboBoxEmpresaRutaConsultaParada.js"></script> 
 </body>
 
 </html>

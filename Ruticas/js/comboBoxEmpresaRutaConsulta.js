@@ -78,7 +78,7 @@ $(document).ready(function () {
 												  "Costo del pasaje: " + costo + " colones<br>" +
 												  "Duración del viaje: " + duracion + " minutos<br>" +
 												  "Servicio para discapacitados: " + discapacitado, customOptions);
-									}, draggableWaypoints: false
+									}, draggableWaypoints: false,addWaypoints: false,
 								}).addTo(mapsPlaceholder[0]);
 				routingControls.push(routingControl);
 				lat = puntos[1][0];

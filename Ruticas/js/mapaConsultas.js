@@ -12,7 +12,7 @@ var paradas = [];
 var marcadoresParadas = [];
 
 navigator.geolocation.getCurrentPosition(
-	function(location) {
+	function (location) {
 		var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
 		var actualPos = L.icon({
 			iconUrl: 'img/actualPos.png',
@@ -25,14 +25,14 @@ navigator.geolocation.getCurrentPosition(
 			id: 'mapbox.streets',
 			accessToken: 'pk.eyJ1IjoiYmJyb29rMTU0IiwiYSI6ImNpcXN3dnJrdDAwMGNmd250bjhvZXpnbWsifQ.Nf9Zkfchos577IanoKMoYQ'
 		}).addTo(map);
-		var customOptions = {'maxWidth': '2000', 'className': 'custom'};		
-		var marker = L.marker(latlng, {icon: actualPos, title:"Usted está aquí"}).bindPopup("Usted está aquí", customOptions).addTo(map);
+		var customOptions = { 'maxWidth': '2000', 'className': 'custom' };
+		var marker = L.marker(latlng, { icon: actualPos, title: "Usted está aquí" }).bindPopup("Usted está aquí", customOptions).addTo(map);
 		L.control.scale().addTo(map);
 
 		mapsPlaceholder[0] = map;
-		
+
 		function onMapClick(e) {
-			if (consulta4 && !hayCirculo){
+			if (consulta4 && !hayCirculo) {
 				rutasPorDibujar = [];
 				eliminarCirculo();
 				circle = L.circle(e.latlng, {
@@ -43,32 +43,39 @@ navigator.geolocation.getCurrentPosition(
 				}).addTo(mapsPlaceholder[0]);
 
 				// Hacemos un for que recorra cada una de ellas y pregunte lo siguiente:
-				for (i = 1; i < paradas.length; i++){
+				for (i = 1; i < paradas.length; i++) {
 					// Sacamos la posición de la parada					
 					var paradaPos = [paradas[i][1], paradas[i][2]];
-					
+
 					// Sacamos la distancia que hay entre la posición del marcador y el centro del círculo
 					var d = mapsPlaceholder[0].distance(paradaPos, circle.getLatLng());
-					
+
 					// El marcador se encuentra dentro del círculo si la distancia obtenida es menor al radio
 					var isInside = d < circle.getRadius();
-					
-					if (isInside){
+
+					if (isInside) {
 						// Obtenemos el id de la ruta asociado a dicho punto 
 						var idRuta = paradas[i][0];
-						
+
 						// Guardamos el id de dicha ruta en el arreglo global únicamente si no ha almacenado antes
-						if (!rutasPorDibujar.includes(idRuta)){
+						if (!rutasPorDibujar.includes(idRuta)) {
 							rutasPorDibujar.push(idRuta);
 						}
-					} 
+					}
 				}
-				if (rutasPorDibujar.length > 0){
+				if (rutasPorDibujar.length > 0) {
 					limpiarParadas();
 					nombres = new Array();
 					marker = new Array();
 					var numeroRuta;
-					for (j = 0; j < rutasPorDibujar.length; j++){
+					select = document.getElementById('rutaParada');
+					$("#rutaParada").empty();
+					option = document.createElement('option');
+					option.value = 0;
+					option.text = "Número de la ruta";
+					option.style.display = "none";
+					select.add(option);
+					for (j = 0; j < rutasPorDibujar.length; j++) {
 						var colors = ["red", "blue", "orange", "green", "yellow", "brown", "black", "purple"];
 						mapsPlaceholder[0].createPane("pane" + j);
 						$.ajax({
@@ -81,6 +88,10 @@ navigator.geolocation.getCurrentPosition(
 							dataType: 'json',
 							success: function (response) {
 								numeroRuta = response[0]['numeroRuta'];
+								option = document.createElement('option');
+								option.value = rutasPorDibujar[j];
+								option.text = numeroRuta;
+								select.add(option);
 							}
 						});
 						$.ajax({
@@ -104,22 +115,22 @@ navigator.geolocation.getCurrentPosition(
 									var marker2 = L.marker([lat, lng]);
 									marker.push(marker2);
 								}
-								var customOptions = {'maxWidth': '2000', 'className': 'custom'};							
+								var customOptions = { 'maxWidth': '2000', 'className': 'custom' };
 								routingControl = L.Routing.control({
-													waypoints: waypoints,
-													createMarker: function (i, wp, nWps) {
-														return L.marker(wp.latLng, {title:nombres[i+1]})
-														.bindPopup("Ruta: " + numeroRuta + "<br>" +
-																   "Nombre de la parada: " + nombres[i+1], customOptions);
-													}, draggableWaypoints: false,	
-													lineOptions: {
-														styles: [{pane:"pane"+j, color: colors[j-1]}]
-													}
-												}).addTo(mapsPlaceholder[0]);
+									waypoints: waypoints,
+									createMarker: function (i, wp, nWps) {
+										return L.marker(wp.latLng, { title: nombres[i + 1] })
+											.bindPopup("Ruta: " + numeroRuta + "<br>" +
+												"Nombre de la parada: " + nombres[i + 1], customOptions);
+									}, draggableWaypoints: false, addWaypoints: false,
+									lineOptions: {
+										styles: [{ pane: "pane" + j, color: colors[j - 1] }]
+									}
+								}).addTo(mapsPlaceholder[0]);
 								routingControls.push(routingControl);
 								var top = document.getElementsByClassName("leaflet-top leaflet-right");
 								while (top[0].firstChild) {
-								  top[0].removeChild(top[0].firstChild);
+									top[0].removeChild(top[0].firstChild);
 								}
 								lat = puntos[1][0];
 								lng = puntos[1][1];
@@ -135,7 +146,7 @@ navigator.geolocation.getCurrentPosition(
 	}
 );
 
-function dibujarParadas(){			
+function dibujarParadas() {
 	$.ajax({
 		async: false,
 		url: 'Scripts/obtenerParadas.php',
@@ -143,38 +154,38 @@ function dibujarParadas(){
 		success: function (response) {
 			marcadoresParadas = [];
 			paradas = response[0]['paradas'];
-			var customOptions = {'maxWidth': '2000', 'className': 'custom'};	
-			for (i = 1; i < paradas.length; i++){
+			var customOptions = { 'maxWidth': '2000', 'className': 'custom' };
+			for (i = 1; i < paradas.length; i++) {
 				var paradaPos = [paradas[i][1], paradas[i][2]];
-				var punto = L.marker(paradaPos, {title:paradas[i][3]}).addTo(mapsPlaceholder[0]);
+				var punto = L.marker(paradaPos, { title: paradas[i][3] }).addTo(mapsPlaceholder[0]);
 				marcadoresParadas.push(punto);
 			}
 		}
 	});
 }
 
-function limpiarParadas(){
-	for (i = 0; i < marcadoresParadas.length; i++){
+function limpiarParadas() {
+	for (i = 0; i < marcadoresParadas.length; i++) {
 		mapsPlaceholder[0].removeLayer(marcadoresParadas[i]);
 	}
 }
 
-function limpiarRutas(){
-	for(i = 0; i < routingControls.length; i++){
+function limpiarRutas() {
+	for (i = 0; i < routingControls.length; i++) {
 		if (routingControls[i] != null) mapsPlaceholder[0].removeControl(routingControls[i]);
 	}
 }
 
-function eliminarCirculo(){
-	if (circle != undefined){
-		console.log("Entré");
+function eliminarCirculo() {
+	if (circle != undefined) {
 		mapsPlaceholder[0].removeLayer(circle);
 		hayCirculo = false;
 	}
 }
-function reiniciarParadas(){
+function reiniciarParadas() {
 	limpiarRutas();
-	eliminarCirculo();	
+	eliminarCirculo();
 	dibujarParadas();
+	limpiarConsulta();
 }
 

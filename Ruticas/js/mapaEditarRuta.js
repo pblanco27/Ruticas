@@ -60,6 +60,6 @@ function dibujarRuta(){
 		createMarker: function (i, wp, nWps) {
 			return L.marker(wp.latLng, {title:nombres[i+1]})
 			 .bindPopup("Notificar punto a OSM: <br><center><textarea id='waypoint" + i + "' rows='3' style='resize:none;'></textarea><button value='" + i + "' onclick='clickBoton(this.value,"+wp.latLng.lat+","+wp.latLng.lng+")'>Enviar</button><center>", customOptions);
-		}, draggableWaypoints: false
+		}, draggableWaypoints: false,addWaypoints: false,
 	}).addTo(mapsPlaceholder[0]);
 }
