@@ -240,7 +240,14 @@ include "conexion.php";
 						<select name="nombreEmpresasParada" id="nombreEmpresasParada">
 						</select>
 						<br>
-						<button onclick="reiniciarParadas()">Limpiar Consulta</button>
+						<div class="row">
+							<div class="span2">
+								<button class="btn btn-submit" onclick="reiniciarParadas()">Limpiar consulta</button>
+							</div>
+							<div class="span2">
+								<button class="btn btn-submit" id="botonRutaCercana" style="display:none;" onclick="calcularRutaCercana()">Ruta a parada más cercana</button>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -293,6 +300,7 @@ include "conexion.php";
 	<script type="text/javascript" src="js/comboBoxRutaConsultaParada.js"></script>
 	<script type="text/javascript" src="js/limpiarConsulta.js"></script>
 	<script type="text/javascript" src="js/comboBoxEmpresaRutaConsultaParada.js"></script> 
+	<script type="text/javascript" src="js/calcularRutaCercana.js"></script> 
 </body>
 
 </html>

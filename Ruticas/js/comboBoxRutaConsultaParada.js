@@ -24,46 +24,48 @@ $(document).ready(function () {
 				var idDistritoPartida = response[0]['idDistritoPartida'];
 				var idDistritoDestino = response[0]['idDistritoDestino'];
                 var activado = response[0]['activado'];
+				document.getElementById("botonRutaCercana").style.display = "block";
                 document.getElementById("numeroRutaParada").value = numeroRuta;
 				document.getElementById("descripcionRutaParada").value = descripcion;
 				document.getElementById("trayectoRutaParada").value = "Trayecto de ruta: " +
 					"de " + nombrePartida + " " +
                     "a " + nombreDestino;
-                    $.ajax({
-                        url: 'Scripts/cargarPuntos.php',
-                        type: 'post',
-                        data: {
-                            ruta: rutaid
-                        },
-                        dataType: 'json',
-                        success: function (response) {
-                            var puntos = response[0]['puntos'];
-                            var descripcion = response[0]['descripcion'];
-                            var waypoints = new Array();
-                            numeroPopups = puntos.length - 1;
-                            for (i = 1; i < puntos.length; i++) {
-                                lat = puntos[i][0];
-                                lng = puntos[i][1];
-                                nombres[i] = descripcion[i];
-                                waypoints.push(L.latLng(lat, lng));
-                                var marker2 = L.marker([lat, lng]);
-                                marker.push(marker2);
-                            }
-                            var customOptions = {'maxWidth': '2000', 'className': 'custom'};	
-                            routingControl = L.Routing.control({
-                                                waypoints: waypoints,
-                                                createMarker: function (i, wp, nWps) {
-                                                    return L.marker(wp.latLng, {title:nombres[i+1]})
-                                                        .bindPopup("Ruta: " + numeroRuta + "<br>" +
-                                                                   "Nombre de la parada: " + nombres[i+1], customOptions);
-                                                }, draggableWaypoints: false, addWaypoints: false,
-                                            }).addTo(mapsPlaceholder[0]);
-                            routingControls.push(routingControl);
-                            lat = puntos[1][0];
-                            lng = puntos[1][1];
-                            mapsPlaceholder[0].panTo([lat, lng]);
-                        }
-                    });
+				$.ajax({
+					url: 'Scripts/cargarPuntos.php',
+					type: 'post',
+					data: {
+						ruta: rutaid
+					},
+					dataType: 'json',
+					success: function (response) {
+						var puntos = response[0]['puntos'];
+						var descripcion = response[0]['descripcion'];
+						var waypoints = new Array();
+						numeroPopups = puntos.length - 1;
+						for (i = 1; i < puntos.length; i++) {
+							lat = puntos[i][0];
+							lng = puntos[i][1];
+							puntosParadas.push([lat, lng]);
+							nombres[i] = descripcion[i];
+							waypoints.push(L.latLng(lat, lng));
+							var marker2 = L.marker([lat, lng]);
+							marker.push(marker2);
+						}
+						var customOptions = {'maxWidth': '2000', 'className': 'custom'};	
+						routingControl = L.Routing.control({
+											waypoints: waypoints,
+											createMarker: function (i, wp, nWps) {
+												return L.marker(wp.latLng, {title:nombres[i+1]})
+													.bindPopup("Ruta: " + numeroRuta + "<br>" +
+															   "Nombre de la parada: " + nombres[i+1], customOptions);
+											}, draggableWaypoints: false, addWaypoints: false,
+										}).addTo(mapsPlaceholder[0]);
+						routingControls.push(routingControl);
+						lat = puntos[1][0];
+						lng = puntos[1][1];
+						mapsPlaceholder[0].panTo([lat, lng]);
+					}
+				});
                 $.ajax({
 					url: 'Scripts/infoRutaEmpresa.php',
 					type: 'post',

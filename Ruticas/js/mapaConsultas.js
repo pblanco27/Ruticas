@@ -10,10 +10,12 @@ var rutasPorDibujar = [];
 var circle;
 var paradas = [];
 var marcadoresParadas = [];
+var puntosParadas = [];
+var latlng; 
 
 navigator.geolocation.getCurrentPosition(
 	function (location) {
-		var latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
+		latlng = new L.LatLng(location.coords.latitude, location.coords.longitude);
 		var actualPos = L.icon({
 			iconUrl: 'img/actualPos.png',
 			iconSize: [25, 45]

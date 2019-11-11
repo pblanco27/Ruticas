@@ -1,4 +1,5 @@
 function limpiarConsulta() {
+	document.getElementById("botonRutaCercana").style.display = "none";
     document.getElementById("numeroRutaParada").value = "";
     document.getElementById("descripcionRutaParada").value = "";
     document.getElementById("trayectoRutaParada").value = "";
