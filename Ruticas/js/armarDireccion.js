@@ -1,5 +1,6 @@
 $(document).ready(function(){
 	$('#provincia').on('change',function(){
+		limpiarDestino();
 		var idProvincia = $(this).val();
 		if(idProvincia){
 			$.ajax({
@@ -21,6 +22,7 @@ $(document).ready(function(){
 		}
 	});
 	$('#canton').on('change',function(){
+		limpiarDestino();
 		var idCanton = $(this).val();
 		if(idCanton){
 			$.ajax({

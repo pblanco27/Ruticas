@@ -1,6 +1,7 @@
+var idConsulta;
 $(document).ready(function() {
     $("#consulta").change(function() {
-		var idConsulta = $(this).val();
+		idConsulta = $(this).val();
 		if (idConsulta == 1){
 			document.getElementById("infoEmpresa").style.display = "block";   
 			document.getElementById("infoRuta").style.display = "none";

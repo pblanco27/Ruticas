@@ -11,7 +11,7 @@ var circle;
 var paradas = [];
 var marcadoresParadas = [];
 var puntosParadas = [];
-var latlng; 
+var latlng;
 
 navigator.geolocation.getCurrentPosition(
 	function (location) {

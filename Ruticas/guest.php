@@ -105,13 +105,22 @@ include "conexion.php";
 		<div align="center">
 			<h2 class="pagetitle" style="color:white;">
 				Consultar información
+				<font size="3">
 				<select name="consulta" id="consulta">
 					<option value="0" style="display:none;">Seleccione una consulta</option>
-					<option value="1" >Todas las rutas de una empresa</option>
-					<option value="2" >Una ruta en particular</option>
-					<option value="3" >Rutas con un mismo destino</option>
-					<option value="4" >Rutas con una misma parada intermedia</option>
+					<option value="1">Todas las rutas de una empresa</option>
+					<option value="2">Una ruta en particular</option>
+					<option value="3">Rutas con un mismo destino</option>
+					<option value="4">Rutas con una misma parada intermedia</option>
 				</select>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				
+					CRC
+					<label class="switch">
+						<input id="divisa" type="checkbox">
+						<span class="slider round"></span>
+					</label>
+					USD</font>
 			</h2>
 		</div>
 	</section>
@@ -172,7 +181,7 @@ include "conexion.php";
 						</select>
 					</div>
 					<div id="infoRuta" style="display: none;">
-						<h3>Información de la Ruta</h3>						
+						<h3>Información de la Ruta</h3>
 						<?php
 						$res->close();
 						$conn->next_result();
@@ -199,6 +208,7 @@ include "conexion.php";
 						Empresas que la recorren:
 						<select name="nombreEmpresas" id="nombreEmpresas">
 						</select>
+						<br>
 					</div>
 					<div id="infoDestino" style="display:none;">
 						<h3>Información Destino</h3>
@@ -224,9 +234,21 @@ include "conexion.php";
 						<select name="distrito" id="distrito" class="form-control" style="width:100%;">
 							<option value="">Seleccione un distrito</option>
 						</select>
+						<div id="infoRutaDestino" style="display:none;">
+							<h3>Información de la Ruta</h3>
+							<select name="rutasDestino" id="rutasDestino" class="form-control" style="width:100%;">
+								<option value="">Seleccione una ruta</option>
+							</select>
+							Trayecto:
+							<input type="text" name="trayectoDestino" placeholder="Trayecto" id="trayectoDestino" readonly>
+							Empresas que la recorren:
+							<select name="nombreEmpresasDestino" id="nombreEmpresasDestino">
+							</select>
+							<button class="btn btn-submit" id="botonRutaCercanaDestino" style="display:none;" onclick="calcularRutaCercana()">Ruta a parada más cercana</button>
+						</div>
 					</div>
 					<div id="infoRutaParada" style="display: none;">
-						<h3>Información de la Ruta</h3>						
+						<h3>Información de la Ruta</h3>
 						<select name="rutaParada" id="rutaParada">
 							<option value="0" style="display:none;">Seleccione una ruta</option>
 						</select><br>
@@ -291,16 +313,22 @@ include "conexion.php";
 	<script src="js/animate.js"></script>
 	<script src="js/custom.js"></script>
 	<script type="text/javascript" src="js/comboBoxEmpresaConsulta.js"></script>
-	<script type="text/javascript" src="js/comboBoxRutaEmpresaConsulta.js"></script> 
+	<script type="text/javascript" src="js/comboBoxRutaEmpresaConsulta.js"></script>
 	<script type="text/javascript" src="js/comboBoxRutaConsulta.js"></script>
-	<script type="text/javascript" src="js/comboBoxEmpresaRutaConsulta.js"></script> 
+	<script type="text/javascript" src="js/comboBoxEmpresaRutaConsulta.js"></script>
 	<script type="text/javascript" src="js/armarDireccion.js"></script>
 	<script type="text/javascript" src="js/rutasPorDistrito.js"></script>
 	<script type="text/javascript" src="js/comboBoxConsulta.js"></script>
 	<script type="text/javascript" src="js/comboBoxRutaConsultaParada.js"></script>
 	<script type="text/javascript" src="js/limpiarConsulta.js"></script>
-	<script type="text/javascript" src="js/comboBoxEmpresaRutaConsultaParada.js"></script> 
-	<script type="text/javascript" src="js/calcularRutaCercana.js"></script> 
+	<script type="text/javascript" src="js/comboBoxEmpresaRutaConsultaParada.js"></script>
+	<script type="text/javascript" src="js/calcularRutaCercana.js"></script>
+	<script type="text/javascript" src="js/comboBoxRutaDestino.js"></script>
+	<script type="text/javascript" src="js/comboBoxEmpresaRutaDestino.js"></script>
+	<script type="text/javascript" src="js/limpiarConsultaDestino.js"></script>
+	<script type="text/javascript" src="js/cambioDivisa.js"></script>
+	<script type="text/javascript" src="js/money.js"></script>
+	<script type="text/javascript" src="js/setupMoneda.js"></script>
 </body>
 
 </html>

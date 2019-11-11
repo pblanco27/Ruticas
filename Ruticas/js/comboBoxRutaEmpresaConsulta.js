@@ -8,6 +8,7 @@ $(document).ready(function () {
 		marker = new Array();
 		var costo;
 		var duracion;
+		var moneda;
 		var discapacitado;	
 		var numeroRuta;		
 		var rutaid = $(this).val();
@@ -34,7 +35,18 @@ $(document).ready(function () {
 			},
 			dataType: 'json',
 			success: function(response) {
-				costo = response[0]['costo'];
+				if (divisaActual) {
+                    fx.settings = {
+                        from: "CRC",
+                        to: "USD"
+                    };
+                    costo = Number((fx.convert(response[0]['costo'])).toFixed(2));
+                    moneda = "dólares";
+                }
+                else {
+                    costo = response[0]['costo'];
+                    moneda = "colones";
+                }
 				duracion = response[0]['duracion'];
 				discapacitado = response[0]['discapacitado'];
 				if (discapacitado == 1){
@@ -75,7 +87,7 @@ $(document).ready(function () {
 										return L.marker(wp.latLng, {title:nombres[i+1]})
 										.bindPopup("Ruta: " + numeroRuta + "<br>" +
 												  "Nombre de la parada: " + nombres[i+1] + "<br>" +
-												  "Costo del pasaje: " + costo + " colones<br>" +
+												  "Costo del pasaje: " + costo + " " + moneda + "<br>" +
 												  "Duración del viaje: " + duracion + " minutos<br>" +
 												  "Servicio para discapacitados: " + discapacitado, customOptions);
 									}, draggableWaypoints: false,addWaypoints: false,
