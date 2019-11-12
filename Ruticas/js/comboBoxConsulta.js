@@ -24,6 +24,7 @@ $(document).ready(function() {
 			document.getElementById("infoEmpresa").style.display = "none";
 			document.getElementById("infoRutaParada").style.display = "none";
 			consulta4 = false;
+			rutasPorDibujar = [];
 			limpiarConsulta();
 			limpiarParadas();
 		} else if (idConsulta == 4){
@@ -32,6 +33,7 @@ $(document).ready(function() {
 			document.getElementById("infoEmpresa").style.display = "none";
 			document.getElementById("infoDestino").style.display = "none";
 			consulta4 = true;
+			rutasPorDibujar = [];
 			reiniciarParadas();
 		}
 	});

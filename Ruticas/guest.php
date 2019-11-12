@@ -1,5 +1,5 @@
 <?php
-include "conexion.php";
+	include "conexion.php";
 ?>
 
 <!DOCTYPE HTML>
@@ -106,21 +106,27 @@ include "conexion.php";
 			<h2 class="pagetitle" style="color:white;">
 				Consultar información
 				<font size="3">
-				<select name="consulta" id="consulta">
-					<option value="0" style="display:none;">Seleccione una consulta</option>
-					<option value="1">Todas las rutas de una empresa</option>
-					<option value="2">Una ruta en particular</option>
-					<option value="3">Rutas con un mismo destino</option>
-					<option value="4">Rutas con una misma parada intermedia</option>
-				</select>
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				
+					<select name="consulta" id="consulta">
+						<option value="0" style="display:none;">Seleccione una consulta</option>
+						<option value="1">Todas las rutas de una empresa</option>
+						<option value="2">Una ruta en particular</option>
+						<option value="3">Rutas con un mismo destino</option>
+						<option value="4">Rutas con una misma parada intermedia</option>
+					</select>
+					
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					CRC
 					<label class="switch">
 						<input id="divisa" type="checkbox">
 						<span class="slider round"></span>
 					</label>
-					USD</font>
+					USD
+				</font>
+				&nbsp;&nbsp;&nbsp;
+				<button class="btn btn-submit" onclick="generarPDF()">
+					Imprimir información
+				</button>
 			</h2>
 		</div>
 	</section>
@@ -329,6 +335,7 @@ include "conexion.php";
 	<script type="text/javascript" src="js/cambioDivisa.js"></script>
 	<script type="text/javascript" src="js/money.js"></script>
 	<script type="text/javascript" src="js/setupMoneda.js"></script>
+	<script type="text/javascript" src="js/generarPDF.js"></script>
 </body>
 
 </html>

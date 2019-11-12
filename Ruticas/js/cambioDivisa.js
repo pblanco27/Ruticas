@@ -1,7 +1,6 @@
 $("#divisa").change(function () {
     divisaActual = this.checked;
     if (idConsulta != undefined) {
-        
         nombres = new Array();
         marker = new Array();
         var costo;

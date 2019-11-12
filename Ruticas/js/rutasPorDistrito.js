@@ -19,7 +19,7 @@ $(document).ready(function () {
 			dataType: 'json',
 			success: function (response) {
 				var colors = ["red", "blue", "orange", "green", "yellow", "brown", "black", "purple"];
-				var ids = response[0]['ids'];
+				rutasPorDibujar = response[0]['ids'];
 				var select = document.getElementById('rutasDestino');
 				$("#rutasDestino").empty();
 				option = document.createElement('option');
@@ -27,20 +27,20 @@ $(document).ready(function () {
 				option.text = "Seleccione una ruta";
 				option.style.display = "none";
 				select.add(option);
-				for (j = 1; j < ids.length; j++) {
+				for (j = 1; j < rutasPorDibujar.length; j++) {
 					mapsPlaceholder[0].createPane("pane" + j);
 					$.ajax({
 						async: false,
 						url: 'Scripts/infoRuta.php',
 						type: 'post',
 						data: {
-							ruta: ids[j]
+							ruta: rutasPorDibujar[j]
 						},
 						dataType: 'json',
 						success: function (response) {
 							numeroRuta = response[0]['numeroRuta'];
 							option = document.createElement( 'option' );
-                            option.value = ids[j];
+                            option.value = rutasPorDibujar[j];
 							option.text = response[0]['numeroRuta'];
                             select.add(option);
 						}
@@ -50,7 +50,7 @@ $(document).ready(function () {
 						url: 'Scripts/cargarPuntos.php',
 						type: 'post',
 						data: {
-							ruta: ids[j]
+							ruta: rutasPorDibujar[j]
 						},
 						dataType: 'json',
 						success: function (response) {
@@ -88,7 +88,7 @@ $(document).ready(function () {
 							mapsPlaceholder[0].panTo([lat, lng]);
 						}
 					});
-				}
+				}				
 				document.getElementById("infoRutaDestino").style.display = "block";
 			}
 		});

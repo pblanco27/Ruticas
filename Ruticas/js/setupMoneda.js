@@ -14,11 +14,5 @@ $.getJSON(
                 base: data.base
             }
         }
-        fx.settings = {
-            from: "USD",
-            to: "CRC"
-        };
-        console.log(fx.convert(50));
-        // 647.71034
     }
 );

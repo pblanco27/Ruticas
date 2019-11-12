@@ -44,6 +44,7 @@ navigator.geolocation.getCurrentPosition(
 					radius: 500
 				}).addTo(mapsPlaceholder[0]);
 
+				var basura = false;
 				// Hacemos un for que recorra cada una de ellas y pregunte lo siguiente:
 				for (i = 1; i < paradas.length; i++) {
 					// Sacamos la posición de la parada					
@@ -56,6 +57,10 @@ navigator.geolocation.getCurrentPosition(
 					var isInside = d < circle.getRadius();
 
 					if (isInside) {
+						if (!basura){
+							rutasPorDibujar.push(0);
+							basura = true;
+						}
 						// Obtenemos el id de la ruta asociado a dicho punto 
 						var idRuta = paradas[i][0];
 
@@ -77,7 +82,7 @@ navigator.geolocation.getCurrentPosition(
 					option.text = "Número de la ruta";
 					option.style.display = "none";
 					select.add(option);
-					for (j = 0; j < rutasPorDibujar.length; j++) {
+					for (j = 1; j < rutasPorDibujar.length; j++) {
 						var colors = ["red", "blue", "orange", "green", "yellow", "brown", "black", "purple"];
 						mapsPlaceholder[0].createPane("pane" + j);
 						$.ajax({

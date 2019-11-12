@@ -4,7 +4,7 @@ $(document).ready(function () {
 		for(i = 0; i < routingControls.length; i++){
 			if (routingControls[i] != null) mapsPlaceholder[0].removeControl(routingControls[i]);
 		}
-		//eliminarCirculo();
+		eliminarCirculo();
 		nombres = new Array();
 		marker = new Array();
         document.getElementById("empresa").selectedIndex = "0"; 
