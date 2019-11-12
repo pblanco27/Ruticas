@@ -182,8 +182,8 @@ session_start();
 							<font style="color:Red"><?php echo $_SESSION["error_zona"];
 													unset($_SESSION["error_zona"]); ?></font>
 						</div>
-						<div class="form-group" data-tip="La direccion debe ser de máximo 45 caracteres">
-							<input type="text" name="direccion" id="direccion" class="form-control" placeholder="Direccion física" maxlength="45" required>
+						<div class="form-group" data-tip="La direccion debe ser de máximo 200 caracteres">
+							<input type="text" name="direccion" id="direccion" class="form-control" placeholder="Direccion física" maxlength="200" required>
 							<font style="color:Red"><?php echo $_SESSION["error_direccion"];
 													unset($_SESSION["error_direccion"]); ?></font>
 						</div>
@@ -200,8 +200,8 @@ session_start();
 							<font style="color:Red"><?php echo $_SESSION["error_telefono"];
 													unset($_SESSION["error_telefono"]); ?></font>
 						</div>
-						<div class="form-group" data-tip="El correo debe contener letras (sin tildes) y números, un arroba y un dominio, de máximo 45 caracteres">
-							<input type="email" name="correo" id="correo" class="form-control" placeholder="Correo electrónico" maxlength="45" required>
+						<div class="form-group" data-tip="El correo debe contener letras (sin tildes) y números, un arroba y un dominio, de máximo 100 caracteres">
+							<input type="email" name="correo" id="correo" class="form-control" placeholder="Correo electrónico" maxlength="100" required>
 							<font style="color:Red"><?php echo $_SESSION["error_correo"];
 													unset($_SESSION["error_correo"]); ?></font>
 						</div>
