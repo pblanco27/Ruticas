@@ -1,6 +1,6 @@
 <?php
-include "conexion.php";
-session_start();
+	include "conexion.php";
+	session_start();
 ?>
 
 <!DOCTYPE HTML>
@@ -81,7 +81,7 @@ session_start();
 </head>
 
 <body>
-	<div class="navbar-wrapper">
+<div class="navbar-wrapper">
 		<div class="navbar navbar-inverse navbar-fixed-top">
 			<div class="navbar-inner">
 				<div class="container">
@@ -165,13 +165,28 @@ session_start();
 		<div align="center">
 			<h2 class="pagetitle" style="color:white;">
 				Consultar información
-				<select name="consulta" id="consulta">
-					<option value="0" style="display:none;">Seleccione una consulta</option>
-					<option value="1" >Todas las rutas de una empresa</option>
-					<option value="2" >Una ruta en particular</option>
-					<option value="3" >Rutas con un mismo destino</option>
-					<option value="4" >Rutas con una misma parada intermedia</option>
-				</select>
+				<font size="3">
+					<select name="consulta" id="consulta">
+						<option value="0" style="display:none;">Seleccione una consulta</option>
+						<option value="1">Todas las rutas de una empresa</option>
+						<option value="2">Una ruta en particular</option>
+						<option value="3">Rutas con un mismo destino</option>
+						<option value="4">Rutas con una misma parada intermedia</option>
+					</select>
+					
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					CRC
+					<label class="switch">
+						<input id="divisa" type="checkbox">
+						<span class="slider round"></span>
+					</label>
+					USD
+				</font>
+				&nbsp;&nbsp;&nbsp;
+				<button class="btn btn-submit" onclick="foto()">
+					Imprimir información
+				</button>
 			</h2>
 		</div>
 	</section>
@@ -232,7 +247,7 @@ session_start();
 						</select>
 					</div>
 					<div id="infoRuta" style="display: none;">
-						<h3>Información de la Ruta</h3>						
+						<h3>Información de la Ruta</h3>
 						<?php
 						$res->close();
 						$conn->next_result();
@@ -259,6 +274,7 @@ session_start();
 						Empresas que la recorren:
 						<select name="nombreEmpresas" id="nombreEmpresas">
 						</select>
+						<br>
 					</div>
 					<div id="infoDestino" style="display:none;">
 						<h3>Información Destino</h3>
@@ -284,9 +300,21 @@ session_start();
 						<select name="distrito" id="distrito" class="form-control" style="width:100%;">
 							<option value="">Seleccione un distrito</option>
 						</select>
+						<div id="infoRutaDestino" style="display:none;">
+							<h3>Información de la Ruta</h3>
+							<select name="rutasDestino" id="rutasDestino" class="form-control" style="width:100%;">
+								<option value="">Seleccione una ruta</option>
+							</select>
+							Trayecto:
+							<input type="text" name="trayectoDestino" placeholder="Trayecto" id="trayectoDestino" readonly>
+							Empresas que la recorren:
+							<select name="nombreEmpresasDestino" id="nombreEmpresasDestino">
+							</select>
+							<button class="btn btn-submit" id="botonRutaCercanaDestino" style="display:none;" onclick="calcularRutaCercana()">Ruta a parada más cercana</button>
+						</div>
 					</div>
 					<div id="infoRutaParada" style="display: none;">
-						<h3>Información de la Ruta</h3>						
+						<h3>Información de la Ruta</h3>
 						<select name="rutaParada" id="rutaParada">
 							<option value="0" style="display:none;">Seleccione una ruta</option>
 						</select><br>
@@ -300,13 +328,26 @@ session_start();
 						<select name="nombreEmpresasParada" id="nombreEmpresasParada">
 						</select>
 						<br>
-						<button onclick="reiniciarParadas()">Limpiar Consulta</button>
+						<div class="row">
+							<div class="span2">
+								<button class="btn btn-submit" onclick="reiniciarParadas()">Limpiar consulta</button>
+							</div>
+							<div class="span2">
+								<button class="btn btn-submit" id="botonRutaCercana" style="display:none;" onclick="calcularRutaCercana()">Ruta a parada más cercana</button>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+		<div style="display:none;">
+			<form action="PDF/Generador/generadorPdf.php" method="POST" target="_blank">
+				<input id="consultaPDF" name="consultaPDF" value="">
+				<input id="foto" name="foto" >
+				<button id="botonGenerar" name="botonGenerar" type="submit"></button>
+			</form>
+		</div>
 	</section>
-
 	<div id="cambiarPass" class="modal" style="visibility:hidden;">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -379,7 +420,7 @@ session_start();
 			</div>
 		</div>
 	</div>
-	
+
 	<footer>
 		<div class="container">
 			<div class="row">
@@ -417,15 +458,24 @@ session_start();
 	<script src="js/animate.js"></script>
 	<script src="js/custom.js"></script>
 	<script type="text/javascript" src="js/comboBoxEmpresaConsulta.js"></script>
-	<script type="text/javascript" src="js/comboBoxRutaEmpresaConsulta.js"></script> 
+	<script type="text/javascript" src="js/comboBoxRutaEmpresaConsulta.js"></script>
 	<script type="text/javascript" src="js/comboBoxRutaConsulta.js"></script>
-	<script type="text/javascript" src="js/comboBoxEmpresaRutaConsulta.js"></script> 
+	<script type="text/javascript" src="js/comboBoxEmpresaRutaConsulta.js"></script>
 	<script type="text/javascript" src="js/armarDireccion.js"></script>
 	<script type="text/javascript" src="js/rutasPorDistrito.js"></script>
 	<script type="text/javascript" src="js/comboBoxConsulta.js"></script>
 	<script type="text/javascript" src="js/comboBoxRutaConsultaParada.js"></script>
 	<script type="text/javascript" src="js/limpiarConsulta.js"></script>
-	<script type="text/javascript" src="js/comboBoxEmpresaRutaConsultaParada.js"></script> 
+	<script type="text/javascript" src="js/comboBoxEmpresaRutaConsultaParada.js"></script>
+	<script type="text/javascript" src="js/calcularRutaCercana.js"></script>
+	<script type="text/javascript" src="js/comboBoxRutaDestino.js"></script>
+	<script type="text/javascript" src="js/comboBoxEmpresaRutaDestino.js"></script>
+	<script type="text/javascript" src="js/limpiarConsultaDestino.js"></script>
+	<script type="text/javascript" src="js/cambioDivisa.js"></script>
+	<script type="text/javascript" src="js/money.js"></script>
+	<script type="text/javascript" src="js/html2canvas.js"></script>
+	<script type="text/javascript" src="js/setupMoneda.js"></script>
+	<script type="text/javascript" src="js/generarPDF.js"></script>
 	<?php
 		if ($_SESSION['nuevo'] == 1) {
 			echo "<script>
@@ -437,6 +487,7 @@ session_start();
 				    });
 				  </script>";
 		}
+		$_SESSION['nuevo'] = 0;
 	?>
 </body>
 

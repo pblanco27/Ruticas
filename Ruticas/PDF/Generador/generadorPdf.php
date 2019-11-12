@@ -26,13 +26,9 @@ class MYPDF extends TCPDF {
     public function Footer() {
         $this->SetY(-15);
         $this->SetFont('helvetica', 'I', 8);
-        $fin = <<<EOD
-<p style="color:#0000A0;"> Forma parte de la comunidad RuTicas <a href="">Clickea aquí para usar la ir al sitio Web</a></p>
-EOD;
 $autores= <<<EOD
 Creado por: Paolo Blanco, Gabriel Solórzano, Carlos Gómez
 EOD;
-        $this->writeHTMLCell(0, 0, '', '', $fin, 0, 1, 0, true, '', true);
         $this->writeHTMLCell(0, 5, '', '', $autores, 0, 1, 0, true, '', true);
         $this->Cell(0, 7, 'Página '.$this->getAliasNumPage().'/'.$this->getAliasNbPages(), 0, false, 'C', 0, '', 0, false, 'T', 'M');
     }
@@ -66,7 +62,7 @@ if (@file_exists(dirname(__FILE__).'/lang/eng.php')) {
 	$pdf->setLanguageArray($l);
 }
 $pdf->setFontSubsetting(true);
-$pdf->SetFont('dejavusans', '', 14, '', true);
+$pdf->SetFont('dejavusans', '', 12, '', true);
 $pdf->AddPage();
 $pdf->setTextShadow(array('enabled'=>true, 'depth_w'=>0.2, 'depth_h'=>0.2, 'color'=>array(196,196,196), 'opacity'=>1, 'blend_mode'=>'Normal'));
 // --------------------------------------
@@ -75,7 +71,10 @@ $pdf->setTextShadow(array('enabled'=>true, 'depth_w'=>0.2, 'depth_h'=>0.2, 'colo
 $mydate=getdate(date("U"));
 
 //Ejemplo se puede jalar desde el session
-$consulta = $_GET["consulta"];
+$consulta = $_POST["consultaPDF"];
+$foto = $_POST["foto"];
+
+$imgdata = base64_decode($foto);
 
 /*Información de la consulta*/
 $intro = <<<EOD
@@ -85,7 +84,7 @@ EOD;
 
 
 $infoConsulta = <<<EOD
-
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br>
 <p>$consulta</p>
 
 EOD;
@@ -93,9 +92,9 @@ EOD;
 
 //Inserción del texto
 $pdf->writeHTMLCell(0, 0, '', '', $intro, 0, 1, 0, true, '', true);
+$pdf->Image('@'.$imgdata ,50, 60, 120);
 $pdf->writeHTMLCell(0, 0, '', '', $infoConsulta, 0, 1, 0, true, '', true);
 //$pdf->Image('images/image_demo.png', 40, 190, 140, 70, 'PNG', '', '', true, 150, '', false, false, 1, false, false, false);
-$pdf->writeHTMLCell(0, 0, '', '', $fin, 0, 1, 0, true, '', true);
 
 // ---------------------------------------------------------
 

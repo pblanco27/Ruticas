@@ -375,6 +375,7 @@ session_start();
 				    });
 				  </script>";
 		}
+		$_SESSION['nuevo'] = 0;
 	?>
 </body>
 

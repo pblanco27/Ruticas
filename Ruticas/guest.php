@@ -124,7 +124,7 @@
 					USD
 				</font>
 				&nbsp;&nbsp;&nbsp;
-				<button class="btn btn-submit" onclick="generarPDF()">
+				<button class="btn btn-submit" onclick="foto()">
 					Imprimir información
 				</button>
 			</h2>
@@ -280,6 +280,13 @@
 				</div>
 			</div>
 		</div>
+		<div style="display:none;">
+			<form action="PDF/Generador/generadorPdf.php" method="POST" target="_blank">
+				<input id="consultaPDF" name="consultaPDF" value="">
+				<input id="foto" name="foto" >
+				<button id="botonGenerar" name="botonGenerar" type="submit"></button>
+			</form>
+		</div>
 	</section>
 
 	<footer>
@@ -334,6 +341,7 @@
 	<script type="text/javascript" src="js/limpiarConsultaDestino.js"></script>
 	<script type="text/javascript" src="js/cambioDivisa.js"></script>
 	<script type="text/javascript" src="js/money.js"></script>
+	<script type="text/javascript" src="js/html2canvas.js"></script>
 	<script type="text/javascript" src="js/setupMoneda.js"></script>
 	<script type="text/javascript" src="js/generarPDF.js"></script>
 </body>

@@ -423,6 +423,7 @@ unset($_SESSION["error_lats"]);
 				    });
 				  </script>";
 		}
+		$_SESSION['nuevo'] = 0;
 	?>
 </body>
 

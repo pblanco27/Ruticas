@@ -1,7 +1,24 @@
-function generarPDF(){
+function foto() {
+	html2canvas(document.getElementById("map"), {
+		scale: window.devicePixelRatio,
+		logging: true,
+		profile: true,
+		allowTaint: true,
+		useCORS: true
+	}).then(function(canvas) {
+		const data = canvas.toDataURL('img/jpg', 0.9);
+		generarPDF(canvas.toDataURL('img', 0.9));
+
+	});
+}
+
+function generarPDF(photo){
 	var rutaid;
 	var empresaid;
 	var consulta = "";
+	
+	fotoBase = photo.replace('data:image/png;base64,','');
+	//console.log(fotoBase);
 	if (idConsulta != undefined) {
 		if (idConsulta == 1) {
 			rutaid = document.getElementById('nombreRutas').value;
@@ -232,7 +249,8 @@ function generarPDF(){
 			});
 		}
 
-		var win = window.open("PDF/Generador/generadorPdf.php?consulta="+consulta, '_blank');
-		win.focus();					
+		document.getElementById('consultaPDF').value = consulta;
+		document.getElementById('foto').value = fotoBase;
+		document.getElementById('botonGenerar').click();				
 	}
 }
