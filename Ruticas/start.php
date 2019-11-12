@@ -222,12 +222,12 @@
 						Zona:
 						<input type="text" name="zona" id="zona" class="form-control" placeholder="Zona donde opera" maxlength="45" readonly>
 						Dirección:
-						<input type="text" name="direccion" id="direccion" class="form-control" placeholder="Direccion física" maxlength="45" readonly>
+						<textarea name="direccion" id="direccion" rows="3" placeholder="Direccion física" style="resize: none;" maxlength="200" readonly></textarea>
 						Teléfono:
 						<input type="text" name="telefono" id="telefono" class="form-control" placeholder="Número telefónico" maxlength="45" readonly>
 						Correo:
 						<br>
-						<input type="email" name="correo" id="correo" class="form-control" placeholder="Correo electrónico" maxlength="45" readonly>
+						<input type="text" name="correo" id="correo" class="form-control" placeholder="Correo electrónico" maxlength="45" readonly>
 						<br>
 						Información de Contacto:
 						<input type="text" name="contacto" id="contacto" class="form-control" placeholder="Contacto de emergencia" maxlength="45" readonly>
@@ -268,9 +268,9 @@
 						Número:
 						<input type="text" name="numero" id="numero" class="form-control" placeholder="Número de la ruta" maxlength="45" readonly>
 						Descripción:
-						<textarea name="descripcion" id="descripcion" rows="5" placeholder="Descripción del ruta" style="resize: none;" maxlength="250" readonly></textarea>
+						<textarea name="descripcion" id="descripcion" rows="3" placeholder="Descripción del ruta" style="resize: none;" maxlength="250" readonly></textarea>
 						Trayecto:
-						<input type="text" name="trayecto" placeholder="Trayecto" id="trayecto" readonly>
+						<textarea name="trayecto" placeholder="Trayecto" id="trayecto" rows="3" style="resize: none;" maxlength="250" readonly></textarea>
 						Empresas que la recorren:
 						<select name="nombreEmpresas" id="nombreEmpresas">
 						</select>
@@ -307,7 +307,7 @@
 								<option value="">Seleccione una ruta</option>
 							</select>
 							Trayecto:
-							<input type="text" name="trayectoDestino" placeholder="Trayecto" id="trayectoDestino" readonly>
+							<textarea name="trayectoDestino" placeholder="Trayecto" id="trayectoDestino" rows="3" style="resize: none;" maxlength="250" readonly></textarea>
 							Empresas que la recorren:
 							<select name="nombreEmpresasDestino" id="nombreEmpresasDestino">
 							</select>
@@ -320,11 +320,11 @@
 							<option value="0" style="display:none;">Seleccione una ruta</option>
 						</select><br>
 						Número:
-						<input type="text" name="numeroRutaParada" id="numeroRutaParada" class="form-control" placeholder="Número de la ruta" maxlength="45" readonly>
+						<input type="text" name="numeroRutaParada" id="numeroRutaParada" class="form-control" placeholder="Número de la ruta" maxlength="45" readonly>						
 						Descripción:
-						<textarea name="descripcionRutaParada" id="descripcionRutaParada" rows="5" placeholder="Descripción del ruta" style="resize: none;" maxlength="250" readonly></textarea>
+						<textarea name="descripcionRutaParada" id="descripcionRutaParada" rows="3" placeholder="Descripción del ruta" style="resize: none;" maxlength="250" readonly></textarea>
 						Trayecto:
-						<input type="text" name="trayectoRutaParada" placeholder="Trayecto" id="trayectoRutaParada" readonly>
+						<textarea name="trayectoRutaParada" placeholder="Trayecto" id="trayectoRutaParada" rows="3" style="resize: none;" maxlength="250" readonly></textarea>
 						Empresas que la recorren:
 						<select name="nombreEmpresasParada" id="nombreEmpresasParada">
 						</select>

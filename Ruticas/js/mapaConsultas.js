@@ -35,14 +35,13 @@ navigator.geolocation.getCurrentPosition(
 
 		function onMapClick(e) {
 			if (consulta4 && !hayCirculo) {
-				document.getElementById("botonRutaCercana").style.display = "block";
 				rutasPorDibujar = [];
 				eliminarCirculo();
 				circle = L.circle(e.latlng, {
 					color: 'red',
 					fillColor: '#f03',
 					fillOpacity: 0.3,
-					radius: 500
+					radius: 200
 				}).addTo(mapsPlaceholder[0]);
 
 				var basura = false;
@@ -58,6 +57,7 @@ navigator.geolocation.getCurrentPosition(
 					var isInside = d < circle.getRadius();
 
 					if (isInside) {
+						document.getElementById("botonRutaCercana").style.display = "block";
 						if (!basura){
 							rutasPorDibujar.push(0);
 							basura = true;
@@ -194,8 +194,9 @@ function eliminarCirculo() {
 }
 function reiniciarParadas() {
 	limpiarRutas();
-	eliminarCirculo();
-	dibujarParadas();
+	limpiarParadas();
 	limpiarConsulta();
+	eliminarCirculo();	
+	dibujarParadas();
 }
 

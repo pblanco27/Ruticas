@@ -247,7 +247,7 @@ session_start();
 						<input type="text" name="zona" id="zona" class="form-control" placeholder="Zona donde opera" maxlength="45" readonly>
 					</div>
 					<div class="form-group">
-						<input type="text" name="direccion" id="direccion" class="form-control" placeholder="Direccion física" maxlength="45" readonly>
+						<textarea name="direccion" id="direccion" rows="3" placeholder="Direccion física" style="resize: none;" maxlength="200" readonly></textarea>
 					</div>
 					<div class="form-group">
 						<input type="text" name="latitud" id="latitud" class="form-control" placeholder="Latitud" style="display:none;" readonly>
@@ -259,7 +259,7 @@ session_start();
 						<input type="text" name="telefono" id="telefono" class="form-control" placeholder="Número telefónico" maxlength="45" readonly>
 					</div>
 					<div class="form-group">
-						<input type="email" name="correo" id="correo" class="form-control" placeholder="Correo electrónico" maxlength="45" readonly>
+						<input type="text" name="correo" id="correo" class="form-control" placeholder="Correo electrónico" maxlength="45" readonly>
 					</div>
 					<div class="form-group" data-tip="Contacto ante eventualidad.">
 						<input type="text" name="contacto" id="contacto" class="form-control" placeholder="Contacto de emergencia" maxlength="45" readonly>
@@ -328,10 +328,10 @@ session_start();
 						<input type="text" name="numero" id="numero" class="form-control" placeholder="Número de la ruta" maxlength="45" readonly>
 					</div>
 					<div class="form-group">
-						<textarea name="descripcion" id="descripcion" rows="7" placeholder="Descripción del ruta" style="resize: none;" maxlength="250" readonly></textarea>
+						<textarea name="descripcion" id="descripcion" rows="3" placeholder="Descripción del ruta" style="resize: none;" maxlength="250" readonly></textarea>
 					</div>
 					<div class="form-group">
-						<input type="text" name="trayecto" id="trayecto" readonly>
+						<textarea name="trayecto" id="trayecto" rows="3" placeholder="Trayecto de ruta" style="resize: none;" maxlength="250" readonly></textarea>
 					</div>
 				</div>
 			</div>

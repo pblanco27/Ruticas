@@ -162,12 +162,12 @@
 						Zona:
 						<input type="text" name="zona" id="zona" class="form-control" placeholder="Zona donde opera" maxlength="45" readonly>
 						Dirección:
-						<input type="text" name="direccion" id="direccion" class="form-control" placeholder="Direccion física" maxlength="45" readonly>
+						<textarea name="direccion" id="direccion" rows="3" placeholder="Direccion física" style="resize: none;" maxlength="200" readonly></textarea>
 						Teléfono:
 						<input type="text" name="telefono" id="telefono" class="form-control" placeholder="Número telefónico" maxlength="45" readonly>
 						Correo:
 						<br>
-						<input type="email" name="correo" id="correo" class="form-control" placeholder="Correo electrónico" maxlength="45" readonly>
+						<input type="text" name="correo" id="correo" class="form-control" placeholder="Correo electrónico" maxlength="45" readonly>
 						<br>
 						Información de Contacto:
 						<input type="text" name="contacto" id="contacto" class="form-control" placeholder="Contacto de emergencia" maxlength="45" readonly>
