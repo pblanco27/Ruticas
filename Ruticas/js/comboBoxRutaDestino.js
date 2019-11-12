@@ -40,6 +40,7 @@ $(document).ready(function () {
 						var descripcion = response[0]['descripcion'];
 						var waypoints = new Array();
 						numeroPopups = puntos.length - 1;
+						puntosParadas = [];
 						for (i = 1; i < puntos.length; i++) {
 							lat = puntos[i][0];
 							lng = puntos[i][1];

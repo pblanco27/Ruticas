@@ -35,6 +35,7 @@ navigator.geolocation.getCurrentPosition(
 
 		function onMapClick(e) {
 			if (consulta4 && !hayCirculo) {
+				document.getElementById("botonRutaCercana").style.display = "block";
 				rutasPorDibujar = [];
 				eliminarCirculo();
 				circle = L.circle(e.latlng, {
@@ -82,6 +83,7 @@ navigator.geolocation.getCurrentPosition(
 					option.text = "Número de la ruta";
 					option.style.display = "none";
 					select.add(option);
+					puntosParadas = [];
 					for (j = 1; j < rutasPorDibujar.length; j++) {
 						var colors = ["red", "blue", "orange", "green", "yellow", "brown", "black", "purple"];
 						mapsPlaceholder[0].createPane("pane" + j);
@@ -118,6 +120,7 @@ navigator.geolocation.getCurrentPosition(
 									lat = puntos[i][0];
 									lng = puntos[i][1];
 									nombres[i] = descripcion[i];
+									puntosParadas.push([lat, lng]);
 									waypoints.push(L.latLng(lat, lng));
 									var marker2 = L.marker([lat, lng]);
 									marker.push(marker2);

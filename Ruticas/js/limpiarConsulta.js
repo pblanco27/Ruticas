@@ -1,5 +1,5 @@
 function limpiarConsulta() {
-	document.getElementById("botonRutaCercana").style.display = "none";
+	//document.getElementById("botonRutaCercana").style.display = "none";
     document.getElementById("numeroRutaParada").value = "";
     document.getElementById("descripcionRutaParada").value = "";
     document.getElementById("trayectoRutaParada").value = "";
@@ -17,4 +17,5 @@ function limpiarConsulta() {
     option.text = "Número de la ruta";
     option.style.display = "none";
     select.add(option);
+    puntosParadas = [];
 }

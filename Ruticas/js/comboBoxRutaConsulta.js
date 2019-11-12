@@ -1,5 +1,6 @@
 $(document).ready(function () {
 	$("#ruta").change(function () {
+		document.getElementById("botonRutaCercanaRuta").style.display = "block";
 		if (markerEmpresa != null) mapsPlaceholder[0].removeLayer(markerEmpresa);
 		for(i = 0; i < routingControls.length; i++){
 			if (routingControls[i] != null) mapsPlaceholder[0].removeControl(routingControls[i]);
@@ -41,9 +42,11 @@ $(document).ready(function () {
 						var descripcion = response[0]['descripcion'];
 						var waypoints = new Array();
 						numeroPopups = puntos.length - 1;
+						puntosParadas = [];
 						for (i = 1; i < puntos.length; i++) {
 							lat = puntos[i][0];
 							lng = puntos[i][1];
+							puntosParadas.push([lat, lng]);
 							nombres[i] = descripcion[i];
 							waypoints.push(L.latLng(lat, lng));
 							var marker2 = L.marker([lat, lng]);

@@ -214,6 +214,7 @@
 						Empresas que la recorren:
 						<select name="nombreEmpresas" id="nombreEmpresas">
 						</select>
+						<button class="btn btn-submit" id="botonRutaCercanaRuta" style="display:none;" onclick="calcularRutaCercana()">Ruta a parada más cercana</button>
 						<br>
 					</div>
 					<div id="infoDestino" style="display:none;">

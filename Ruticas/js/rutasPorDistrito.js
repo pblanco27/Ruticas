@@ -27,6 +27,13 @@ $(document).ready(function () {
 				option.text = "Seleccione una ruta";
 				option.style.display = "none";
 				select.add(option);
+				if(rutasPorDibujar.length > 1){
+					document.getElementById("botonRutaCercanaDestino").style.display = "block";
+				}
+				else{
+					document.getElementById("botonRutaCercanaDestino").style.display = "none";
+				}
+				puntosParadas = [];
 				for (j = 1; j < rutasPorDibujar.length; j++) {
 					mapsPlaceholder[0].createPane("pane" + j);
 					$.ajax({
@@ -61,6 +68,7 @@ $(document).ready(function () {
 							for (i = 1; i < puntos.length; i++) {
 								lat = puntos[i][0];
 								lng = puntos[i][1];
+								puntosParadas.push([lat, lng]);
 								nombres[i] = descripcion[i];
 								waypoints.push(L.latLng(lat, lng));
 								var marker2 = L.marker([lat, lng]);
