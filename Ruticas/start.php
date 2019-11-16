@@ -92,6 +92,12 @@
 						<ul id="menu-main" class="nav">
 							<li>
 								<button class="btn btn-danger" onclick="location.href='#';">
+									Notificar
+								</button>
+								&nbsp;&nbsp;
+							</li>
+							<li>
+								<button class="btn btn-danger" onclick="location.href='#';">
 									Consultas
 								</button>
 								&nbsp;&nbsp;
