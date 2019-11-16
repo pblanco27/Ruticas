@@ -91,7 +91,7 @@
 					<nav class="pull-right nav-collapse collapse">
 						<ul id="menu-main" class="nav">
 							<li>
-								<button class="btn btn-danger" onclick="location.href='#';">
+								<button class="btn btn-danger" onclick="window.open('http://localhost:8000/init')" target="_blank">
 									Notificar
 								</button>
 								&nbsp;&nbsp;

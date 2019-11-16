@@ -1,0 +1,1 @@
+Notificaciones <br><br><table><tr><th>Descripción</th><th>Latitud</th><th>Longitud</th><th>Fecha</th></tr><tr><td>Aqui va una parada</td><td>9.927368851353618</td><td>-84.07433509826662</td><td>2019-11-15</td></tr></table><tr><td>Otro Punto</td><td>9.932092801009512</td><td>-84.0337371826172</td><td>2019-11-16</td></tr></table>

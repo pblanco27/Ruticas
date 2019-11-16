@@ -70,11 +70,8 @@ $pdf->setTextShadow(array('enabled'=>true, 'depth_w'=>0.2, 'depth_h'=>0.2, 'colo
 //Fecha
 $mydate=getdate(date("U"));
 
-//Ejemplo se puede jalar desde el session
-
-
-$myfile = fopen("consulta.txt", "r") or die("Unable to open file!");
-$notificaciones = fread($myfile,filesize("consulta.txt"));
+$myfile = fopen("../../Notificaciones/Consulta.txt", "r") or die("Unable to open file!");
+$notificaciones = fread($myfile,filesize("../../Notificaciones/Consulta.txt"));
 fclose($myfile);
 
 $foto = $_POST["foto"];

@@ -1,0 +1,34 @@
+<html>
+
+    <head>
+    
+        <title>
+            {# Contenido dinamico #}
+            {% block title %}
+            
+            {% endblock title %}
+        </title>
+
+    </head>
+
+    <body>
+
+        {% include "./barra.html" %}
+
+        <h2>Shop CR</h2>
+        <h3>TIENDA DE PRENDAS ONLINE</h3>
+        
+        {# Contenido dinamico #}
+        {% block content %}
+        
+        {% endblock content %}
+
+    </body>
+
+    <footer>
+        Costa Rica, 2019
+        <br>
+        Gracias por su visita!
+    </footer>
+
+</html>
