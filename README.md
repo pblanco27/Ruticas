@@ -1,2 +1,2 @@
 # ElectivaWeb-ProyectoRutas
-Proyecto de rutas de la electiva de desarrollo de páginas web.
+Proyecto de rutas para la Electiva de Desarrollo Web.
